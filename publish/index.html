@@ -1,29 +1,60 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>My Game</title>
-  <link rel="stylesheet" href="style.css">
-  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  <script src="app.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content, user-scalable=no">
+<title>Arcane Idle Survivors</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100vh;height:100dvh;overflow:hidden;background:#070814;color:#fff;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;user-select:none;-webkit-user-select:none}.game{position:relative;width:100%;height:100%;background:radial-gradient(circle at 50% 45%,#1d2147 0,#0b1024 55%,#050611 100%)}canvas{display:block;width:100%;height:100%;touch-action:none}.hud{position:absolute;left:12px;right:12px;top:calc(10px + env(safe-area-inset-top));display:grid;grid-template-columns:1.1fr .7fr .7fr 1.2fr 1.2fr;gap:8px;z-index:2;pointer-events:none}.pill,.bar{background:rgba(5,8,20,.72);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:8px 10px;box-shadow:0 8px 24px rgba(0,0,0,.28);font-size:13px}.bar{padding:6px}.bar label{display:flex;justify-content:space-between;font-size:12px;color:#d7e4ff;margin-bottom:4px}.track{height:10px;border-radius:99px;background:#20263d;overflow:hidden}.fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#ef4444,#f97316)}.xpfill{background:linear-gradient(90deg,#38bdf8,#6366f1)}.overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(4,6,16,.72);backdrop-filter:blur(8px);z-index:5}.panel{width:min(820px,96vw);max-height:92dvh;overflow:auto;border:1px solid rgba(255,255,255,.16);border-radius:24px;background:linear-gradient(180deg,rgba(20,27,58,.96),rgba(8,12,30,.96));box-shadow:0 22px 80px rgba(0,0,0,.5);padding:24px}.title{font-size:34px;margin:0 0 8px;text-align:center}.sub{margin:0 0 22px;text-align:center;color:#b7c5ea}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card,.choice,button{border:1px solid rgba(255,255,255,.16);border-radius:18px;background:rgba(255,255,255,.08);color:#fff;padding:16px;cursor:pointer;transition:.15s transform,.15s background}.card:hover,.choice:hover,button:hover{transform:translateY(-2px);background:rgba(255,255,255,.14)}.card h2,.choice h2{margin:0 0 8px}.card p,.choice p{margin:6px 0;color:#c8d6ff;line-height:1.45}.hidden{display:none!important}.choices{display:grid;gap:12px}.result{text-align:center}.result h1{font-size:44px;margin:0 0 12px}.hint{position:absolute;left:14px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:2;color:#93a4cf;font-size:12px;background:rgba(0,0,0,.35);padding:8px 10px;border-radius:10px}@media(max-width:720px){.hud{grid-template-columns:1fr 1fr;top:calc(8px + env(safe-area-inset-top));gap:6px}.pill,.bar{font-size:11px;padding:6px}.cards{grid-template-columns:1fr}.title{font-size:26px}.panel{padding:18px}}
+</style>
 </head>
 <body>
-  <div class="container" x-data="app">
-    <div class="card" x-show="!ready">
-      <p>SDK 加载中...</p>
-    </div>
-
-    <div class="card" x-show="ready" x-transition>
-      <div class="header" x-show="userName">
-        <template x-if="userAvatar">
-          <img :src="userAvatar" class="avatar" />
-        </template>
-        <span x-text="userName"></span>
-      </div>
-      <h1>Hello World</h1>
-      <p class="hint">编辑 app.js 开始创作</p>
-    </div>
+<div class="game">
+  <canvas id="c"></canvas>
+  <div class="hud">
+    <div class="pill">职业：<b id="job">未选择</b></div><div class="pill">等级：<b id="lv">1</b></div><div class="pill">时间：<b id="tm">00:00</b></div>
+    <div class="bar"><label><span>HP</span><span id="hpTxt">0/0</span></label><div class="track"><div id="hpFill" class="fill"></div></div></div>
+    <div class="bar"><label><span>EXP</span><span id="xpTxt">0/0</span></label><div class="track"><div id="xpFill" class="fill xpfill"></div></div></div>
   </div>
+  <div class="hint">自动走位 + 自动攻击；60 秒后 Boss 登场</div>
+  <section id="start" class="overlay"><div class="panel"><h1 class="title">Arcane Idle Survivors</h1><p class="sub">选择职业后开始挂机割草。升级时会自动暂停，点击三选一强化。</p><div class="cards" id="classCards"></div></div></section>
+  <section id="levelup" class="overlay hidden"><div class="panel"><h1 class="title">升级！选择一个强化</h1><div class="choices" id="choices"></div></div></section>
+  <section id="end" class="overlay hidden"><div class="panel result"><h1 id="endTitle">胜利</h1><p id="endText"></p><button id="restart">重新开始</button></div></section>
+</div>
+<script>
+(() => {
+'use strict';
+const canvas=document.getElementById('c'),ctx=canvas.getContext('2d');
+const $=id=>document.getElementById(id),TAU=Math.PI*2,rand=(a,b)=>a+Math.random()*(b-a),dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const AS={paladin:'./assets/generated/player-paladin-sheet.bf222e7d.webp',mage:'./assets/generated/player-mage-sheet.66736412.webp',ranger:'./assets/generated/player-ranger-sheet.59ca4283.webp',imp:'./assets/generated/enemy-imp-sheet.eaaba398.webp',boss:'./assets/generated/boss-demon-sheet.d0bf2a94.webp'};
+const imgs={};Object.entries(AS).forEach(([k,s])=>{imgs[k]=new Image();imgs[k].src=s});
+const CLASSES={paladin:{cn:'圣骑士',hp:200,spd:78,dmg:1,skill:'garlic',desc:'高血量，重甲慢速，自带大蒜光环。'},mage:{cn:'大魔法师',hp:80,spd:96,dmg:1.45,skill:'missile',desc:'低血量高伤害，自带魔法飞弹。'},ranger:{cn:'游侠',hp:100,spd:122,dmg:1,skill:'axe',desc:'机动最快，自带回旋飞斧。'}};
+const INFO={missile:['魔法飞弹','向最近怪物发射蓝色法球，升级提升伤害并降低 CD。'],garlic:['大蒜光环','主角周围绿色波纹持续伤害，升级扩大范围并增伤。'],axe:['回旋飞斧','随机方向抛出旋转飞斧，穿透伤害，升级更快更痛。'],lightning:['闪电轰顶','随机怪物头顶落雷并小范围爆炸，升级降低 CD。'],foot:['空虚之足','每级提升 15% 移动速度，增强自动走位和捡经验效率。'],armor:['重装铠甲','每级提升 20% 最大生命值并回复 20 HP。']};
+let W=0,H=0,DPR=1,S=null,last=0;function resize(){DPR=devicePixelRatio||1;W=canvas.clientWidth;H=canvas.clientHeight;canvas.width=W*DPR;canvas.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0)}addEventListener('resize',resize);new ResizeObserver(resize).observe(document.body);resize();
+function fresh(){return{run:false,paused:false,over:false,spawn:0,time:0,boss:false,shake:0,player:null,enemies:[],gems:[],missiles:[],axes:[],bolts:[],parts:[],skills:{missile:0,garlic:0,axe:0,lightning:0,foot:0,armor:0},cd:{missile:0,axe:0,lightning:0},kills:0}};
+function start(k){const c=CLASSES[k];S=fresh();S.run=true;S.skills[c.skill]=1;S.player={cls:k,job:c.cn,x:W/2,y:H/2,r:19,hp:c.hp,max:c.hp,base:c.spd,lv:1,xp:0,next:12,vx:0,vy:0,dmg:c.dmg,hit:0};$('start').classList.add('hidden');updateHud()}
+function restart(){S=null;$('end').classList.add('hidden');$('start').classList.remove('hidden')}
+function spawnEnemy(boss=false){let e=Math.floor(rand(0,4)),x=e<2?rand(0,W):(e===2?-35:W+35),y=e<2?(e===0?-35:H+35):rand(0,H);S.enemies.push({x,y,r:boss?58:18,hp:boss?1800:28+S.time*.8,max:boss?1800:28+S.time*.8,spd:boss?38:42+S.time*.45,boss,hit:0,phase:rand(0,TAU)})}
+function frameOf(t,fps=7){return Math.floor(t*fps)%4}function drawSheet(img,x,y,size,frame,rot=0,sx=1,sy=1){if(!img.complete){ctx.fillStyle='#fff';ctx.fillRect(x-size/2,y-size/2,size,size);return}const fw=img.width/2,fh=img.height/2,fx=frame%2*fw,fy=Math.floor(frame/2)*fh;ctx.save();ctx.translate(x,y);ctx.rotate(rot);ctx.scale(sx,sy);ctx.drawImage(img,fx,fy,fw,fh,-size/2,-size/2,size,size);ctx.restore()}
+function nearest(list,p){let best=null,bd=1e9;for(const it of list){let d=dist(it,p);if(d<bd){bd=d;best=it}}return best}
+function movePlayer(dt){let p=S.player,fx=0,fy=0;for(const e of S.enemies){let dx=p.x-e.x,dy=p.y-e.y,d=Math.hypot(dx,dy)||1;if(d<150){let f=(150-d)/150*3.2;fx+=dx/d*f;fy+=dy/d*f}}let g=nearest(S.gems,p);if(g){let dx=g.x-p.x,dy=g.y-p.y,d=Math.hypot(dx,dy)||1;fx+=dx/d*1.45;fy+=dy/d*1.45}if(!g&&S.enemies.length){let e=nearest(S.enemies,p),dx=p.x-e.x,dy=p.y-e.y,d=Math.hypot(dx,dy)||1;fx-=dx/d*.25;fy-=dy/d*.25}let m=Math.hypot(fx,fy)||1,spd=p.base*(1+S.skills.foot*.15);p.vx=fx/m;p.vy=fy/m;p.x=clamp(p.x+p.vx*spd*dt,24,W-24);p.y=clamp(p.y+p.vy*spd*dt,62,H-24)}
+function skills(dt){let p=S.player;S.cd.missile-=dt;S.cd.axe-=dt;S.cd.lightning-=dt;if(S.skills.garlic){let lv=S.skills.garlic,rad=54+lv*13,dmg=(18+lv*10)*dt*p.dmg;for(const e of S.enemies)if(dist(p,e)<rad+e.r){e.hp-=dmg;e.hit=.08}}if(S.skills.missile&&S.cd.missile<=0){let e=nearest(S.enemies,p);if(e){let a=Math.atan2(e.y-p.y,e.x-p.x);S.missiles.push({x:p.x,y:p.y,vx:Math.cos(a)*360,vy:Math.sin(a)*360,dmg:(24+S.skills.missile*15)*p.dmg,life:2,trail:[]});p.hit=.18}S.cd.missile=Math.max(.28,1.15-S.skills.missile*.13)}if(S.skills.axe&&S.cd.axe<=0){let a=rand(0,TAU);S.axes.push({x:p.x,y:p.y,vx:Math.cos(a)*245,vy:Math.sin(a)*245,dmg:(18+S.skills.axe*13)*p.dmg,life:2.8,rot:0,hit:new Set()});S.cd.axe=Math.max(.45,1.55-S.skills.axe*.16)}if(S.skills.lightning&&S.cd.lightning<=0&&S.enemies.length){let e=S.enemies[Math.floor(rand(0,S.enemies.length))],lv=S.skills.lightning;S.bolts.push({x:e.x,y:e.y,life:.12});S.shake=.1;for(const m of S.enemies)if(Math.hypot(m.x-e.x,m.y-e.y)<58){m.hp-=(42+lv*22)*p.dmg;m.hit=.12}S.cd.lightning=Math.max(.55,2.5-lv*.28)}}
+function updateObjs(dt){let p=S.player;for(const e of S.enemies){let a=Math.atan2(p.y-e.y,p.x-e.x);e.x+=Math.cos(a)*e.spd*dt;e.y+=Math.sin(a)*e.spd*dt;e.phase+=dt*TAU*4;e.hit-=dt;if(dist(e,p)<e.r+p.r){p.hp-=((e.boss?32:10)*dt);p.hit=.12}}for(const g of S.gems){let d=dist(g,p);if(d<110){g.x+=(p.x-g.x)*dt*3.2;g.y+=(p.y-g.y)*dt*3.2}if(d<p.r+10){g.dead=true;p.xp+=g.v}}for(const m of S.missiles){m.life-=dt;m.trail.push({x:m.x,y:m.y,a:1});if(m.trail.length>5)m.trail.shift();m.x+=m.vx*dt;m.y+=m.vy*dt;for(const e of S.enemies)if(!m.dead&&dist(m,e)<e.r+8){e.hp-=m.dmg;e.hit=.1;m.dead=true}}for(const a of S.axes){a.life-=dt;a.rot+=Math.PI/12;a.x+=a.vx*dt;a.y+=a.vy*dt;for(const e of S.enemies)if(!a.hit.has(e)&&dist(a,e)<e.r+16){e.hp-=a.dmg;e.hit=.1;a.hit.add(e)}}for(const b of S.bolts)b.life-=dt;for(const q of S.parts){q.life-=dt;q.x+=q.vx*dt;q.y+=q.vy*dt;q.a=q.life/q.max}S.gems=S.gems.filter(g=>!g.dead);S.missiles=S.missiles.filter(m=>!m.dead&&m.life>0);S.axes=S.axes.filter(a=>a.life>0);S.bolts=S.bolts.filter(b=>b.life>0);S.parts=S.parts.filter(q=>q.life>0)}
+function deaths(){for(const e of S.enemies)if(e.hp<=0&&!e.dead){e.dead=true;S.kills++;S.gems.push({x:e.x,y:e.y,v:e.boss?80:5});for(let i=0;i<(e.boss?40:8);i++)S.parts.push({x:e.x,y:e.y,vx:rand(-80,80),vy:rand(-80,80),life:rand(.25,.7),max:.7,a:1,c:e.boss?'#111':'#f43f5e'});if(e.boss)end(true)}S.enemies=S.enemies.filter(e=>!e.dead)}
+function levelCheck(){let p=S.player;while(p.xp>=p.next&&!S.paused&&!S.over){p.xp-=p.next;p.lv++;p.next=Math.floor(p.next*1.32+8);openLevel()}}
+function openLevel(){S.paused=true;let pool=Object.keys(INFO).filter(k=>S.skills[k]<5),opts=[];while(opts.length<3&&pool.length){let i=Math.floor(rand(0,pool.length));opts.push(pool.splice(i,1)[0])}$('choices').innerHTML=opts.map(k=>`<div class="choice" data-k="${k}"><h2>${INFO[k][0]} Lv.${S.skills[k]} → Lv.${S.skills[k]+1}</h2><p>${INFO[k][1]}</p></div>`).join('');$('levelup').classList.remove('hidden')}
+function upgrade(k){let p=S.player;S.skills[k]++;if(k==='armor'){let add=Math.round(p.max*.2);p.max+=add;p.hp=Math.min(p.max,p.hp+20+add)}$('levelup').classList.add('hidden');S.paused=false}
+function end(win){S.over=true;S.paused=true;$('endTitle').textContent=win?'胜利！':'失败';$('endText').textContent=win?`你击败了 Boss，共消灭 ${S.kills} 个敌人。`:`你坚持了 ${fmt(S.time)}，共消灭 ${S.kills} 个敌人。`;$('end').classList.remove('hidden')}
+function drawBg(){ctx.fillStyle='#080b1b';ctx.fillRect(0,0,W,H);ctx.strokeStyle='rgba(87,100,160,.18)';ctx.lineWidth=1;let s=48,ox=-(S.time*18%s),oy=-(S.time*9%s);for(let x=ox;x<W;x+=s){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}for(let y=oy;y<H;y+=s){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}}
+function drawPlayer(){let p=S.player,t=S.time,f=frameOf(t,8),bob=Math.sin(t*10)*2,rot=0,sx=1,sy=1;if(p.cls==='ranger')rot=p.vx*.09;if(p.cls==='mage'){sx=1-p.vx*.03;sy=1+p.vy*.02}if(p.hit>0){ctx.shadowColor='#fde68a';ctx.shadowBlur=16}if(S.skills.garlic){let r=54+S.skills.garlic*13+Math.sin(t*5)*5;ctx.strokeStyle='rgba(34,197,94,.55)';ctx.lineWidth=7;ctx.beginPath();ctx.arc(p.x,p.y,r,0,TAU);ctx.stroke();ctx.strokeStyle='rgba(134,239,172,.24)';ctx.lineWidth=15;ctx.beginPath();ctx.arc(p.x,p.y,r+8,0,TAU);ctx.stroke()}drawSheet(imgs[p.cls],p.x,p.y+bob,54,f,rot,sx,sy);ctx.shadowBlur=0;p.hit-=1/60}
+function drawEnemies(){for(const e of S.enemies){if(e.boss){for(let i=0;i<14;i++){ctx.fillStyle=`rgba(0,0,0,${rand(.08,.22)})`;ctx.beginPath();ctx.arc(e.x+rand(-70,70),e.y+rand(-70,70),rand(2,6),0,TAU);ctx.fill()}drawSheet(imgs.boss,e.x,e.y,150,frameOf(S.time,4),0,1+Math.sin(S.time*3)*.03,1-Math.sin(S.time*3)*.03)}else{let q=Math.sin(e.phase)*.16;drawSheet(imgs.imp,e.x,e.y,42,frameOf(S.time+e.phase,8),0,1+q,1-q)}if(e.hit>0){ctx.strokeStyle='rgba(255,255,255,.65)';ctx.lineWidth=2;ctx.beginPath();ctx.arc(e.x,e.y,e.r+4,0,TAU);ctx.stroke()}ctx.fillStyle='rgba(0,0,0,.55)';ctx.fillRect(e.x-e.r,e.y-e.r-10,e.r*2,4);ctx.fillStyle=e.boss?'#ef4444':'#fb7185';ctx.fillRect(e.x-e.r,e.y-e.r-10,e.r*2*clamp(e.hp/e.max,0,1),4)}}
+function drawFx(){for(const g of S.gems){ctx.fillStyle='#38bdf8';ctx.shadowColor='#38bdf8';ctx.shadowBlur=12;ctx.beginPath();ctx.arc(g.x,g.y,6+Math.sin(S.time*8)*1.5,0,TAU);ctx.fill()}ctx.shadowBlur=0;for(const m of S.missiles){m.trail.forEach((r,i)=>{ctx.fillStyle=`rgba(96,165,250,${(i+1)/7})`;ctx.beginPath();ctx.arc(r.x,r.y,3+i,0,TAU);ctx.fill()});ctx.fillStyle='#60a5fa';ctx.beginPath();ctx.arc(m.x,m.y,8,0,TAU);ctx.fill()}for(const a of S.axes){ctx.save();ctx.translate(a.x,a.y);ctx.rotate(a.rot);ctx.fillStyle='#d1d5db';ctx.fillRect(-16,-4,32,8);ctx.fillStyle='#f59e0b';ctx.fillRect(-3,-14,6,28);ctx.restore()}for(const b of S.bolts){ctx.strokeStyle='rgba(250,204,21,.95)';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(b.x-16,0);ctx.lineTo(b.x+4,b.y-36);ctx.lineTo(b.x-10,b.y-18);ctx.lineTo(b.x+12,b.y);ctx.stroke();ctx.fillStyle='rgba(250,204,21,.35)';ctx.beginPath();ctx.arc(b.x,b.y,44*(b.life/.12),0,TAU);ctx.fill()}for(const p of S.parts){ctx.fillStyle=p.c||`rgba(0,0,0,${p.a})`;ctx.globalAlpha=p.a;ctx.fillRect(p.x,p.y,3,3);ctx.globalAlpha=1}}
+function updateHud(){let p=S?.player;if(!p)return;$('job').textContent=p.job;$('lv').textContent=p.lv;$('tm').textContent=fmt(S.time);$('hpTxt').textContent=`${Math.ceil(p.hp)}/${p.max}`;$('xpTxt').textContent=`${Math.floor(p.xp)}/${p.next}`;$('hpFill').style.width=`${clamp(p.hp/p.max*100,0,100)}%`;$('xpFill').style.width=`${clamp(p.xp/p.next*100,0,100)}%`}
+function fmt(t){let m=Math.floor(t/60),s=Math.floor(t%60);return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`}
+function tick(ts){requestAnimationFrame(tick);let dt=Math.min(.033,(ts-last)/1000||0);last=ts;if(!S||!S.run){ctx.clearRect(0,0,W,H);return}if(!S.paused){S.time+=dt;S.spawn+=dt;if(S.time<60&&S.spawn>=1){S.spawn=0;for(let i=0;i<3;i++)spawnEnemy(false)}if(S.time>=60&&!S.boss){S.boss=true;spawnEnemy(true)}movePlayer(dt);skills(dt);updateObjs(dt);deaths();levelCheck();if(S.player.hp<=0)end(false);S.shake=Math.max(0,S.shake-dt);updateHud()}ctx.save();if(S.shake>0)ctx.translate(rand(-2,2),rand(-2,2));drawBg();drawFx();drawEnemies();drawPlayer();ctx.restore()}
+$('classCards').innerHTML=Object.entries(CLASSES).map(([k,c])=>`<button class="card" data-c="${k}"><h2>${c.cn}</h2><p>HP ${c.hp} / 速度 ${c.spd}</p><p>初始技能：${INFO[c.skill][0]}</p><p>${c.desc}</p></button>`).join('');
+document.addEventListener('click',e=>{let c=e.target.closest('[data-c]');if(c)start(c.dataset.c);let ch=e.target.closest('[data-k]');if(ch)upgrade(ch.dataset.k)});$('restart').onclick=restart;requestAnimationFrame(tick);
+})();
+</script>
 </body>
 </html>

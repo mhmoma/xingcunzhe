@@ -1,0 +1,241 @@
+{
+  "version": 1,
+  "createdAt": "2026-06-13T14:08:29Z",
+  "updatedAt": "2026-06-13T14:24:15Z",
+  "assets": [
+    {
+      "name": "player-paladin",
+      "status": "success",
+      "path": "publish/assets/generated/player-paladin.b3dc026c.webp",
+      "contentHash": "b3dc026c",
+      "revisedPrompt": "Cute chibi fantasy paladin hero, top-down 3/4 arcade game sprite, centered full body, silver armor with gold trim, small shield, holy glow, clean dark outline, bright readable silhouette, no text, no logo, no watermark. Place strictly on a SOLID UNIFORM #00B140 chroma key flat color background that fills the entire image with no gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat green screen background, exactly uniform #00B140.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 73.6,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 1212734,
+      "finalBytes": 90064,
+      "usage": {
+        "inputTokens": 116,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqcfje8j_qv5lhxgz",
+      "createdAt": "2026-06-13T14:08:29Z"
+    },
+    {
+      "name": "player-mage",
+      "status": "success",
+      "path": "publish/assets/generated/player-mage.2ee53fd6.webp",
+      "contentHash": "2ee53fd6",
+      "revisedPrompt": "Cute chibi fantasy archmage hero, top-down 3/4 arcade game sprite, purple robe, glowing blue spell orb, high damage magical aura, clean dark outline, bright readable silhouette, centered full body. Strictly on a SOLID UNIFORM #00B140 chroma key flat color background filling the entire canvas outside the character. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background, exactly like a green screen used for VFX compositing. No text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 63.6,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 1358054,
+      "finalBytes": 121164,
+      "usage": {
+        "inputTokens": 123,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqcfl6s5_tdm6s7gg",
+      "createdAt": "2026-06-13T14:09:50Z"
+    },
+    {
+      "name": "player-ranger",
+      "status": "success",
+      "path": "publish/assets/generated/player-ranger.b80da4b4.webp",
+      "contentHash": "b80da4b4",
+      "revisedPrompt": "Cute chibi fantasy ranger hero, top-down 3/4 arcade game sprite, leather armor, small cloak, twin spinning axes, agile pose, clean dark outline, bright readable silhouette, centered full body. No text, no logo, no watermark. Place strictly on a SOLID UNIFORM #FF00FF chroma key flat color background that fills 100% of pixels not occupied by the character. The background must be a single uniform shade of #FF00FF with no gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background exactly like a chroma key green screen used for VFX compositing.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#FF00FF",
+        "alphaZeroPct": 74.6,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 1179727,
+      "finalBytes": 95920,
+      "usage": {
+        "inputTokens": 143,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqcfmx08_rsnxzbbx",
+      "createdAt": "2026-06-13T14:11:09Z"
+    },
+    {
+      "name": "enemy-goblin",
+      "status": "success",
+      "path": "publish/assets/generated/enemy-goblin.31f67e5d.webp",
+      "contentHash": "31f67e5d",
+      "revisedPrompt": "Cute but menacing small red dungeon monster goblin blob, top-down 3/4 arcade enemy sprite, glowing angry eyes, compact round silhouette for swarm enemies, clean dark outline, centered full body, no text, no logo, no watermark. Strictly placed on a SOLID UNIFORM #00B140 chroma key flat color background. The background is a single uniform shade of #00B140 chroma key green that fills 100% of pixels not occupied by the character. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background, exactly like a green screen used for VFX compositing. No text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 80.5,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 950006,
+      "finalBytes": 32836,
+      "usage": {
+        "inputTokens": 153,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqcfom33_xsx04nl6",
+      "createdAt": "2026-06-13T14:12:19Z"
+    },
+    {
+      "name": "player-paladin-sheet",
+      "status": "success",
+      "path": "publish/assets/generated/player-paladin-sheet.bf222e7d.webp",
+      "contentHash": "bf222e7d",
+      "revisedPrompt": "Four-frame pixel art sprite sheet for a cute chibi fantasy paladin hero in a top-down 3/4 arcade survivor game. Arrange exactly as a 2x2 grid, four equal square cells, one animation frame per cell. Same character in every cell: gold helmet, silver armor, small shield, heavy walking poses with shield swinging left and right, readable silhouette, clean dark outline, consistent scale and centered in each cell. Pixel art style, no labels, no frame numbers, no text, no logo, no watermark. Strictly placed on a SOLID UNIFORM #00B140 chroma key flat color background. The background is a single uniform shade of #00B140 chroma key green that fills 100% of pixels not occupied by the character. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background, exactly like a green screen used for VFX compositing. No text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 75.7,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossless_alpha",
+      "originalBytes": 1056072,
+      "finalBytes": 341558,
+      "usage": {
+        "inputTokens": 211,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqcfwrzg_zumpzjf2",
+      "createdAt": "2026-06-13T14:18:52Z"
+    },
+    {
+      "name": "player-mage-sheet",
+      "status": "success",
+      "path": "publish/assets/generated/player-mage-sheet.66736412.webp",
+      "contentHash": "66736412",
+      "revisedPrompt": "Four-frame pixel art sprite sheet for a cute chibi fantasy blue mage hero in a top-down 3/4 arcade survivor game. Arrange exactly as a 2x2 grid, four equal square cells, one animation frame per cell. Same character in every cell: blue wizard hat, purple robe, small staff, walking poses, hat tip bending backward as if moving, one frame with staff crystal glowing yellow for attack, readable silhouette, clean dark outline, consistent scale and centered in each cell. Pixel art style, no labels, no frame numbers, no text, no logo, no watermark. Strictly placed on a SOLID UNIFORM #00B140 chroma key flat color background. The background is a single uniform shade of #00B140 chroma key green that fills 100% of pixels not occupied by the character. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background, exactly like a green screen used for VFX compositing. No text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 78.2,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossless_alpha",
+      "originalBytes": 1012000,
+      "finalBytes": 332708,
+      "usage": {
+        "inputTokens": 223,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqcfyk77_z26wrb8u",
+      "createdAt": "2026-06-13T14:20:09Z"
+    },
+    {
+      "name": "player-ranger-sheet",
+      "status": "success",
+      "path": "publish/assets/generated/player-ranger-sheet.59ca4283.webp",
+      "contentHash": "59ca4283",
+      "revisedPrompt": "Four-frame pixel art sprite sheet for a cute chibi fantasy green ranger hero in a top-down 3/4 arcade survivor game. Arrange exactly as a 2x2 grid, four equal square cells, one animation frame per cell. Same character in every cell: green hood, leather armor, small cloak, dual hand axes, fast running poses with alternating feet, body leaning forward, readable silhouette, clean dark outline, consistent scale and centered in each cell. Pixel art style, no labels, no frame numbers, no text, no logo, no watermark. Strictly placed on a SOLID UNIFORM #FF00FF chroma key flat color background. The background is a single uniform shade of #FF00FF chroma key green that fills 100% of pixels not occupied by the character. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background, exactly like a green screen used for VFX compositing. No text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#FF00FF",
+        "alphaZeroPct": 73.8,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossless_alpha",
+      "originalBytes": 1071026,
+      "finalBytes": 413804,
+      "usage": {
+        "inputTokens": 216,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqcg08jb_8b4ta3yq",
+      "createdAt": "2026-06-13T14:21:26Z"
+    },
+    {
+      "name": "enemy-imp-sheet",
+      "status": "success",
+      "path": "publish/assets/generated/enemy-imp-sheet.eaaba398.webp",
+      "contentHash": "eaaba398",
+      "revisedPrompt": "Four-frame pixel art sprite sheet for a small red imp demon enemy head in a top-down arcade fantasy survivor game. Arrange exactly as a 2x2 grid, four equal square cells, one animation frame per cell. Same monster in every cell: red demon head, small horns, angry glowing eyes, squash and stretch jelly movement poses, frantic swarm enemy, readable silhouette, clean dark outline, consistent scale and centered in each cell. Pixel art style, no labels, no frame numbers, no text, no logo, no watermark. Strictly placed on a SOLID UNIFORM #00B140 chroma key flat color background. The background is a single uniform shade of #00B140 chroma key green that fills 100% of pixels not occupied by the character. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background, exactly like a green screen used for VFX compositing. No text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 78.2,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossless_alpha",
+      "originalBytes": 942034,
+      "finalBytes": 268408,
+      "usage": {
+        "inputTokens": 210,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqcg1vkq_sljpnlwm",
+      "createdAt": "2026-06-13T14:22:48Z"
+    },
+    {
+      "name": "boss-demon-sheet",
+      "status": "success",
+      "path": "publish/assets/generated/boss-demon-sheet.d0bf2a94.webp",
+      "contentHash": "d0bf2a94",
+      "revisedPrompt": "Four-frame pixel art sprite sheet for a huge dark demon boss in a top-down arcade fantasy survivor game. Arrange exactly as a 2x2 grid, four equal square cells, one animation frame per cell. Same boss in every cell: giant horned demon, dark red body, black smoky aura, massive body three times larger than normal enemy, idle breathing and attack windup poses, readable silhouette, clean dark outline, consistent scale and centered in each cell. Pixel art style, no labels, no frame numbers, no text, no logo, no watermark. Strictly placed on a SOLID UNIFORM #00B140 chroma key flat color background. The background is a single uniform shade of #00B140 chroma key green that fills 100% of pixels not occupied by the character. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background, exactly like a green screen used for VFX compositing. No text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 57.1,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossless_alpha",
+      "originalBytes": 1448805,
+      "finalBytes": 788772,
+      "usage": {
+        "inputTokens": 216,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqcg3oj0_wj5nleck",
+      "createdAt": "2026-06-13T14:24:15Z"
+    }
+  ]
+}
