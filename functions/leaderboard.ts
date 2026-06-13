@@ -17,8 +17,8 @@ async function submitScore(ctx: any, args: any) {
   const level = Math.floor(Number(args.level) || 1);
   const kills = Math.floor(Number(args.kills) || 0);
   if (!Number.isFinite(time) || time < 5 || time > 86400) throw new Error('invalid survival time');
-  const clientName = pickName(args.playerName, args.userName, args.displayName, args.nickname);
-  const serverName = pickName(ctx.user?.name);
+  const clientName = pickName(args.playerName, args.userName, args.displayName, args.nickname, args.username, args.name);
+  const serverName = pickName(ctx.user?.name, ctx.user?.displayName, ctx.user?.nickname, ctx.user?.username);
   const name = pickName(serverName, clientName, '匿名勇士');
   const row = { name, job, time: Math.floor(time), level, kills, at: new Date().toISOString() };
   const raw = (await ctx.kv.global.get('leaderboard'))?.value;
@@ -40,7 +40,7 @@ function pickName(...values: any[]) {
 
 function cleanRow(r: any) {
   return {
-    name: pickName(r?.name, r?.playerName, r?.userName, r?.displayName, r?.nickname),
+    name: pickName(r?.name, r?.playerName, r?.userName, r?.displayName, r?.nickname, r?.username),
     job: String(r?.job || '').slice(0, 12),
     time: Math.max(0, Math.floor(Number(r?.time) || 0)),
     level: Math.max(1, Math.floor(Number(r?.level) || 1)),
