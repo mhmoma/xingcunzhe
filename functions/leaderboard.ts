@@ -19,7 +19,8 @@ async function submitScore(ctx: any, args: any) {
   if (!Number.isFinite(time) || time < 5 || time > 86400) throw new Error('invalid survival time');
   const clientName = pickName(args.playerName, args.userName, args.displayName, args.nickname, args.username, args.name);
   const serverName = pickName(ctx.user?.name, ctx.user?.displayName, ctx.user?.nickname, ctx.user?.username);
-  const name = pickName(serverName, clientName, '匿名勇士');
+  const idFallback = ctx.user?.id ? `勇士${String(ctx.user.id).slice(-4)}` : '';
+  const name = pickName(serverName, clientName, idFallback, '匿名勇士');
   const row = { name, job, time: Math.floor(time), level, kills, at: new Date().toISOString() };
   const raw = (await ctx.kv.global.get('leaderboard'))?.value;
   const board = Array.isArray(raw) ? raw.map(cleanRow) : [];
@@ -33,14 +34,14 @@ async function submitScore(ctx: any, args: any) {
 function pickName(...values: any[]) {
   for (const v of values) {
     const s = String(v ?? '').trim();
-    if (s && s !== 'null' && s !== 'undefined') return s.slice(0, 16);
+    if (s && s !== 'null' && s !== 'undefined' && !/^匿名/.test(s)) return s.slice(0, 16);
   }
-  return '匿名勇士';
+  return '';
 }
 
 function cleanRow(r: any) {
   return {
-    name: pickName(r?.name, r?.playerName, r?.userName, r?.displayName, r?.nickname, r?.username),
+    name: pickName(r?.name, r?.playerName, r?.userName, r?.displayName, r?.nickname, r?.username, '匿名勇士'),
     job: String(r?.job || '').slice(0, 12),
     time: Math.max(0, Math.floor(Number(r?.time) || 0)),
     level: Math.max(1, Math.floor(Number(r?.level) || 1)),
