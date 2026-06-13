@@ -1,7 +1,7 @@
 {
   "version": 1,
   "createdAt": "2026-06-13T14:08:29Z",
-  "updatedAt": "2026-06-13T14:24:15Z",
+  "updatedAt": "2026-06-13T14:40:05Z",
   "assets": [
     {
       "name": "player-paladin",
@@ -236,6 +236,162 @@
       },
       "traceId": "trace_mqcg3oj0_wj5nleck",
       "createdAt": "2026-06-13T14:24:15Z"
+    },
+    {
+      "name": "fx-magic-missile-sheet",
+      "status": "success",
+      "path": "publish/assets/generated/fx-magic-missile-sheet.1249a125.webp",
+      "contentHash": "1249a125",
+      "revisedPrompt": "Four-frame pixel art sprite sheet for a blue magic missile projectile in a top-down arcade fantasy survivor game. Arrange exactly as a 2x2 grid, four equal square cells, one animation frame per cell. Glowing blue orb with small comet tail, increasing brightness across frames, clean readable game effect, centered in each cell, consistent scale. Pixel art style, no labels, no frame numbers, no text, no logo, no watermark. Strictly placed on a SOLID UNIFORM #00B140 chroma key flat color background. The background is a single uniform shade of #00B140 chroma key green that fills 100% of pixels not occupied by the effect. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background, exactly like a green screen used for VFX compositing. No text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 89.8,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossless_alpha",
+      "originalBytes": 906455,
+      "finalBytes": 130324,
+      "usage": {
+        "inputTokens": 192,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqcgftei_uur0resc",
+      "createdAt": "2026-06-13T14:33:26Z"
+    },
+    {
+      "name": "fx-axe-sheet",
+      "status": "success",
+      "path": "publish/assets/generated/fx-axe-sheet.01a72091.webp",
+      "contentHash": "01a72091",
+      "revisedPrompt": "Four-frame pixel art sprite sheet for a spinning throwing axe projectile in a top-down arcade fantasy survivor game. Arrange exactly as a 2x2 grid, four equal square cells, one animation frame per cell. Silver axe blade with wooden handle, each frame rotated 90 degrees to imply fast spinning, sharp motion glow, centered in each cell, consistent scale. Pixel art style, no labels, no frame numbers, no text, no logo, no watermark. Strictly placed on a SOLID UNIFORM #00B140 chroma key flat color background. The background is a single uniform shade of #00B140 chroma key green that fills 100% of pixels not occupied by the effect. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background, exactly like a green screen used for VFX compositing. No text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 87.6,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossless_alpha",
+      "originalBytes": 1018043,
+      "finalBytes": 207834,
+      "usage": {
+        "inputTokens": 195,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqcghb3j_qbip0lth",
+      "createdAt": "2026-06-13T14:34:45Z"
+    },
+    {
+      "name": "fx-fireball-sheet",
+      "status": "success",
+      "path": "publish/assets/generated/fx-fireball-sheet.ee667c5a.webp",
+      "contentHash": "ee667c5a",
+      "revisedPrompt": "Four-frame pixel art sprite sheet for an orange fireball projectile and explosion spark in a top-down arcade fantasy survivor game. Arrange exactly as a 2x2 grid, four equal square cells, one animation frame per cell. Flaming orange orb with red core, fiery tail, last frame looks like small burst, centered in each cell, consistent scale. Pixel art style, no labels, no frame numbers, no text, no logo, no watermark. Strictly placed on a SOLID UNIFORM #00B140 chroma key flat color background. The background is a single uniform shade of #00B140 chroma key green that fills 100% of pixels not occupied by the effect. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background, exactly like a green screen used for VFX compositing. No text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 90.3,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossless_alpha",
+      "originalBytes": 916772,
+      "finalBytes": 144888,
+      "usage": {
+        "inputTokens": 193,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqcgj018_lge0ntjv",
+      "createdAt": "2026-06-13T14:35:57Z"
+    },
+    {
+      "name": "fx-ice-orb-sheet",
+      "status": "success",
+      "path": "publish/assets/generated/fx-ice-orb-sheet.4ec3fab6.webp",
+      "contentHash": "4ec3fab6",
+      "revisedPrompt": "Create a 2x2 sprite sheet in pixel art style for a top-down arcade fantasy survivor game. Exactly four equal square cells arranged in a clean 2x2 grid, one animation frame per cell. Each cell contains the same cyan ice orb projectile centered consistently, with icy blue crystal sphere, frost shards, and a sparkling cold trail; readable animated variation across frames while keeping consistent scale and placement. Use crisp retro pixel art, no anti-aliasing, no blur, no text, no labels, no frame numbers, no logo, no watermark. Background must be a perfectly flat, solid, uniform chroma-key green color #00B140 filling all pixels not occupied by the effect, with no gradients, shadows, textures, scenery, ground, decoration, or environmental elements. Pure flat green screen background.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 85.6,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossless_alpha",
+      "originalBytes": 968420,
+      "finalBytes": 194584,
+      "usage": {
+        "inputTokens": 170,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqcgklvu_1yxzfptf",
+      "createdAt": "2026-06-13T14:37:25Z"
+    },
+    {
+      "name": "fx-garlic-aura-sheet",
+      "status": "success",
+      "path": "publish/assets/generated/fx-garlic-aura-sheet.9b69ac72.webp",
+      "contentHash": "9b69ac72",
+      "revisedPrompt": "Four-frame pixel art sprite sheet for a green garlic holy aura ring effect in a top-down arcade fantasy survivor game. Exactly a 2x2 grid with four equal square cells, one animation frame per cell. Each cell shows a centered translucent green circular wave ring with leafy garlic magic particles, pulsing outward, consistent scale across all four frames, no character. Pixel art style, crisp retro game sprite sheet, no labels, no frame numbers, no text, no logo, no watermark. Strictly on a SOLID UNIFORM #FF00FF chroma key flat color background filling 100% of pixels not occupied by the effect. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background, exactly like a green screen used for VFX compositing.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#FF00FF",
+        "alphaZeroPct": 81.7,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossless_alpha",
+      "originalBytes": 1127686,
+      "finalBytes": 410042,
+      "usage": {
+        "inputTokens": 173,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqcgmf8c_31o4mbhy",
+      "createdAt": "2026-06-13T14:38:40Z"
+    },
+    {
+      "name": "fx-orbital-star-sheet",
+      "status": "success",
+      "path": "publish/assets/generated/fx-orbital-star-sheet.14c0f014.webp",
+      "contentHash": "14c0f014",
+      "revisedPrompt": "Four-frame pixel art sprite sheet for a golden orbital magic star blade projectile in a top-down arcade fantasy survivor game. Arrange exactly as a 2x2 grid, four equal square cells, one animation frame per cell. Bright golden four-point star blade, spinning orbit weapon, radiant edge glow, centered in each cell, consistent scale. Pixel art style, crisp sprite edges, no labels, no frame numbers, no text, no logo, no watermark. Strictly placed on a SOLID UNIFORM #00B140 chroma key flat color background. The background is a single uniform shade of #00B140 chroma key green that fills 100% of pixels not occupied by the effect. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background, exactly like a green screen used for VFX compositing. No text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 80.6,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossless_alpha",
+      "originalBytes": 1060594,
+      "finalBytes": 329188,
+      "usage": {
+        "inputTokens": 194,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqcgo2ny_scroux5t",
+      "createdAt": "2026-06-13T14:40:05Z"
     }
   ]
 }
