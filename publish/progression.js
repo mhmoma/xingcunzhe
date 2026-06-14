@@ -61,6 +61,7 @@ window.GameModules.progression = (() => {
   function node(c, id) { return nodes(c).find(n => n.id === id); }
   function unlocked(c, n) { return !n.pre || level(c, n.pre) > 0; }
   function cost(c, id) { const n = node(c, id), lv = level(c, id); return !n || lv >= n.max ? 0 : Math.round(n.base * Math.pow(1.55, lv)); }
+  function esc(v) { return String(v).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m])); }
   async function buy(c, id) {
     const n = node(c, id); if (!n || !unlocked(c, n)) return false;
     const lv = level(c, id), price = cost(c, id); if (lv >= n.max || meta.soulGold < price) return false;
@@ -73,10 +74,13 @@ window.GameModules.progression = (() => {
   function renderTree(container, onChange, active = 'paladin') {
     if (!container) return; const list = nodes(active), up = clsData(active).upgrades;
     const lines = list.filter(n => n.pre).map(n => { const p = node(active, n.pre); return `<line x1="${p.x}%" y1="${p.y}%" x2="${n.x}%" y2="${n.y}%"/>`; }).join('');
-    const cards = list.map(n => { const lv = up[n.id] || 0, price = cost(active, n.id), lock = !unlocked(active, n), full = lv >= n.max, can = !lock && !full && meta.soulGold >= price; return `<button class="treeNode ${lock ? 'locked' : ''} ${full ? 'full' : ''}" style="left:${n.x}%;top:${n.y}%" data-prog-node="${n.id}" ${can ? '' : 'disabled'}><b>${n.name}</b><small>Lv.${lv}/${n.max}</small><span>${lock ? '需前置节点' : full ? '已满级' : `消耗 ${price}`}</span><em title="${n.desc}">${n.desc}</em></button>`; }).join('');
-    container.innerHTML = `<div class="progressHead"><b>灵魂金币：${meta.soulGold}</b><small>当前职业：${CLASSES[active]}</small></div><div class="classTabs">${Object.entries(CLASSES).map(([id, name]) => `<button class="${id === active ? 'selected' : ''}" data-prog-class="${id}">${name}</button>`).join('')}</div><div class="treeCanvas"><svg viewBox="0 0 100 130" preserveAspectRatio="none">${lines}</svg>${cards}</div>`;
+    const cards = list.map(n => { const lv = up[n.id] || 0, price = cost(active, n.id), lock = !unlocked(active, n), full = lv >= n.max, can = !lock && !full && meta.soulGold >= price, tip = `${n.name} Lv.${lv}/${n.max}\n${n.desc}\n${lock ? '需要先升级前置节点' : full ? '已满级' : `下一次升级消耗 ${price} 灵魂金币`}`; return `<button class="treeNode ${lock ? 'locked' : ''} ${full ? 'full' : ''}" style="left:${n.x}%;top:${n.y}%" data-prog-node="${n.id}" data-tip="${esc(tip)}" ${can ? '' : 'disabled'}><b>${n.name}</b><small>Lv.${lv}/${n.max}</small><span>${lock ? '需前置节点' : full ? '已满级' : `消耗 ${price}`}</span><em>${n.desc}</em></button>`; }).join('');
+    container.innerHTML = `<div class="progressHead"><b>灵魂金币：${meta.soulGold}</b><small>当前职业：${CLASSES[active]}</small></div><div class="classTabs">${Object.entries(CLASSES).map(([id, name]) => `<button class="${id === active ? 'selected' : ''}" data-prog-class="${id}">${name}</button>`).join('')}</div><div class="treeCanvas"><svg viewBox="0 0 100 130" preserveAspectRatio="none">${lines}</svg>${cards}<div class="treeTip" id="treeTip"></div></div>`;
     container.querySelectorAll('[data-prog-class]').forEach(b => b.onclick = () => renderTree(container, onChange, b.dataset.progClass));
-    container.querySelectorAll('[data-prog-node]').forEach(b => b.onclick = async () => { await buy(active, b.dataset.progNode); renderTree(container, onChange, active); onChange?.(); });
+    const tip = container.querySelector('#treeTip');
+    function showTip(btn) { if (!tip) return; tip.textContent = btn.dataset.tip || ''; tip.style.left = btn.style.left; tip.style.top = `calc(${btn.style.top} - 54px)`; tip.classList.add('show'); }
+    function hideTip() { tip?.classList.remove('show'); }
+    container.querySelectorAll('[data-prog-node]').forEach(b => { b.onpointerenter = () => showTip(b); b.onpointerleave = hideTip; b.onpointerdown = () => showTip(b); b.onpointerup = () => setTimeout(hideTip, 900); b.onclick = async () => { await buy(active, b.dataset.progNode); renderTree(container, onChange, active); onChange?.(); }; });
   }
   function applyClass(classId, baseClass) {
     const u = clsData(classId).upgrades, skillDmg = {}, skillLv = {}; let hpMul = 1 + (u.hp || 0) * 0.05, dmgMul = 1 + (u.damage || 0) * 0.04, spdMul = 1 + (u.speed || 0) * 0.03;
