@@ -1,7 +1,7 @@
 {
   "version": 1,
   "createdAt": "2026-06-13T14:08:29Z",
-  "updatedAt": "2026-06-14T04:30:35Z",
+  "updatedAt": "2026-06-14T08:36:06Z",
   "assets": [
     {
       "name": "player-paladin",
@@ -1127,6 +1127,150 @@
       },
       "traceId": "trace_mqdacbrz_wq99thse",
       "createdAt": "2026-06-14T04:30:35Z"
+    },
+    {
+      "name": "bg-ancient-ruins-field",
+      "status": "success",
+      "path": "publish/assets/generated/bg-ancient-ruins-field.522f8be5.webp",
+      "contentHash": "522f8be5",
+      "revisedPrompt": "Large readable ancient ruins battlefield background for a top-down 3/4 arcade fantasy survivor game. Wide stone plaza with broken marble paths, mossy rune circles, collapsed pillars, cracked tiles, old stair edges, scattered relic stones, clear walkable open spaces, strong visual variety between quadrants, dark fantasy arcade colors, clean high contrast, no tiny cramped arena, designed to tile or scroll under the player while feeling like a much larger place. Bright readable terrain, no characters, no text, no logo, no watermark. Wide composition, no text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1536x1024",
+      "wantsTransparent": false,
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q80_opaque",
+      "originalBytes": 3843253,
+      "finalBytes": 434092,
+      "usage": {
+        "inputTokens": 123,
+        "outputImageTokens": 1372
+      },
+      "traceId": "trace_mqdiuofa_8zawrgnz",
+      "createdAt": "2026-06-14T08:29:02Z"
+    },
+    {
+      "name": "bg-frost-moon-field",
+      "status": "success",
+      "path": "publish/assets/generated/bg-frost-moon-field.1a0c790c.webp",
+      "contentHash": "1a0c790c",
+      "revisedPrompt": "Large readable frost moon wasteland battlefield background for a top-down 3/4 arcade fantasy survivor game. Wide icy open field under moonlight, with a clear sense of a huge scrolling arena larger than the screen. Composition should feel expansive and playable: broad walkable lanes, open spaces, readable paths, varied terrain zones, and distinct navigation shape. A frozen river curves through the scene, snowdrift lanes weave around it, blue crystal clusters glow subtly, broken black rocks and jagged ice formations create obstacles, distant ritual ice marks etched into the ground, dark fantasy arcade color palette with strong contrast and readability. The scene should not look like a tiny repeated patch; it should feel like a big handcrafted battlefield. No characters, no text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1536x1024",
+      "wantsTransparent": false,
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q80_opaque",
+      "originalBytes": 3407061,
+      "finalBytes": 310984,
+      "usage": {
+        "inputTokens": 161,
+        "outputImageTokens": 1372
+      },
+      "traceId": "trace_mqdiwits_dw5yrxcy",
+      "createdAt": "2026-06-14T08:30:20Z"
+    },
+    {
+      "name": "enemy-ruin-guardian-sheet",
+      "status": "success",
+      "path": "publish/assets/generated/enemy-ruin-guardian-sheet.5561b588.webp",
+      "contentHash": "5561b588",
+      "revisedPrompt": "Cute chibi ancient ruin guardian enemy sprite sheet for a top-down 3/4 arcade fantasy survivor game. 2x2 grid animation frames, stone construct soldier, cracked sandstone armor, glowing blue rune core, heavy shield arm, readable silhouette, clean dark outline, consistent character in all four frames, centered in each cell. Sprite sheet format: four equal cells in a 2x2 grid, same character design in each frame with slight animation pose differences appropriate for idle/attack/move. No text, no logo, no watermark. STRICTLY on a SOLID UNIFORM #00B140 chroma key flat color background. The background must be a single uniform shade of #00B140 chroma key green filling 100% of pixels not occupied by the character. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background, exactly like a green screen used for VFX compositing.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 70.4,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 1362554,
+      "finalBytes": 112042,
+      "usage": {
+        "inputTokens": 202,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqdiy7fz_1nngqr47",
+      "createdAt": "2026-06-14T08:31:38Z"
+    },
+    {
+      "name": "enemy-frost-wraith-sheet",
+      "status": "success",
+      "path": "publish/assets/generated/enemy-frost-wraith-sheet.94ba310c.webp",
+      "contentHash": "94ba310c",
+      "revisedPrompt": "Cute chibi frost wraith enemy sprite sheet for a top-down 3/4 arcade fantasy survivor game. 2x2 grid animation frames, floating icy ghost warrior, pale blue cloak, crescent frost claws, glowing cyan eyes, snow particles around body, readable silhouette, clean dark outline, consistent character in all four frames, centered in each cell. No text, no logo, no watermark. Strictly placed on a SOLID UNIFORM #00B140 chroma key flat color background. The background is a single uniform shade of #00B140 chroma key green that fills 100% of pixels not occupied by the character. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background, exactly like a green screen used for VFX compositing.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 73.4,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 1347238,
+      "finalBytes": 142334,
+      "usage": {
+        "inputTokens": 175,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqdj02zb_nav0nyrw",
+      "createdAt": "2026-06-14T08:33:13Z"
+    },
+    {
+      "name": "boss-ruin-colossus-sheet",
+      "status": "success",
+      "path": "publish/assets/generated/boss-ruin-colossus-sheet.427d44af.webp",
+      "contentHash": "427d44af",
+      "revisedPrompt": "Large ancient ruin colossus boss sprite sheet for a top-down 3/4 arcade fantasy survivor game. Create a 2x2 grid of animation frames, each frame centered within its cell and showing the same massive stone golem boss in consistent design and scale across all four frames. The creature is made of broken temple blocks and weathered ancient ruins, with a golden cracked crown, glowing blue rune core in the chest, heavy shield plates integrated into its body, and a boss-scale imposing silhouette. Style should be cute arcade fantasy but clearly threatening, with a clean dark outline, readable shapes, and polished game-sprite appeal. No text, no logo, no watermark. Background must be a strict solid uniform chroma key flat color #00B140 filling 100% of all non-character pixels, with absolutely no gradient, shadow, texture, scenery, ground, decoration, or environmental elements. Pure flat green screen background only. The sprite sheet should have four distinct animation frames arranged in a 2x2 grid, maintaining the same character identity in each frame.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 56.9,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 1705879,
+      "finalBytes": 190318,
+      "usage": {
+        "inputTokens": 221,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqdj1wy2_0vyz1p25",
+      "createdAt": "2026-06-14T08:34:41Z"
+    },
+    {
+      "name": "boss-frost-queen-sheet",
+      "status": "success",
+      "path": "publish/assets/generated/boss-frost-queen-sheet.a45906f6.webp",
+      "contentHash": "a45906f6",
+      "revisedPrompt": "Large sprite sheet for a top-down 3/4 arcade fantasy survivor game: a frost moon queen boss, arranged as a 2x2 grid animation sheet with four frames. The character is an icy spectral queen with a crescent moon crown, flowing blue-white robes, a crystal staff, frozen aura, elegant but threatening boss silhouette, glowing cyan highlights, and a clean dark outline. Keep the boss consistent across all four frames, centered in each cell, with subtle animation variation suitable for a boss idle/attack cycle. No text, no logo, no watermark. IMPORTANT: place the sprite sheet on a SOLID UNIFORM #00B140 chroma key flat color background filling 100% of pixels not occupied by the character. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat green screen background exactly #00B140.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 65.8,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 1611388,
+      "finalBytes": 224342,
+      "usage": {
+        "inputTokens": 187,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqdj3tbw_qfnwcldp",
+      "createdAt": "2026-06-14T08:36:06Z"
     }
   ]
 }
