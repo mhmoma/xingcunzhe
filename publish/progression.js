@@ -12,22 +12,22 @@ window.GameModules.progression = (() => {
   ];
   const SPEC = {
     paladin: [
-      ['aura', '蒜阵圣化', '大蒜光环伤害每级 +7%，Lv.4 后大蒜光环额外 +1 技能等级', 5, 80, 26, 82, 'damage', ['garlic']],
-      ['lance', '圣枪裁决', '圣光长枪伤害每级 +7%，Lv.4 后圣光长枪额外 +1 技能等级', 5, 90, 50, 86, 'damage', ['holyLance']],
-      ['nova', '血誓新星', '血色新星伤害每级 +7%，Lv.4 后血色新星额外 +1 技能等级', 5, 90, 74, 82, 'damage', ['bloodNova']],
+      ['aura', '蒜阵圣化', '大蒜光环每级范围 +5、伤害 +4%，Lv.4 后额外 +1 技能等级', 5, 80, 26, 82, 'damage', ['garlic']],
+      ['lance', '圣枪裁决', '圣光长枪每级冷却 -5%、枪阵宽度 +3，Lv.2/Lv.4 各 +1 发', 5, 90, 50, 86, 'damage', ['holyLance']],
+      ['nova', '血誓新星', '血色新星每级范围 +7、冷却 -6%、伤害 +4%，Lv.4 后额外 +1 技能等级', 5, 90, 74, 82, 'damage', ['bloodNova']],
       ['guard', '神圣壁垒', '每级生命 +3%、开局护盾 +4% 基础生命、每秒回复 +0.25', 4, 110, 50, 108, 'utility', []],
     ],
     mage: [
-      ['missile', '飞弹增幅', '魔法飞弹伤害每级 +7%，Lv.4 后魔法飞弹额外 +1 技能等级', 5, 80, 26, 82, 'damage', ['missile']],
-      ['fire', '赤焰学派', '火球与陨星伤害每级 +7%，Lv.4 后两者额外 +1 技能等级', 5, 90, 50, 86, 'damage', ['fireball', 'meteorShard']],
-      ['thunder', '雷弧回路', '闪电与连锁雷弧伤害每级 +7%，Lv.4 后两者额外 +1 技能等级', 5, 90, 74, 82, 'damage', ['lightning', 'thunderChain']],
-      ['beam', '棱镜奥术', '奥术射线伤害每级 +7%，Lv.4 后奥术射线额外 +1 技能等级', 4, 110, 50, 108, 'damage', ['arcaneBeam']],
+      ['missile', '飞弹增幅', '魔法飞弹每级冷却 -4.5%、爆炸范围 +4，Lv.2/Lv.4 各 +1 发', 5, 80, 26, 82, 'damage', ['missile']],
+      ['fire', '赤焰学派', '火球与陨星每级爆炸范围 +6、冷却 -4.5%，Lv.4 后额外 +1 发', 5, 90, 50, 86, 'damage', ['fireball', 'meteorShard']],
+      ['thunder', '雷弧回路', '闪电每级额外落雷，连锁雷弧每级 +1 跳，冷却 -4.5%', 5, 90, 74, 82, 'damage', ['lightning', 'thunderChain']],
+      ['beam', '棱镜奥术', '奥术射线每级宽度 +3、射程 +45、冷却 -6%，Lv.4 后 +1 道射线', 4, 110, 50, 108, 'damage', ['arcaneBeam']],
     ],
     ranger: [
-      ['axe', '回旋飞斧', '飞斧伤害每级 +7%，Lv.4 后飞斧额外 +1 技能等级', 5, 80, 26, 82, 'damage', ['axe']],
-      ['wind', '风裂专精', '风裂刃伤害每级 +7%，Lv.4 后风裂刃额外 +1 技能等级', 5, 90, 50, 86, 'damage', ['windCutter']],
-      ['dagger', '匕首阵列', '匕首雨伤害每级 +7%，Lv.4 后匕首雨额外 +1 技能等级', 5, 90, 74, 82, 'damage', ['daggerRain']],
-      ['moon', '月牙猎影', '月牙斩伤害每级 +7%，Lv.4 后月牙斩额外 +1 技能等级', 4, 110, 50, 108, 'damage', ['moonSlash']],
+      ['axe', '回旋飞斧', '飞斧每级持续 +0.18 秒、冷却 -4.5%，Lv.2/Lv.4 各 +1 把', 5, 80, 26, 82, 'damage', ['axe']],
+      ['wind', '风裂专精', '风裂刃每级飞行速度 +20、冷却 -4.5%，Lv.2/Lv.4 各 +1 道', 5, 90, 50, 86, 'damage', ['windCutter']],
+      ['dagger', '匕首阵列', '匕首雨每级目标 +1、落点范围 +4、冷却 -5%', 5, 90, 74, 82, 'damage', ['daggerRain']],
+      ['moon', '月牙猎影', '月牙斩每级减速 +0.18、弧刃范围 +4、冷却 -5%，Lv.4 后 +1 道', 4, 110, 50, 108, 'damage', ['moonSlash']],
     ],
   };
   const DEFAULT = { soulGold: 0, classes: Object.fromEntries(Object.keys(CLASSES).map(k => [k, { upgrades: {} }])) };
@@ -83,10 +83,26 @@ window.GameModules.progression = (() => {
     container.querySelectorAll('[data-prog-node]').forEach(b => { b.onpointerenter = () => showTip(b); b.onpointerleave = hideTip; b.onpointerdown = () => showTip(b); b.onpointerup = () => setTimeout(hideTip, 900); b.onclick = async () => { await buy(active, b.dataset.progNode); renderTree(container, onChange, active); onChange?.(); }; });
   }
   function applyClass(classId, baseClass) {
-    const u = clsData(classId).upgrades, skillDmg = {}, skillLv = {}; let hpMul = 1 + (u.hp || 0) * 0.05, dmgMul = 1 + (u.damage || 0) * 0.04, spdMul = 1 + (u.speed || 0) * 0.03;
-    for (const n of SPEC[classId]) { const lv = u[n[0]] || 0; if (!lv) continue; for (const s of n[8]) { skillDmg[s] = (skillDmg[s] || 0) + lv * 0.07; if (lv >= 4) skillLv[s] = (skillLv[s] || 0) + 1; } }
+    const u = clsData(classId).upgrades, skillDmg = {}, skillLv = {}, skillMods = {};
+    let hpMul = 1 + (u.hp || 0) * 0.05, dmgMul = 1 + (u.damage || 0) * 0.04, spdMul = 1 + (u.speed || 0) * 0.03;
+    function add(skill, mod) {
+      skillMods[skill] = skillMods[skill] || {};
+      for (const [k, v] of Object.entries(mod)) skillMods[skill][k] = (skillMods[skill][k] || 0) + v;
+    }
+    const aura = u.aura || 0, lance = u.lance || 0, nova = u.nova || 0, missile = u.missile || 0, fire = u.fire || 0, thunder = u.thunder || 0, beam = u.beam || 0, axe = u.axe || 0, wind = u.wind || 0, dagger = u.dagger || 0, moon = u.moon || 0;
+    if (aura) { skillDmg.garlic = aura * 0.04; add('garlic', { radius: aura * 5 }); if (aura >= 4) skillLv.garlic = 1; }
+    if (lance) add('holyLance', { cd: lance * 0.05, width: lance * 3, count: Math.floor(lance / 2) });
+    if (nova) { skillDmg.bloodNova = nova * 0.04; add('bloodNova', { radius: nova * 7, cd: nova * 0.06 }); if (nova >= 4) skillLv.bloodNova = 1; }
+    if (missile) add('missile', { cd: missile * 0.045, aoe: missile * 4, count: Math.floor(missile / 2) });
+    if (fire) for (const s of ['fireball', 'meteorShard']) add(s, { radius: fire * 6, cd: fire * 0.045, count: fire >= 4 ? 1 : 0 });
+    if (thunder) { add('lightning', { count: thunder, radius: thunder * 3, cd: thunder * 0.045 }); add('thunderChain', { jumps: thunder, cd: thunder * 0.045 }); }
+    if (beam) add('arcaneBeam', { width: beam * 3, range: beam * 45, cd: beam * 0.06, count: beam >= 4 ? 1 : 0 });
+    if (axe) add('axe', { life: axe * 0.18, cd: axe * 0.045, count: Math.floor(axe / 2) });
+    if (wind) add('windCutter', { speed: wind * 20, cd: wind * 0.045, count: Math.floor(wind / 2) });
+    if (dagger) add('daggerRain', { targets: dagger, radius: dagger * 4, cd: dagger * 0.05 });
+    if (moon) add('moonSlash', { slow: moon * 0.18, radius: moon * 4, cd: moon * 0.05, count: moon >= 4 ? 1 : 0 });
     hpMul *= 1 + (u.guard || 0) * 0.03;
-    return { hp: Math.round(baseClass.hp * hpMul), spd: baseClass.spd * spdMul, dmg: baseClass.dmg * dmgMul, startXp: (u.startXp || 0) * 4, magnetBonus: (u.magnet || 0) * 0.06, goldBonus: (u.gold || 0) * 0.05, shieldStart: Math.round(baseClass.hp * (u.guard || 0) * 0.04), regenBonus: (u.guard || 0) * 0.25, skillDmg, skillLv };
+    return { hp: Math.round(baseClass.hp * hpMul), spd: baseClass.spd * spdMul, dmg: baseClass.dmg * dmgMul, startXp: (u.startXp || 0) * 4, magnetBonus: (u.magnet || 0) * 0.06, goldBonus: (u.gold || 0) * 0.05, shieldStart: Math.round(baseClass.hp * (u.guard || 0) * 0.04), regenBonus: (u.guard || 0) * 0.25, skillDmg, skillLv, skillMods };
   }
   function estimateRunReward(run) {
     const c = run.classId || run.cls || 'paladin', goals = Math.max(0, Number(run.goals) || 0), base = Math.floor(Number(run.gold) || 0), time = Math.floor((Number(run.time) || 0) / 30) * 10, boss = Math.max(0, Number(run.bossKills) || 0) * 80, level = run.level >= 30 ? 100 : run.level >= 20 ? 60 : run.level >= 10 ? 30 : 0;
