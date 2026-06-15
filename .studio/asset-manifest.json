@@ -1,7 +1,7 @@
 {
   "version": 1,
   "createdAt": "2026-06-13T14:08:29Z",
-  "updatedAt": "2026-06-15T13:01:07.282Z",
+  "updatedAt": "2026-06-15T13:19:26.900Z",
   "assets": [
     {
       "name": "player-paladin",
@@ -1707,88 +1707,160 @@
       "createdAt": "2026-06-15T12:07:02Z"
     },
     {
-      "name": "equipment-icons-gold-exact-sheet",
+      "name": "equipment-icons-gold-rpg-sheet",
       "status": "success",
-      "path": "publish/assets/generated/equipment-icons-gold-exact-sheet.svg",
-      "contentHash": "3300f68e",
-      "model": "programmatic-svg",
-      "size": "576x576",
+      "path": "publish/assets/generated/equipment-icons-gold-rpg-sheet.8bac9168.webp",
+      "contentHash": "8bac9168",
+      "revisedPrompt": "Create a high-detail fantasy RPG equipment icon SPRITE SHEET, matching ornate mobile RPG item icon aesthetics. Composition: EXACTLY 6 columns by 6 rows, 36 equal square cells, one centered equipment icon per cell, consistent scale and padding, row-major order from left to right, top to bottom. Each cell should contain a single polished icon with ornate red and gold gemstones, metallic gold trim, dark clean outline, glossy highlights, rich shadows, transparent/icon-like presentation, bright readable silhouette, top-down 3/4 icon rendering, no text, no labels, no numbers, no watermark.\n\nIMPORTANT: The 6th weapon must clearly be a DAGGER, not a staff. The 2nd weapon must clearly be a STAFF, not a dagger.\n\nCell contents in row-major order:\nRow 1 weapons: 1 golden sun sword/blade, 2 meteor fire mage staff, 3 hawk hunting bow, 4 crystal mace/scepter, 5 dragon engraved battle axe, 6 moonlight short dagger.\nRow 2 helmets: 1 golden guardian crown, 2 ember fire visor helmet, 3 frost hood, 4 heavy stone helmet, 5 void gold mask, 6 rose veil.\nRow 3 chest armor: 1 solar gilded plate armor, 2 ember mage robe, 3 golden hunter leather armor, 4 deep gold carapace armor, 5 mist shadow robe, 6 holy vessel ceremonial dress.\nRow 4 amulets: 1 dawn holy amulet, 2 arcane golden core pendant, 3 molten fire heart pendant, 4 icy moon teardrop pendant, 5 bone golden charm, 6 rose heart pendant.\nRow 5 rings: 1 fury red gold ring, 2 focus arcane ring, 3 guardian shield ring, 4 moon shadow ring, 5 greed treasure ring, 6 rose gold ring.\nRow 6 boots: 1 sun forged greaves, 2 wind golden boots, 3 frost boots, 4 void walking boots, 5 stone sabaton boots, 6 rose slippers.\n\nBackground: strictly a SOLID UNIFORM #00B140 chroma key flat color filling 100% of pixels not occupied by icons. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background exactly like green screen compositing. Make the icon grid clean and evenly spaced, with each icon centered in its square cell. Maintain consistent perspective and scale across all 36 icons.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
       "wantsTransparent": true,
-      "outputFormat": "svg",
-      "compressionProfile": "vector",
-      "finalBytes": 29869,
-      "createdAt": "2026-06-15T13:01:07.282Z",
-      "note": "Exact deterministic equipment sprite sheet. Each cell index matches equipment.js item order."
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 54.1,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 1952086,
+      "finalBytes": 299448,
+      "usage": {
+        "inputTokens": 529,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqf8adm0_2liws545",
+      "createdAt": "2026-06-15T13:09:17Z"
     },
     {
-      "name": "equipment-icons-unique-exact-sheet",
+      "name": "equipment-icons-unique-rpg-sheet",
       "status": "success",
-      "path": "publish/assets/generated/equipment-icons-unique-exact-sheet.svg",
-      "contentHash": "3eaa2879",
-      "model": "programmatic-svg",
-      "size": "576x576",
+      "path": "publish/assets/generated/equipment-icons-unique-rpg-sheet.b1783e31.webp",
+      "contentHash": "b1783e31",
+      "revisedPrompt": "High-detail dark-gold unique fantasy RPG equipment icon sprite sheet, ornate mobile RPG item icon style. Create a 6 columns by 6 rows sprite sheet with equal square cells and one centered icon per cell. Only the first 18 cells contain icons in row-major order; remaining cells are empty transparent/chroma background. Each occupied cell must clearly match the item type and name concept below, with polished gem-encrusted fantasy equipment icon rendering, dark gold metal, red/purple gems, black shadows, glossy highlights, clean dark outline, no text, no labels, no numbers, no watermark. Use a SOLID UNIFORM #00B140 chroma key flat color background filling all unused pixels; no gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background exactly like green screen compositing.\n\nRow 1: 1 void lantern pendant, 2 dragon heart chest armor/core, 3 frost moon crown helmet, 4 holy nail war hammer/mace weapon, 5 thunder long bow weapon, 6 blood pact heavy plate armor.\nRow 2: 1 reverse clock ring, 2 greedy traveler boots, 3 rose mirror amulet, 4 abyss mask helmet, 5 golem soul ring/core, 6 starfall tome weapon book.\nRow 3: 1 demon horn helmet, 2 pale wheel ring, 3 pilgrim faith boots, 4 endless quiver amulet, 5 plague bell weapon, 6 sun remnant shield chest armor.\n\nMake weapons clearly weapons, boots clearly boots, rings clearly rings, helmets clearly helmets, armor clearly armor. Icon-centric composition, centered in each cell, consistent scale and style across all icons. No extra cells populated beyond the first 18.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
       "wantsTransparent": true,
-      "outputFormat": "svg",
-      "compressionProfile": "vector",
-      "finalBytes": 28966,
-      "createdAt": "2026-06-15T13:01:07.282Z",
-      "note": "Exact deterministic equipment sprite sheet. Each cell index matches equipment.js item order."
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 69.4,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 1541737,
+      "finalBytes": 178840,
+      "usage": {
+        "inputTokens": 369,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqf8cv3e_ttpyi1sz",
+      "createdAt": "2026-06-15T13:11:01Z"
     },
     {
-      "name": "equipment-icons-set-paladin-exact-sheet",
+      "name": "equipment-icons-set-paladin-rpg-sheet",
       "status": "success",
-      "path": "publish/assets/generated/equipment-icons-paladin-exact-sheet.svg",
-      "contentHash": "115f8af1",
-      "model": "programmatic-svg",
-      "size": "576x576",
+      "path": "publish/assets/generated/equipment-icons-set-paladin-rpg-sheet.96aa82dd.webp",
+      "contentHash": "96aa82dd",
+      "revisedPrompt": "High-detail fantasy RPG equipment icon sprite sheet for PALADIN set gear, ornate mobile RPG item icon style, polished red-gold gemstone equipment aesthetic with gold trim, red and holy white gems, glossy highlights, dark clean outline, rich shadows. Exactly 6 columns by 6 rows, equal square cells, one centered icon per cell. Only first 18 cells contain icons in row-major order; remaining cells empty on flat chroma key background. IMPORTANT order and placement: Row 1 set 'Aureate Guardian': cell 1 holy golden weapon, cell 2 guardian crown helmet, cell 3 golden plate armor, cell 4 holy pendant amulet, cell 5 guardian ring, cell 6 golden greaves boots. Row 2 set 'Thorn Bulwark': cell 1 thorn shield-mace weapon, cell 2 thorn heavy helmet, cell 3 thorn bulwark armor, cell 4 thorn charm amulet, cell 5 thorn ring, cell 6 thorn sabaton boots. Row 3 set 'Dawn Judgment': cell 1 dawn judgment blade weapon, cell 2 dawn crown helmet, cell 3 dawn armor robe, cell 4 dawn pendant, cell 5 dawn ring, cell 6 dawn boots. Make each slot visually obvious: weapon, helmet, chest armor, amulet, ring, boots. No text, no labels, no numbers, no watermark. Strictly placed on a SOLID UNIFORM #00B140 chroma key flat color background. The background is a single uniform shade of #00B140 chroma key green that fills 100% of pixels not occupied by icons. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background exactly like green screen compositing.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
       "wantsTransparent": true,
-      "outputFormat": "svg",
-      "compressionProfile": "vector",
-      "finalBytes": 14990,
-      "createdAt": "2026-06-15T13:01:07.282Z",
-      "note": "Exact deterministic equipment sprite sheet. Each cell index matches equipment.js item order."
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 75.6,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 1469591,
+      "finalBytes": 169702,
+      "usage": {
+        "inputTokens": 374,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqf8f9wt_n9mlrjm0",
+      "createdAt": "2026-06-15T13:12:43Z"
     },
     {
-      "name": "equipment-icons-set-mage-exact-sheet",
+      "name": "equipment-icons-set-mage-rpg-sheet",
       "status": "success",
-      "path": "publish/assets/generated/equipment-icons-mage-exact-sheet.svg",
-      "contentHash": "a6bd0be3",
-      "model": "programmatic-svg",
-      "size": "576x576",
+      "path": "publish/assets/generated/equipment-icons-set-mage-rpg-sheet.a179ef44.webp",
+      "contentHash": "a179ef44",
+      "revisedPrompt": "Create a high-detail fantasy RPG equipment icon sprite sheet for a MAGE set in ornate mobile RPG item icon style. Canvas is a 6 columns by 6 rows grid of equal square cells, with exactly one centered icon per cell. Only the first 18 cells contain icons in row-major order; the remaining 18 cells are empty and show only a solid uniform chroma-key background color #00B140. No text, no labels, no numbers, no watermark, no scenery, no texture, no gradient, no shadow in background, no decoration outside icons.\n\nIcons should be polished, highly detailed, glossy, with clean dark outlines, rich shadows, purple-blue arcane gems, gold trim, and strong mobile game item readability. Each slot must be visually obvious by category.\n\nRow 1, set 'Astral Missile':\n1 astral wand/staff weapon\n2 star crown helmet\n3 astral mage robe chest\n4 star pendant amulet\n5 astral ring\n6 star boots\n\nRow 2, set 'Ember Meteor':\n1 fire meteor staff weapon\n2 ember mage hood\n3 ember robe chest\n4 meteor pendant\n5 ember ring\n6 ember boots\n\nRow 3, set 'Storm Sigil':\n1 storm sigil staff weapon\n2 storm circlet helmet\n3 storm robe chest\n4 lightning pendant\n5 storm ring\n6 storm boots\n\nEnsure each icon is centered in its cell, consistent sizing, with strong contrast against the flat #00B140 background. The empty cells must be completely blank except for the uniform green background. The overall sheet should look like a clean game asset sprite sheet.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
       "wantsTransparent": true,
-      "outputFormat": "svg",
-      "compressionProfile": "vector",
-      "finalBytes": 15151,
-      "createdAt": "2026-06-15T13:01:07.282Z",
-      "note": "Exact deterministic equipment sprite sheet. Each cell index matches equipment.js item order."
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 70.4,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 1532457,
+      "finalBytes": 194346,
+      "usage": {
+        "inputTokens": 337,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqf8hbb4_bpzskemj",
+      "createdAt": "2026-06-15T13:14:30Z"
     },
     {
-      "name": "equipment-icons-set-ranger-exact-sheet",
+      "name": "equipment-icons-set-ranger-rpg-sheet",
       "status": "success",
-      "path": "publish/assets/generated/equipment-icons-ranger-exact-sheet.svg",
-      "contentHash": "51e35b69",
-      "model": "programmatic-svg",
-      "size": "576x576",
+      "path": "publish/assets/generated/equipment-icons-set-ranger-rpg-sheet.0fcef178.webp",
+      "contentHash": "0fcef178",
+      "revisedPrompt": "Create a high-detail fantasy RPG equipment icon sprite sheet for a RANGER set gear in ornate mobile RPG item icon style. Canvas is exactly a 6 columns by 6 rows grid of equal square cells, with one centered icon per cell. Only the first 18 cells contain icons in row-major order; the remaining 18 cells are empty with a strict solid uniform chroma-key background color #FF00FF filling all unused space. Absolutely no text, labels, numbers, watermark, scenery, decorative particles outside icons, shadows outside icons, or any background texture/gradient—just flat #FF00FF in empty cells and behind the grid. Each icon should be isolated, centered, and visually obvious as its slot type, with clean dark outline, rich shadows inside the icon, glossy highlights, polished gems, ornate mobile RPG UI styling.\n\nOrder and content exactly:\nRow 1, set 'Cyclone Axe': 1) spinning axe weapon, 2) ranger helm/cowl, 3) leather armor chest, 4) cyclone pendant amulet, 5) cyclone ring, 6) ranger boots.\nRow 2, set 'Moon Hunter': 1) moon bow or moon blade weapon, 2) moon hunter hood, 3) moon leather armor, 4) moon pendant, 5) moon ring, 6) moon boots.\nRow 3, set 'Venom Shadow': 1) venom dagger weapon, 2) shadow mask hood, 3) venom shadow leather armor, 4) venom amulet, 5) shadow ring, 6) shadow boots.\n\nVisual theme: green, moon silver, dark leather, gold trim, polished gems, glossy highlights, rich shadows, clean dark outline. Make each slot type very legible from silhouette and materials. The remaining 18 cells must be empty magenta #FF00FF exactly.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
       "wantsTransparent": true,
-      "outputFormat": "svg",
-      "compressionProfile": "vector",
-      "finalBytes": 15525,
-      "createdAt": "2026-06-15T13:01:07.282Z",
-      "note": "Exact deterministic equipment sprite sheet. Each cell index matches equipment.js item order."
+      "chromaKey": {
+        "color": "#FF00FF",
+        "alphaZeroPct": 62,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 1560422,
+      "finalBytes": 214536,
+      "usage": {
+        "inputTokens": 388,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqf8jlm5_xxw5dh1m",
+      "createdAt": "2026-06-15T13:16:34Z"
     },
     {
-      "name": "equipment-icons-set-saintess-exact-sheet",
+      "name": "equipment-icons-set-saintess-rpg-sheet",
       "status": "success",
-      "path": "publish/assets/generated/equipment-icons-saintess-exact-sheet.svg",
-      "contentHash": "07b83c31",
-      "model": "programmatic-svg",
-      "size": "576x576",
+      "path": "publish/assets/generated/equipment-icons-set-saintess-rpg-sheet.c2224def.webp",
+      "contentHash": "c2224def",
+      "revisedPrompt": "High-detail fantasy RPG equipment icon sprite sheet for SAINTESS set gear in ornate mobile RPG item icon style. Square canvas sprite sheet with EXACTLY 6 columns by 6 rows, equal square cells, one centered icon per cell. Only the first 18 cells (rows 1-3, columns 1-6) contain icons in row-major order; the remaining 18 cells are empty. Strictly use a SOLID UNIFORM chroma key background #00B140 filling all empty space and all pixel areas not occupied by icons; no gradients, no texture, no scenery, no shadows on background, no decoration. Each icon should have a clean dark outline, rich shadows, glossy reflections, gold trim, purple highlights, red-pink gemstone/rose crystal theme, highly polished mobile RPG item icon look, visually obvious item silhouettes.\n\nRow 1 set name 'Crimson Vessel':\n1) crimson holy weapon scepter, ornate gem-studded scepter\n2) crimson veil crown helmet, ceremonial crown/veil headpiece\n3) crimson ceremonial dress chest, ornate dress/armor chest piece\n4) crimson vessel pendant, holy pendant necklace\n5) crimson ring, gemstone ring\n6) crimson slippers boots, elegant boots/slippers\n\nRow 2 set name 'Violet Hymn':\n1) violet hymn staff weapon, ornate hymn staff\n2) violet tiara/veil helmet, headpiece\n3) violet robe dress chest, robe-like armor chest piece\n4) violet holy pendant, necklace pendant\n5) violet ring, gemstone ring\n6) violet boots, elegant boots\n\nRow 3 set name 'Rose Mirror':\n1) rose mirror wand weapon, mirror-themed wand\n2) rose crown helmet, crown headpiece\n3) rose ceremonial armor dress, ornate armor-dress chest piece\n4) rose heart amulet, heart-shaped amulet\n5) rose mirror ring, mirror-themed ring\n6) rose slippers boots, elegant boots/slippers\n\nRows 4-6 all cells empty chroma background only.\n\nNo text, no labels, no numbers, no watermark. Items centered within each cell with consistent scale and spacing, clearly separated, polished fantasy icon artwork, rich jewel tones, SAINTESS aesthetic.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
       "wantsTransparent": true,
-      "outputFormat": "svg",
-      "compressionProfile": "vector",
-      "finalBytes": 14678,
-      "createdAt": "2026-06-15T13:01:07.282Z",
-      "note": "Exact deterministic equipment sprite sheet. Each cell index matches equipment.js item order."
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 75.2,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 1483651,
+      "finalBytes": 167294,
+      "usage": {
+        "inputTokens": 461,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqf8mb6b_vmj6m29e",
+      "createdAt": "2026-06-15T13:18:22Z"
     }
   ]
 }
