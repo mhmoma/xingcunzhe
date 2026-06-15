@@ -1,7 +1,7 @@
 {
   "version": 1,
   "createdAt": "2026-06-13T14:08:29Z",
-  "updatedAt": "2026-06-15T03:25:38Z",
+  "updatedAt": "2026-06-15T03:44:19Z",
   "assets": [
     {
       "name": "player-paladin",
@@ -1419,6 +1419,136 @@
       "compressionProfile": "lossless_alpha",
       "finalBytes": 1320116,
       "createdAt": "2026-06-15T03:24:57Z"
+    },
+    {
+      "name": "fx-lewd-heart-shot-sheet",
+      "status": "success",
+      "path": "publish/assets/generated/fx-lewd-heart-shot-sheet.603e7a05.webp",
+      "contentHash": "603e7a05",
+      "revisedPrompt": "Create a 2x2 sprite sheet for a chibi arcade fantasy survivor game: a pink-purple heart-shaped magic projectile VFX in pixel-like cartoon style. Four frames total arranged in 2 columns by 2 rows, centered in each cell, no labels, no frame borders. The projectile should appear to grow brighter and faster from left to right across the frames, matching an existing magic missile sprite sheet feel. Design: thick readable outline, glowing hot pink core, violet trail, tiny sparkles, dark charm magic effect, general-audience, no characters, no explicit content. Keep the heart shape clearly readable, with dynamic motion implied by trail and sparkles. IMPORTANT: place everything on a solid uniform chroma key background color #00B140 filling 100% of pixels not occupied by the effect. The background must be a single flat uniform shade of #00B140, with no gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background only. No text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 82.1,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossless_alpha",
+      "originalBytes": 1007327,
+      "finalBytes": 292054,
+      "usage": {
+        "inputTokens": 222,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqenwd9e_j7iq78cx",
+      "createdAt": "2026-06-15T03:38:01Z"
+    },
+    {
+      "name": "fx-lewd-splash-counter-sheet",
+      "status": "success",
+      "path": "publish/assets/generated/fx-lewd-splash-counter-sheet.62344561.webp",
+      "contentHash": "62344561",
+      "revisedPrompt": "Create a 2x2 sprite sheet for a chibi arcade fantasy survivor game: a reactive pink-purple sacred splash counterattack burst VFX. Pixel-like cartoon visual effect with a thick readable outline, glossy liquid-like magic arcs, hot pink and violet radial spray, and small heart sparkles. Four frames total arranged in 2 columns by 2 rows, each frame centered in its cell, no labels, no frame borders. The effect should expand from small to large across the frames, like an arcane splash burst. Match the feel of an existing blood nova sprite sheet but reinterpret it as pink-purple sacred magic instead of red. General-audience fantasy magic splash, no characters, no explicit content. STRICTLY on a SOLID UNIFORM #00B140 chroma key flat color background filling 100% of pixels not occupied by the effect. Background must be a single uniform shade of #00B140 with no gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background. No text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 72.8,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossless_alpha",
+      "originalBytes": 1351857,
+      "finalBytes": 600230,
+      "usage": {
+        "inputTokens": 226,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqeny78m_oswdw5ei",
+      "createdAt": "2026-06-15T03:39:27Z"
+    },
+    {
+      "name": "fx-lewd-prayer-field-sheet",
+      "status": "success",
+      "path": "publish/assets/generated/fx-lewd-prayer-field-sheet.6514d487.webp",
+      "contentHash": "6514d487",
+      "revisedPrompt": "Create a 2x2 sprite sheet for a chibi arcade fantasy survivor game: a corrupted saintess prayer field aura VFX. Pixel-like cartoon magic effect with thick readable outline, circular pink-purple magic sigil, gothic rosary shapes, small heart motes, violet attraction swirl pulling inward, golden holy accents corrupted by crimson glow. Four frames total showing an expanding and pulsing circular area effect, matching typical aura/nova game effects. Arrange as 2 columns by 2 rows, centered in each cell, no labels, no frame borders. General-audience dark charm holy magic, no characters, no explicit content. Strictly on a solid uniform #00B140 chroma key flat color background filling all unused pixels exactly, pure flat color only, no gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. No text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 60.7,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossless_alpha",
+      "originalBytes": 1497855,
+      "finalBytes": 831946,
+      "usage": {
+        "inputTokens": 190,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqeo0bng_61m3p1l1",
+      "createdAt": "2026-06-15T03:41:09Z"
+    },
+    {
+      "name": "fx-lewd-overflow-burst-sheet",
+      "status": "success",
+      "path": "publish/assets/generated/fx-lewd-overflow-burst-sheet.4a48fc9a.webp",
+      "contentHash": "4a48fc9a",
+      "revisedPrompt": "Create a 2x2 sprite sheet for a chibi arcade fantasy survivor game: a huge pink-purple corrupted holy overflow burst, pixel-like cartoon VFX, thick readable outline, radial circular blast, glossy violet energy waves, hot pink heart-shaped sparks, crimson sacred rays, dark-gold occult halo fragments, very bright center. Four frames show a large ultimate area explosion expanding from a compact core to a massive ring, with clear progression from frame 1 to frame 4. Style: readable pixel-art-inspired VFX, crisp silhouettes, high contrast, magical gothic holy energy, more pink-purple and holy-gothic than blood nova, no characters. Arrange exactly 2 columns by 2 rows, centered in each cell, no labels, no frame borders. Use a SOLID UNIFORM chroma key background color #00B140 filling 100% of pixels not occupied by the effect, flat and fully uniform with no gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. No text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 58.9,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossless_alpha",
+      "originalBytes": 1696314,
+      "finalBytes": 969686,
+      "usage": {
+        "inputTokens": 222,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqeo288g_sa6yr3zb",
+      "createdAt": "2026-06-15T03:42:40Z"
+    },
+    {
+      "name": "relic-lewd-demon-idol",
+      "status": "success",
+      "path": "publish/assets/generated/relic-lewd-demon-idol.d38d5f6c.webp",
+      "contentHash": "d38d5f6c",
+      "revisedPrompt": "Single game relic icon, arcade fantasy artifact icon sheet style. Centered ornate dark-gold demon idol statue shaped like a small gothic shrine, curled horns, tiny rosary chains, polished cartoon pixel-game icon rendering, thick dark outline, high contrast, readable at small size. Visible pink-purple glowing heart core in the center, subtle crimson-violet aura around the relic. General-audience dark charm relic, no characters, no explicit content. Strictly isolated on a SOLID UNIFORM #00B140 chroma key flat color background filling 100% of pixels not occupied by the icon. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background. No text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1024x1024",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 69,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossless_alpha",
+      "originalBytes": 1229286,
+      "finalBytes": 535722,
+      "usage": {
+        "inputTokens": 161,
+        "outputImageTokens": 1756
+      },
+      "traceId": "trace_mqeo4epq_v3zzybbe",
+      "createdAt": "2026-06-15T03:44:19Z"
     }
   ]
 }
