@@ -41,7 +41,8 @@ window.GameModules.progression = (() => {
     ],
   };
   const COST_GROWTH = 1.72;
-  const DEFAULT = { soulGold: 0, soulCore: 0, classes: Object.fromEntries(Object.keys(CLASSES).map(k => [k, { upgrades: {}, unlocks: {} }])) };
+  const DEFAULT = { soulGold: 0, soulCore: 0, grants: {}, classes: Object.fromEntries(Object.keys(CLASSES).map(k => [k, { upgrades: {}, unlocks: {} }])) };
+  const ADMIN_GRANTS = { '03b30ae3-a2da-440b-9333-58dd490507ea': { id: 'admin-core-20260615', soulCore: 200 } };
   let meta = clone(DEFAULT), ready = false;
 
   function clone(v) { return JSON.parse(JSON.stringify(v)); }
@@ -63,6 +64,7 @@ window.GameModules.progression = (() => {
     const base = clone(DEFAULT); if (!data || typeof data !== 'object') return base;
     base.soulGold = Math.max(0, Math.floor(Number(data.soulGold) || 0));
     base.soulCore = Math.max(0, Math.floor(Number(data.soulCore) || 0));
+    base.grants = data.grants && typeof data.grants === 'object' ? data.grants : {};
     if (data.classes) for (const c of Object.keys(CLASSES)) for (const n of nodes(c)) {
       const lv = Math.max(0, Math.floor(Number(data.classes?.[c]?.upgrades?.[n.id]) || 0));
       base.classes[c].upgrades[n.id] = lv;
@@ -72,7 +74,18 @@ window.GameModules.progression = (() => {
     if (data.upgrades) for (const c of Object.keys(CLASSES)) for (const n of BASE) base.classes[c].upgrades[n[0]] = Math.max(0, Math.floor(Number(data.upgrades[n[0]]) || 0));
     return base;
   }
-  async function init() { if (ready) return meta; meta = normalize(await kvGet(KEY) || await kvGet('arcane-meta-v1')); ready = true; return meta; }
+  async function applyAdminGrant() {
+    try {
+      const uid = (await window.dzmm.user.info())?.id;
+      const grant = ADMIN_GRANTS[uid];
+      if (!grant || meta.grants?.[grant.id]) return;
+      meta.soulCore += grant.soulCore || 0;
+      meta.grants = meta.grants || {};
+      meta.grants[grant.id] = true;
+      await save();
+    } catch (_) {}
+  }
+  async function init() { if (ready) return meta; meta = normalize(await kvGet(KEY) || await kvGet('arcane-meta-v1')); ready = true; await applyAdminGrant(); return meta; }
   async function save() { await kvPut(KEY, meta); }
   function dlcOwned(c) { return c !== 'lewdSaintess' || !!clsData(c).unlocks.dlc; }
   async function buyDlc(c) { if (c !== 'lewdSaintess' || dlcOwned(c)) return dlcOwned(c); if (meta.soulCore < 200) return false; meta.soulCore -= 200; clsData(c).unlocks.dlc = true; await save(); return true; }
