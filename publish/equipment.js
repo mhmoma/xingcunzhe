@@ -25,9 +25,12 @@ window.GameModules.equipment = (() => {
     ['lewdSaintess','crimson-vessel','绯红圣器','setSaintess',{hp:.1,lust:.07,regen:.04}],['lewdSaintess','violet-hymn','紫罗兰圣歌','setSaintess',{range:.06,holy:.05,lust:.05}],['lewdSaintess','rose-mirror','蔷薇镜像','setSaintess',{damage:.06,lust:.06,shadow:.04}],
   ];
   const pieceNames = { weapon:'武器', helm:'冠冕', chest:'衣甲', amulet:'坠饰', ring:'戒环', boots:'足具' };
+  const GOLD_ICONS = { weapon:[0,1,2,3,4,5], helm:[12,13,14,15,16,17], chest:[18,19,20,21,22,23], amulet:[28,29,30,31,32,33], ring:[24,25,26,27,34,35], boots:[27,28,29,24,25,26] };
+  const UNIQUE_ICONS = { 'unique-void-lantern':3, 'unique-dragon-heart':1, 'unique-moon-crown':2, 'unique-saint-nail':11, 'unique-thunder-bow':5, 'unique-blood-plate':4, 'unique-clock-gloves':10, 'unique-greed-boots':8, 'unique-rose-mirror':3, 'unique-abyss-mask':6, 'unique-golem-soul':9, 'unique-star-tome':7, 'unique-demon-horn':6, 'unique-pale-ring':3, 'unique-faith-boots':8, 'unique-hunt-quiver':5, 'unique-plague-bell':7, 'unique-sun-shield':9 };
+  const setIconIndex = (familyIndex, slot) => { const col = (familyIndex % 3) * 2 + (slot === 'amulet' || slot === 'boots' ? 1 : 0); const row = { weapon:0, helm:1, chest:2, ring:5, amulet:5, boots:4 }[slot] || 0; return row * 6 + col; };
   const toItem = (r, sheet, i) => ({ baseId:r[0], name:r[1], rarity:sheet, slot:r[2], stats:r[3], resists:r[4], effect:r[5]||'', icon:{sheet:ICON_SHEETS[sheet], index:i} });
-  const gold = GOLD.map((r,i)=>toItem(r,'gold',i)), uniques = UNIQUES.map((r,i)=>toItem(r,'unique',i));
-  const sets = SET_FAMILIES.flatMap((f,fi)=>SLOTS.map((slot,i)=>({ baseId:`set-${f[1]}-${slot}`, name:`${f[2]}·${pieceNames[slot]}`, rarity:'set', class:f[0], setId:f[1], setName:f[2], slot, stats:{...Object.fromEntries(Object.entries(f[4]).filter(([k])=>!RES.includes(k))), [slot==='weapon'?'damage':slot==='boots'?'move':slot==='ring'?'atkSpeed':slot==='amulet'?'range':'hp']:.06}, resists:Object.fromEntries(Object.entries(f[4]).filter(([k])=>RES.includes(k))), icon:{sheet:ICON_SHEETS[f[3]], index:(fi%3)*6+i} })));
+  const gold = GOLD.map((r,i)=>toItem(r,'gold',GOLD_ICONS[r[2]][i%6])), uniques = UNIQUES.map((r,i)=>toItem(r,'unique',UNIQUE_ICONS[r[0]] ?? i));
+  const sets = SET_FAMILIES.flatMap((f,fi)=>SLOTS.map((slot)=>({ baseId:`set-${f[1]}-${slot}`, name:`${f[2]}·${pieceNames[slot]}`, rarity:'set', class:f[0], setId:f[1], setName:f[2], slot, stats:{...Object.fromEntries(Object.entries(f[4]).filter(([k])=>!RES.includes(k))), [slot==='weapon'?'damage':slot==='boots'?'move':slot==='ring'?'atkSpeed':slot==='amulet'?'range':'hp']:.06}, resists:Object.fromEntries(Object.entries(f[4]).filter(([k])=>RES.includes(k))), icon:{sheet:ICON_SHEETS[f[3]], index:setIconIndex(fi, slot)} })));
   const all = [...gold,...uniques,...sets];
   let meta = { items:[], equipped:{}, dust:0 }, ready = false;
   const clone = v => JSON.parse(JSON.stringify(v));
@@ -48,7 +51,7 @@ window.GameModules.equipment = (() => {
   function stats(cls){let out={resists:{},sets:{},allRes:0,attrCapBonus:0,bossAttrCut:0,eliteAttrCut:0,shieldAttrBlock:0}; for(const it of equippedItems(cls)){for(const [k,v] of Object.entries(it.stats||{}))out[k]=(out[k]||0)+v; for(const [k,v] of Object.entries(it.resists||{}))out.resists[k]=(out.resists[k]||0)+v; if(it.setId)out.sets[it.setId]=(out.sets[it.setId]||0)+1} for(const n of Object.values(out.sets)){if(n>=2)out.allRes+=.06;if(n>=4){out.bossAttrCut+=.1;out.eliteAttrCut+=.08}if(n>=6){out.shieldAttrBlock+=.35;out.attrCapBonus+=.1}} if(equippedItems(cls).some(x=>x.rarity==='unique'))out.attrCapBonus+=.05; return out}
   function pct(v){return `${v>=0?'+':''}${Math.round(v*100)}%`}
   function itemText(it){let s=[]; for(const [k,v] of Object.entries(it.stats||{}))s.push(`${{hp:'生命',damage:'伤害',armor:'护甲',move:'移速',cooldown:'冷却',atkSpeed:'攻速',range:'范围',pickup:'拾取',gold:'金币',regen:'回复',crit:'暴击'}[k]||k} ${pct(v)}`); for(const [k,v] of Object.entries(it.resists||{}))s.push(`${RES_CN[k]||k}抗性 ${pct(v)}`); return s.join(' / ')}
-  function iconHtml(it){let i=it.icon?.index||0,x=i%6,y=Math.floor(i/6);return `<span class="eqIcon" style="background-image:url('${it.icon?.sheet||''}');background-position:${x*-20}% ${y*-20}%"></span>`}
+  function iconHtml(it){let i=it.icon?.index||0,x=i%6,y=Math.floor(i/6);return `<span class="eqIcon" style="background-image:url('${it.icon?.sheet||''}');background-position:${x*20}% ${y*20}%"></span>`}
   function data(){return meta}
   return { init, save, data, SLOTS, SLOT_CN, CLS_CN, RES_CN, all, rollDrop, addItem, equip, unequip, equippedItems, stats, hydrate, itemText, iconHtml };
 })();
