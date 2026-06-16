@@ -94,6 +94,7 @@ window.GameModules.equipment = (() => {
   function iconYOffset(it){return it?.rarity==='unique'?28:it?.rarity==='set'?24:0}
   function iconHtml(it){let r=it.icon?.rect,s=iconScale(it); if(r){let fit=34/Math.max(r.w,r.h),bw=Math.round(1024*fit),bh=bw;return `<span class="eqIcon" style="background-image:url('${it.icon?.sheet||''}');background-size:${bw}px ${bh}px;background-position:${Math.round(-r.x*fit)}px ${Math.round(-r.y*fit)}px;background-repeat:no-repeat;transform:scale(${s})"></span>`} let i=it.icon?.index||0,x=i%6,y=Math.floor(i/6),rows=iconRows(it),step=100/(rows-1),oy=iconYOffset(it);return `<span class="eqIcon" style="background-image:url('${it.icon?.sheet||''}');background-size:600% ${rows*100}%;background-position:${x*20}% ${y*step+oy}%;background-repeat:no-repeat;transform:scale(${s})"></span>`}
   function data(){return meta}
-  return { init, save, data, SLOTS, SLOT_CN, CLS_CN, RES_CN, all, rollDrop, addItem, equip, unequip, discard, equippedItems, stats, hydrate, itemText, iconHtml };
+  function setBonus(id){return SET_BONUS[id]||null}
+  return { init, save, data, SLOTS, SLOT_CN, CLS_CN, RES_CN, all, rollDrop, addItem, equip, unequip, discard, equippedItems, stats, hydrate, itemText, iconHtml, setBonus };
 })();
 window.Equipment = window.GameModules.equipment;
