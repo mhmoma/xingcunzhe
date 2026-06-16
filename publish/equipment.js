@@ -24,6 +24,20 @@ window.GameModules.equipment = (() => {
     ['ranger','cyclone-axe','旋风飞斧','setRanger',{atkSpeed:.07,physical:.06,range:.04}],['ranger','moon-hunter','月影猎手','setRanger',{crit:.05,frost:.06,move:.04}],['ranger','venom-shadow','毒影伏击','setRanger',{atkSpeed:.05,shadow:.06,move:.05}],
     ['lewdSaintess','crimson-vessel','绯红圣器','setSaintess',{hp:.1,lust:.07,regen:.04}],['lewdSaintess','violet-hymn','紫罗兰圣歌','setSaintess',{range:.06,holy:.05,lust:.05}],['lewdSaintess','rose-mirror','蔷薇镜像','setSaintess',{damage:.06,lust:.06,shadow:.04}],
   ];
+  const SET_BONUS = {
+    'aureate-guardian':{n:'辉金守护',s:'2件 生命+12%、神圣抗性+12%；4件 圣域护盾；6件 大蒜光环变辉金圣域。',b2:{hp:.12,holy:.12},b4:{armor:.06,regen:.05},b6:{skill:'garlic',skillDmg:.55,range:.16,shieldAttrBlock:.25}},
+    'thorn-bulwark':{n:'荆棘壁垒',s:'2件 护甲+10%、物理抗性+15%；4件 受击荆棘反击；6件 血色新星变荆棘圣盾。',b2:{armor:.1,physical:.15},b4:{hp:.1},b6:{skill:'bloodNova',skillDmg:.5,bossAttrCut:.08}},
+    'dawn-judgment':{n:'黎明审判',s:'2件 伤害+10%、范围+8%；4件 圣枪审判 Boss；6件 圣光长枪变天罚枪阵。',b2:{damage:.1,range:.08},b4:{holy:.12},b6:{skill:'holyLance',skillDmg:.62,eliteAttrCut:.08}},
+    'astral-missile':{n:'星界飞弹',s:'2件 奥术伤害+12%、冷却+6%；4件 飞弹命中蓄积星轨；6件 魔法飞弹变星轨齐射。',b2:{arcane:.12,cooldown:.06},b4:{damage:.08},b6:{skill:'missile',skillDmg:.58,range:.08}},
+    'ember-meteor':{n:'余烬陨星',s:'2件 火焰伤害+15%、范围+8%；4件 火焰留下燃烧；6件 火球/陨星变龙焰天灾。',b2:{fire:.15,range:.08},b4:{damage:.09},b6:{skill:'meteorShard',skillDmg:.65,bossAttrCut:.06}},
+    'storm-sigil':{n:'风暴符印',s:'2件 攻速+10%、奥术抗性+10%；4件 雷链附加符印；6件 连锁雷弧变风暴共鸣。',b2:{atkSpeed:.1,arcane:.1},b4:{cooldown:.08},b6:{skill:'thunderChain',skillDmg:.56,range:.06}},
+    'cyclone-axe':{n:'旋风飞斧',s:'2件 物理伤害+12%、攻速+8%；4件 飞斧回旋更久；6件 回旋飞斧变旋风猎场。',b2:{physical:.12,atkSpeed:.08},b4:{range:.09},b6:{skill:'axe',skillDmg:.6,move:.06}},
+    'moon-hunter':{n:'月影猎手',s:'2件 移速+10%、暴击+8%；4件 移动蓄势；6件 月牙斩变月蚀连斩。',b2:{move:.1,crit:.08},b4:{frost:.1},b6:{skill:'moonSlash',skillDmg:.58,damage:.08}},
+    'venom-shadow':{n:'毒影伏击',s:'2件 暗影伤害+12%、移速+6%；4件 毒雾标记伏击；6件 毒雾/影刃触发毒影处决。',b2:{shadow:.12,move:.06},b4:{atkSpeed:.08},b6:{skill:'poisonCloud',skillDmg:.55,eliteAttrCut:.08}},
+    'crimson-vessel':{n:'绯红圣器',s:'2件 生命+14%、欲望抗性+12%；4件 受击积累绯红能量；6件 欲液反涌变绯红喷泉。',b2:{hp:.14,lust:.12},b4:{regen:.08},b6:{skill:'lustSplash',skillDmg:.62,shieldAttrBlock:.2}},
+    'violet-hymn':{n:'紫罗兰圣歌',s:'2件 范围+10%、神圣/欲望抗性+8%；4件 祈祷领域回复淫荡值；6件 献媚祈祷变堕欲圣咏。',b2:{range:.1,holy:.08,lust:.08},b4:{regen:.06},b6:{skill:'lustPrayer',skillDmg:.58,attrCapBonus:.06}},
+    'rose-mirror':{n:'蔷薇镜像',s:'2件 伤害+8%、暗影/欲望抗性+10%；4件 受伤生成镜像反击；6件 飞吻/溢流触发万花镜裂。',b2:{damage:.08,shadow:.1,lust:.1},b4:{crit:.08},b6:{skill:'lustKiss',skillDmg:.55,range:.08}},
+  };
   const pieceNames = { weapon:'武器', helm:'冠冕', chest:'衣甲', amulet:'坠饰', ring:'戒环', boots:'足具' };
   const toItem = (r, sheet, i) => ({ baseId:r[0], name:r[1], rarity:sheet, slot:r[2], stats:r[3], resists:r[4], effect:r[5]||'', icon:{sheet:ICON_SHEETS[sheet], index:i} });
   const gold = GOLD.map((r,i)=>toItem(r,'gold',i)), uniques = UNIQUES.map((r,i)=>toItem(r,'unique',i));
@@ -49,7 +63,8 @@ window.GameModules.equipment = (() => {
   async function unequip(slot,cls){await init(); delete equippedMap(cls)[slot]; await save(); return true}
   async function discard(uid){await init(); meta.items=meta.items.filter(x=>x.uid!==uid); for(const eq of Object.values(meta.equipped||{}))for(const [slot,id] of Object.entries(eq))if(id===uid)delete eq[slot]; await save(); return true}
   function equippedItems(cls){let eq=equippedMap(cls); return SLOTS.map(s=>meta.items.find(x=>x.uid===eq[s])).filter(Boolean).map(hydrate)}
-  function stats(cls){let out={resists:{},sets:{},allRes:0,attrCapBonus:0,bossAttrCut:0,eliteAttrCut:0,shieldAttrBlock:0}; for(const it of equippedItems(cls)){for(const [k,v] of Object.entries(it.stats||{}))out[k]=(out[k]||0)+v; for(const [k,v] of Object.entries(it.resists||{}))out.resists[k]=(out.resists[k]||0)+v; if(it.setId)out.sets[it.setId]=(out.sets[it.setId]||0)+1} for(const n of Object.values(out.sets)){if(n>=2)out.allRes+=.06;if(n>=4){out.bossAttrCut+=.1;out.eliteAttrCut+=.08}if(n>=6){out.shieldAttrBlock+=.35;out.attrCapBonus+=.1}} if(equippedItems(cls).some(x=>x.rarity==='unique'))out.attrCapBonus+=.05; return out}
+  function addBonus(out,b){for(const [k,v] of Object.entries(b||{})){if(k==='skill'||k==='skillDmg')continue; if(RES.includes(k))out.resists[k]=(out.resists[k]||0)+v;else out[k]=(out[k]||0)+v}}
+  function stats(cls){let out={resists:{},sets:{},setText:[],setPowers:{},skillDmg:{},allRes:0,attrCapBonus:0,bossAttrCut:0,eliteAttrCut:0,shieldAttrBlock:0}; for(const it of equippedItems(cls)){for(const [k,v] of Object.entries(it.stats||{}))out[k]=(out[k]||0)+v; for(const [k,v] of Object.entries(it.resists||{}))out.resists[k]=(out.resists[k]||0)+v; if(it.setId)out.sets[it.setId]=(out.sets[it.setId]||0)+1} for(const [id,n] of Object.entries(out.sets)){let cfg=SET_BONUS[id]; if(!cfg)continue; out.setPowers[id]=n; if(n>=2)addBonus(out,cfg.b2); if(n>=4)addBonus(out,cfg.b4); if(n>=6){addBonus(out,cfg.b6); out.setPowers[id]=6; if(cfg.b6.skill)out.skillDmg[cfg.b6.skill]=(out.skillDmg[cfg.b6.skill]||0)+(cfg.b6.skillDmg||0)} out.setText.push(`${cfg.n} ${n}/6：${cfg.s}`)} if(equippedItems(cls).some(x=>x.rarity==='unique'))out.attrCapBonus+=.05; return out}
   function pct(v){return `${v>=0?'+':''}${Math.round(v*100)}%`}
   function itemText(it){let s=[]; if(it.rollTier)s.push(`品相：${it.rollTier}`); for(const [k,v] of Object.entries(it.stats||{}))s.push(`${{hp:'生命',damage:'伤害',armor:'护甲',move:'移速',cooldown:'冷却',atkSpeed:'攻速',range:'范围',pickup:'拾取',gold:'金币',regen:'回复',crit:'暴击'}[k]||k} ${pct(v)}`); for(const [k,v] of Object.entries(it.resists||{}))s.push(`${RES_CN[k]||k}抗性 ${pct(v)}`); return s.join(' / ')}
   function iconScale(it){if(it?.rarity==='unique')return .78;if(it?.rarity==='set')return .84;return 1}
