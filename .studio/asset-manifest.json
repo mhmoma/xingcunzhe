@@ -1,7 +1,7 @@
 {
   "version": 1,
   "createdAt": "2026-06-13T14:08:29Z",
-  "updatedAt": "2026-06-15T14:47:34Z",
+  "updatedAt": "2026-06-16T04:06:48Z",
   "assets": [
     {
       "name": "player-paladin",
@@ -1887,6 +1887,26 @@
       },
       "traceId": "trace_mqfbth0r_x51iz0gd",
       "createdAt": "2026-06-15T14:47:34Z"
+    },
+    {
+      "name": "season-1-promo",
+      "status": "success",
+      "path": "publish/assets/generated/season-1-promo.cbf7c517.webp",
+      "contentHash": "cbf7c517",
+      "revisedPrompt": "Arcane Survivor Season One promotional key art for a dark fantasy survivor game, theme: Abyss Awakening. A glowing purple abyss rift tears open in a ruined medieval dungeon, with demon army silhouettes emerging from the crack. Three cute chibi fantasy heroes stand in the foreground as small readable silhouettes with weapons and magic, facing the rift. Gold and violet magic lighting, high contrast, dramatic but game-friendly, medieval RPG promotional splash art. Bright arcade fantasy survivor game art with cute chibi characters, clean dark outline, soft glow, palette of dark dungeon navy, violet, cyan, crimson and gold. Vertical composition, wide scene feeling within the frame, no text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1024x1536",
+      "wantsTransparent": false,
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q80_opaque",
+      "originalBytes": 2738034,
+      "finalBytes": 229190,
+      "usage": {
+        "inputTokens": 147,
+        "outputImageTokens": 1372
+      },
+      "traceId": "trace_mqg4d93m_utuy9wzm",
+      "createdAt": "2026-06-16T04:06:48Z"
     }
   ]
 }
