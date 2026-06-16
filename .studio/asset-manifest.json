@@ -1,7 +1,7 @@
 {
   "version": 1,
   "createdAt": "2026-06-13T14:08:29Z",
-  "updatedAt": "2026-06-16T05:57:34Z",
+  "updatedAt": "2026-06-16T06:07:19Z",
   "assets": [
     {
       "name": "player-paladin",
@@ -2089,6 +2089,32 @@
       },
       "traceId": "trace_mqg8bn9o_l79y3am2",
       "createdAt": "2026-06-16T05:57:34Z"
+    },
+    {
+      "name": "relic-scythe-maiden-moon-scythe",
+      "status": "success",
+      "path": "publish/assets/generated/scythe-maiden/relic-scythe-maiden-moon-scythe.f437d134.webp",
+      "contentHash": "f437d134",
+      "revisedPrompt": "Arcane survivor chibi fantasy class relic icon for a scythe maiden: a centered single floating crescent moon scythe talisman, violet-black metal crescent blade, cyan soul flame core, small dangling charm, magical purple aura, readable top-down 3/4 arcade sprite, clean dark outline, soft glow, high contrast, no character, no scenery, no text, no logo, no watermark. Strictly on a SOLID UNIFORM #00B140 chroma key flat color background filling 100% of the canvas outside the relic. Background must be a single uniform shade of #00B140 with no gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat green-screen style background.",
+      "model": "gpt-image-2",
+      "size": "1254x1254",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 82.8,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 1385109,
+      "finalBytes": 93924,
+      "usage": {
+        "inputTokens": 161,
+        "outputImageTokens": 2058
+      },
+      "traceId": "trace_mqg8o162_6yy53wf1",
+      "createdAt": "2026-06-16T06:07:19Z"
     }
   ]
 }
