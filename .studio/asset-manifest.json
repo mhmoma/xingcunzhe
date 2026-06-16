@@ -1,7 +1,7 @@
 {
   "version": 1,
   "createdAt": "2026-06-13T14:08:29Z",
-  "updatedAt": "2026-06-16T07:07:50Z",
+  "updatedAt": "2026-06-16T11:32:00Z",
   "assets": [
     {
       "name": "player-paladin",
@@ -2245,6 +2245,32 @@
       },
       "traceId": "trace_mqgately_qetvh3bp",
       "createdAt": "2026-06-16T07:07:50Z"
+    },
+    {
+      "name": "scythe-arc-redraw",
+      "status": "success",
+      "path": "publish/assets/generated/scythe-maiden/scythe-arc-redraw.f7b89dfd.webp",
+      "contentHash": "f7b89dfd",
+      "revisedPrompt": "Animated 2x2 sprite sheet for a fantasy action game skill VFX named Crescent Moon Scythe Dance. Exactly four equal square cells arranged in a 2x2 grid, one animation frame per cell, no labels or frame numbers. Top-down 3/4 arcade magic effect style matching a Scythe Maiden character: spectral purple, violet, cyan, pale moonlight, dark clean outline, soft glow, high contrast. The skill is a large half-moon scythe slash wave. IMPORTANT ORIENTATION: each frame must face and travel to the RIGHT by default. The player/caster origin is on the LEFT edge of each cell; the crescent blade must extend outward to the RIGHT away from the caster. The sharp cutting edge and bright outer arc are on the far RIGHT/outside, not pointing back inward. The hollow inner curve is on the LEFT/caster side. It must never look like the crescent is cutting back toward the caster. Frame 1: slash begins, thin crescent forming from left origin toward right. Frame 2: larger half-moon scythe arc expanding forward to the right. Frame 3: full broad crescent slash, brightest outer blade on right. Frame 4: fading spectral afterimage still facing right. No character, no weapon handle, no ground, no scenery, no text, no logo, no watermark. Keep consistent scale and position across frames, centered vertically in each cell, with enough empty transparent space near the left edge for the caster origin. Strictly placed on a SOLID UNIFORM #00B140 chroma key flat color background. The background is a single uniform shade of #00B140 chroma key green that fills 100% of pixels not occupied by the skill effect. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background, exactly like a green screen used for VFX compositing. No text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1254x1254",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 77.1,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossless_alpha",
+      "originalBytes": 1538912,
+      "finalBytes": 613880,
+      "usage": {
+        "inputTokens": 412,
+        "outputImageTokens": 2058
+      },
+      "traceId": "trace_mqgk942v_n410d09j",
+      "createdAt": "2026-06-16T11:32:00Z"
     }
   ]
 }
