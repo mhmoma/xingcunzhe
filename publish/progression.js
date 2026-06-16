@@ -1,7 +1,7 @@
 window.GameModules = window.GameModules || {};
 window.GameModules.progression = (() => {
   const KEY = 'arcane-meta-v2';
-  const CLASSES = { paladin: '圣骑士', mage: '大魔法师', ranger: '游侠', lewdSaintess: '淫靡圣女' };
+  const CLASSES = { paladin: '圣骑士', mage: '大魔法师', ranger: '游侠', lewdSaintess: '淫靡圣女', scytheMaiden: '镰刀娘' };
   const BASE = [
     ['hp', '生命根基', '最大生命 +5%', 10, 30, 50, 16],
     ['damage', '战斗本能', '全技能伤害 +4%', 10, 50, 28, 38],
@@ -38,6 +38,13 @@ window.GameModules.progression = (() => {
       ['prayer', '献媚祈祷', '祈祷场每级范围 +5、冷却 -5%、淫荡值回复提升', 5, 95, 78, 82, 'utility', ['lustPrayer'], 24],
       ['desire', '淫荡值容器', '每级生命 +4%、淫荡值上限 +12、受击转化更稳定', 4, 120, 50, 108, 'utility', [], 26, 'prayer'],
       ['overflow', '欲潮溢流', '反伤、飞吻、祈祷场对 Boss 更强，淫荡值高时爆发更频繁', 4, 145, 50, 126, 'damage', ['lustSplash', 'lustKiss', 'lustOverflow'], 30, 'splash'],
+    ],
+    scytheMaiden: [
+      ['arc', '镰舞精通', '残月镰舞每级范围 +5、伤害 +5%，Lv.4 后额外 +1 技能等级', 5, 90, 22, 82, 'damage', ['scytheArc'], 24],
+      ['reaper', '收割本能', '影刃、月牙斩每级冷却 -4.5%，对残血敌人伤害提升', 5, 90, 50, 86, 'damage', ['shadowBlade', 'moonSlash'], 24],
+      ['soul', '吸魂回路', '魂火与虚空技能每级范围 +4，击杀精英回复少量生命', 5, 95, 78, 82, 'utility', ['soulOrb', 'voidRift'], 24],
+      ['dance', '死舞步伐', '每级移动速度 +3%，移动时积累冥契更快', 4, 120, 50, 108, 'utility', [], 26, 'reaper'],
+      ['execute', '终末处决', '镰刀系技能对 Boss 与护盾敌人更强，残血敌人受到额外处决伤害', 4, 145, 50, 126, 'damage', ['scytheArc', 'shadowBlade', 'moonSlash', 'bloodNova'], 30, 'arc'],
     ],
   };
   const COST_GROWTH = 1.72;
@@ -132,6 +139,7 @@ window.GameModules.progression = (() => {
     const missile = u.missile || 0, fire = u.fire || 0, thunder = u.thunder || 0, beam = u.beam || 0, overload = u.overload || 0;
     const axe = u.axe || 0, wind = u.wind || 0, dagger = u.dagger || 0, moon = u.moon || 0, mark = u.mark || 0;
     const splash = u.splash || 0, kiss = u.kiss || 0, prayer = u.prayer || 0, desire = u.desire || 0, overflow = u.overflow || 0;
+    const arc = u.arc || 0, reaper = u.reaper || 0, soul = u.soul || 0, dance = u.dance || 0, execute = u.execute || 0;
     if (aura) { dmg('garlic', aura * 0.04); add('garlic', { radius: aura * 5 }); if (aura >= 4) skillLv.garlic = 1; }
     if (lance) add('holyLance', { cd: lance * 0.05, width: lance * 3, count: Math.floor(lance / 2) });
     if (nova) { dmg('bloodNova', nova * 0.04); add('bloodNova', { radius: nova * 7, cd: nova * 0.06 }); if (nova >= 4) skillLv.bloodNova = 1; }
@@ -150,7 +158,12 @@ window.GameModules.progression = (() => {
     if (kiss) add('lustKiss', { cd: kiss * 0.04, aoe: kiss * 4, count: Math.floor(kiss / 2) });
     if (prayer) add('lustPrayer', { radius: prayer * 5, cd: prayer * 0.05, lustRegen: prayer * 0.35 });
     if (overflow) for (const s of ['lustSplash', 'lustKiss', 'lustPrayer', 'lustOverflow']) add(s, { bossDmg: overflow * 0.06, cd: overflow * 0.025 });
+    if (arc) { dmg('scytheArc', arc * 0.05); add('scytheArc', { radius: arc * 5, arc: arc * 0.04 }); if (arc >= 4) skillLv.scytheArc = 1; }
+    if (reaper) for (const s of ['shadowBlade', 'moonSlash']) add(s, { cd: reaper * 0.045, execute: reaper * 0.04 });
+    if (soul) { add('soulOrb', { radius: soul * 4 }); add('voidRift', { radius: soul * 4 }); }
+    if (execute) for (const s of ['scytheArc', 'shadowBlade', 'moonSlash', 'bloodNova']) add(s, { bossDmg: execute * 0.05, shieldBreak: execute * 0.08, execute: execute * 0.05 });
     hpMul *= 1 + guard * 0.03 + desire * 0.04;
+    spdMul *= 1 + dance * 0.03;
     return { hp: Math.round(baseClass.hp * hpMul), spd: baseClass.spd * spdMul, dmg: baseClass.dmg * dmgMul, startXp: (u.startXp || 0) * 4, magnetBonus: (u.magnet || 0) * 0.06, goldBonus: (u.gold || 0) * 0.05, shieldStart: Math.round(baseClass.hp * guard * 0.04), regenBonus: guard * 0.25, lustMaxBonus: desire * 12, lustGainBonus: desire * 0.08 + prayer * 0.04, skillDmg, skillLv, skillMods };
   }
   function estimateRunReward(run) {

@@ -1,10 +1,10 @@
 window.GameModules = window.GameModules || {};
 window.GameModules.equipment = (() => {
   const KEY = 'arcane-equipment-v1';
-  const ICON_SHEETS = { gold:'./assets/generated/equipment-icons-gold-rpg-sheet.8bac9168.webp', unique:'./assets/generated/equipment-icons-unique-rpg-sheet.b1783e31.webp', setPaladin:'./assets/generated/equipment-icons-set-paladin-rpg-sheet.96aa82dd.webp', setMage:'./assets/generated/equipment-icons-set-mage-rpg-sheet.a179ef44.webp', setRanger:'./assets/generated/equipment-icons-set-ranger-rpg-sheet.a6ce5da2.webp', setSaintess:'./assets/generated/equipment-icons-set-saintess-rpg-sheet.c2224def.webp' };
+  const ICON_SHEETS = { gold:'./assets/generated/equipment-icons-gold-rpg-sheet.8bac9168.webp', unique:'./assets/generated/equipment-icons-unique-rpg-sheet.b1783e31.webp', setPaladin:'./assets/generated/equipment-icons-set-paladin-rpg-sheet.96aa82dd.webp', setMage:'./assets/generated/equipment-icons-set-mage-rpg-sheet.a179ef44.webp', setRanger:'./assets/generated/equipment-icons-set-ranger-rpg-sheet.a6ce5da2.webp', setSaintess:'./assets/generated/equipment-icons-set-saintess-rpg-sheet.c2224def.webp', setScythe:'./assets/generated/equipment-icons-set-ranger-rpg-sheet.a6ce5da2.webp' };
   const SLOTS = ['weapon','helm','chest','amulet','ring','boots'];
   const SLOT_CN = { weapon:'武器', helm:'头盔', chest:'胸甲', amulet:'项链', ring:'戒指', boots:'靴子' };
-  const CLS_CN = { paladin:'圣骑士', mage:'大魔法师', ranger:'游侠', lewdSaintess:'淫靡圣女' };
+  const CLS_CN = { paladin:'圣骑士', mage:'大魔法师', ranger:'游侠', lewdSaintess:'淫靡圣女', scytheMaiden:'镰刀娘' };
   const RES = ['physical','fire','frost','arcane','holy','shadow','lust'];
   const RES_CN = { physical:'物理', fire:'火焰', frost:'霜寒', arcane:'奥术', holy:'神圣', shadow:'暗影', lust:'欲望', all:'全属性' };
   const GOLD = [
@@ -23,6 +23,7 @@ window.GameModules.equipment = (() => {
     ['mage','astral-missile','星界飞弹','setMage',{damage:.08,arcane:.06,range:.05}],['mage','ember-meteor','余烬陨星','setMage',{damage:.09,fire:.07,cooldown:.03}],['mage','storm-sigil','风暴符印','setMage',{atkSpeed:.06,arcane:.05,cooldown:.04}],
     ['ranger','cyclone-axe','旋风飞斧','setRanger',{atkSpeed:.07,physical:.06,range:.04}],['ranger','moon-hunter','月影猎手','setRanger',{crit:.05,frost:.06,move:.04}],['ranger','venom-shadow','毒影伏击','setRanger',{atkSpeed:.05,shadow:.06,move:.05}],
     ['lewdSaintess','crimson-vessel','绯红圣器','setSaintess',{hp:.1,lust:.07,regen:.04}],['lewdSaintess','violet-hymn','紫罗兰圣歌','setSaintess',{range:.06,holy:.05,lust:.05}],['lewdSaintess','rose-mirror','蔷薇镜像','setSaintess',{damage:.06,lust:.06,shadow:.04}],
+    ['scytheMaiden','reaper-waltz','冥月圆舞','setScythe',{move:.08,physical:.05,shadow:.05}],['scytheMaiden','blood-reaping','血镰誓约','setScythe',{hp:.1,regen:.04,shadow:.05}],['scytheMaiden','soul-shadow','断魂影镰','setScythe',{damage:.06,crit:.05,shadow:.06}],
   ];
   const SET_BONUS = {
     'aureate-guardian':{n:'辉金守护',s:'2件 生命+12%、神圣抗性+12%；4件 圣域护盾；6件 大蒜光环变辉金圣域。',b2:{hp:.12,holy:.12},b4:{armor:.06,regen:.05},b6:{skill:'garlic',skillDmg:.55,range:.16,shieldAttrBlock:.25}},
@@ -37,6 +38,10 @@ window.GameModules.equipment = (() => {
     'crimson-vessel':{n:'绯红圣器',s:'2件 生命+14%、欲望抗性+12%；4件 受击积累绯红能量；6件 欲液反涌变绯红喷泉。',b2:{hp:.14,lust:.12},b4:{regen:.08},b6:{skill:'lustSplash',skillDmg:.62,shieldAttrBlock:.2}},
     'violet-hymn':{n:'紫罗兰圣歌',s:'2件 范围+10%、神圣/欲望抗性+8%；4件 祈祷领域回复淫荡值；6件 献媚祈祷变堕欲圣咏。',b2:{range:.1,holy:.08,lust:.08},b4:{regen:.06},b6:{skill:'lustPrayer',skillDmg:.58,attrCapBonus:.06}},
     'rose-mirror':{n:'蔷薇镜像',s:'2件 伤害+8%、暗影/欲望抗性+10%；4件 受伤生成镜像反击；6件 飞吻/溢流触发万花镜裂。',b2:{damage:.08,shadow:.1,lust:.1},b4:{crit:.08},b6:{skill:'lustKiss',skillDmg:.55,range:.08}},
+    'reaper-waltz':{n:'冥月圆舞',s:'2件 移速+10%、物理/暗影抗性+8%；4件 残月镰舞命中后强化下一刀；6件 残月镰舞变冥月圆舞，范围扩大并获得轻微减伤。',b2:{move:.1,physical:.08,shadow:.08},b4:{damage:.08},b6:{skill:'scytheArc',skillDmg:.6,move:.08,shieldAttrBlock:.18}},
+    'blood-reaping':{n:'血镰誓约',s:'2件 生命+12%、回复+6%；4件 低生命时血色新星冷却缩短；6件 血色新星变血镰祭环，命中 Boss 回复生命。',b2:{hp:.12,regen:.06},b4:{armor:.05},b6:{skill:'bloodNova',skillDmg:.55,bossAttrCut:.06}},
+    'soul-shadow':{n:'断魂影镰',s:'2件 暗影伤害+12%、暴击+6%；4件 击杀精英后释放追魂刃；6件 影刃和魂火对残血目标额外处决，击杀后弹射。',b2:{shadow:.12,crit:.06},b4:{atkSpeed:.08},b6:{skill:'shadowBlade',skillDmg:.58,eliteAttrCut:.08}},
+
   };
   const PALADIN_RECTS = (() => {
     const cols = [[16,13,170,175],[220,20,126,162],[378,24,163,164],[561,16,108,171],[700,32,141,129],[868,18,134,170]];
@@ -56,7 +61,7 @@ window.GameModules.equipment = (() => {
   ].map(([x,y,w,h]) => ({ x, y, w, h }));
   function rectFor(sheet, index) {
     if (sheet === 'setPaladin' || sheet === 'setSaintess') return PALADIN_RECTS[index];
-    if (sheet === 'setMage' || sheet === 'setRanger') return MAGE_RECTS[index];
+    if (sheet === 'setMage' || sheet === 'setRanger' || sheet === 'setScythe') return MAGE_RECTS[index];
     return null;
   }
   const pieceNames = { weapon:'武器', helm:'冠冕', chest:'衣甲', amulet:'坠饰', ring:'戒环', boots:'足具' };
