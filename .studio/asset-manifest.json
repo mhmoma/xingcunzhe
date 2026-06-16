@@ -1,7 +1,7 @@
 {
   "version": 1,
   "createdAt": "2026-06-13T14:08:29Z",
-  "updatedAt": "2026-06-16T06:28:44Z",
+  "updatedAt": "2026-06-16T07:07:50Z",
   "assets": [
     {
       "name": "player-paladin",
@@ -2141,6 +2141,110 @@
       },
       "traceId": "trace_mqg9d02d_gd2q25t4",
       "createdAt": "2026-06-16T06:28:43Z"
+    },
+    {
+      "name": "scythe-blood-reap-sheet",
+      "status": "success",
+      "path": "publish/assets/generated/scythe-maiden/scythe-blood-reap-sheet.f6321cc0.webp",
+      "contentHash": "f6321cc0",
+      "revisedPrompt": "Create a 2x2 sprite sheet of a Blood Reap skill effect for a top-down 3/4 survivor game. Four animation frames, each frame centered in its own quadrant with clean spacing. The effect is a ring of blood-red crescent scythe blades spinning around an implied player center, with vampiric crimson energy trails, sharp readable arcade fantasy VFX, cute but high-contrast survivor-game readability, dark outline, bright glow accents. Palette accents: #7c3aed purple, #38bdf8 cyan, #f43f5e crimson, #facc15 gold. No character, no scenery, no ground, no decoration, no environmental elements. Strictly on a SOLID UNIFORM #00B140 chroma key flat background filling all empty pixels. No gradient, no shadow, no texture. No text, no logo, no watermark. Sprite sheet only, flat green screen background, crisp edges, isolated effect.",
+      "model": "gpt-image-2",
+      "size": "1254x1254",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 70.6,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 1971588,
+      "finalBytes": 262282,
+      "usage": {
+        "inputTokens": 201,
+        "outputImageTokens": 2058
+      },
+      "traceId": "trace_mqgajuxy_bzdxymm1",
+      "createdAt": "2026-06-16T07:00:13Z"
+    },
+    {
+      "name": "scythe-wraith-blade-sheet",
+      "status": "success",
+      "path": "publish/assets/generated/scythe-maiden/scythe-wraith-blade-sheet.38740bc5.webp",
+      "contentHash": "38740bc5",
+      "revisedPrompt": "Create a 2x2 sprite sheet for a game VFX attack called \"Wraith Blade\": a ghostly purple spectral scythe blade slash sweeping forward, with ethereal soul trails and execution slash energy. Four animation frames, each frame centered in its own quadrant, clearly readable as separate frames. Top-down 3/4 arcade fantasy effect, cute-chibi readable but dark dungeon fantasy style, clean dark outline, high contrast violet and cyan glow. Palette accents: #7c3aed #38bdf8 #f43f5e #facc15. No character, no scenery, no ground, no decoration, no environmental elements outside the effect. Strictly place the effect on a SOLID UNIFORM #00B140 chroma key background filling all empty space, pure flat green screen with no gradient, no shadow, no texture. No text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1254x1254",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 71.3,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 1805598,
+      "finalBytes": 201546,
+      "usage": {
+        "inputTokens": 188,
+        "outputImageTokens": 2058
+      },
+      "traceId": "trace_mqgaq45v_cgwdyv2t",
+      "createdAt": "2026-06-16T07:05:02Z"
+    },
+    {
+      "name": "scythe-reaper-chain-sheet",
+      "status": "success",
+      "path": "publish/assets/generated/scythe-maiden/scythe-reaper-chain-sheet.3075d913.webp",
+      "contentHash": "3075d913",
+      "revisedPrompt": "Create a 2x2 sprite sheet of a fantasy projectile VFX for a game: a thrown chained scythe projectile with a curved crescent hook, spectral chain links, and purple + cold cyan soul energy. Four animation frames arranged in a strict 2x2 grid, each frame centered in its own quadrant with consistent scale and spacing. Top-down 3/4 arcade fantasy style, cute chibi-readable effects, clean silhouette, high contrast, soft glow, bright readable VFX. Palette accents: #7c3aed, #38bdf8, #f43f5e, #facc15, with dark dungeon-inspired tones only in the effect. No character, no scenery, no ground, no extra elements. The entire background must be a single uniform flat chroma key green #00B140 filling 100% of pixels not occupied by the effect. No gradient, no shadow, no texture, no decoration, no environmental elements. No text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1254x1254",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 83,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 1412711,
+      "finalBytes": 131248,
+      "usage": {
+        "inputTokens": 210,
+        "outputImageTokens": 2058
+      },
+      "traceId": "trace_mqgarsim_qa94pn6w",
+      "createdAt": "2026-06-16T07:06:17Z"
+    },
+    {
+      "name": "scythe-grave-rift-sheet",
+      "status": "success",
+      "path": "publish/assets/generated/scythe-maiden/scythe-grave-rift-sheet.75c298d4.webp",
+      "contentHash": "75c298d4",
+      "revisedPrompt": "Create a 2x2 sprite sheet for a game skill effect named 'Grave Moon Rift'. Four animation frames, each frame centered in its own quadrant with consistent padding. Top-down 3/4 arcade fantasy area effect, clean readable silhouette, no character, no scenery. The effect is a dark violet ground rift shaped like a crescent moon, a cracked shadow portal with pale blue soul flames and pulling vortex energy, subtle magenta and gold accent sparks. Bright arcade fantasy survivor game art, cute chibi-readable effects, dark dungeon colors, high contrast, soft glow, crisp edges. Palette accents: #7c3aed #38bdf8 #f43f5e #facc15. Ensure each frame shows progression of the rift/portal animation: opening crack, stronger vortex, peak energy, then pulsing close/open cycle. The sprite sheet background must be a single uniform solid chroma key green #00B140 filling all non-effect pixels, exactly flat with no gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements outside the effect. No text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1254x1254",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 66.5,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 1947943,
+      "finalBytes": 237224,
+      "usage": {
+        "inputTokens": 240,
+        "outputImageTokens": 2058
+      },
+      "traceId": "trace_mqgately_qetvh3bp",
+      "createdAt": "2026-06-16T07:07:50Z"
     }
   ]
 }
