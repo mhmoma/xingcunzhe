@@ -49,13 +49,18 @@ window.GameModules.equipment = (() => {
     const row3 = [[10,437,145,209],[195,437,148,184],[363,437,163,189],[552,437,128,184],[706,462,144,144],[864,437,145,184]];
     return [...row1, ...row2, ...row3].map(([x,y,w,h]) => ({ x, y, w, h }));
   })();
+  const UNIQUE_RECTS = [
+    [37,8,107,214],[193,10,164,207],[386,10,137,206],[545,9,144,205],[711,7,127,203],[846,21,173,201],
+    [13,275,153,161],[187,252,152,197],[376,244,121,216],[521,243,158,208],[689,271,137,159],[839,267,175,179],
+    [13,477,157,216],[183,504,151,164],[345,486,148,203],[519,480,113,212],[670,475,126,219],[847,474,154,224],
+  ].map(([x,y,w,h]) => ({ x, y, w, h }));
   function rectFor(sheet, index) {
     if (sheet === 'setPaladin' || sheet === 'setSaintess') return PALADIN_RECTS[index];
     if (sheet === 'setMage' || sheet === 'setRanger') return MAGE_RECTS[index];
     return null;
   }
   const pieceNames = { weapon:'武器', helm:'冠冕', chest:'衣甲', amulet:'坠饰', ring:'戒环', boots:'足具' };
-  const toItem = (r, sheet, i) => ({ baseId:r[0], name:r[1], rarity:sheet, slot:r[2], stats:r[3], resists:r[4], effect:r[5]||'', icon:{sheet:ICON_SHEETS[sheet], index:i} });
+  const toItem = (r, sheet, i) => ({ baseId:r[0], name:r[1], rarity:sheet, slot:r[2], stats:r[3], resists:r[4], effect:r[5]||'', icon:{sheet:ICON_SHEETS[sheet], index:i, rect:sheet==='unique'?UNIQUE_RECTS[i]:null} });
   const gold = GOLD.map((r,i)=>toItem(r,'gold',i)), uniques = UNIQUES.map((r,i)=>toItem(r,'unique',i));
   const sets = SET_FAMILIES.flatMap((f,fi)=>SLOTS.map((slot,i)=>({ baseId:`set-${f[1]}-${slot}`, name:`${f[2]}·${pieceNames[slot]}`, rarity:'set', class:f[0], setId:f[1], setName:f[2], slot, stats:{...Object.fromEntries(Object.entries(f[4]).filter(([k])=>!RES.includes(k))), [slot==='weapon'?'damage':slot==='boots'?'move':slot==='ring'?'atkSpeed':slot==='amulet'?'range':'hp']:.06}, resists:Object.fromEntries(Object.entries(f[4]).filter(([k])=>RES.includes(k))), icon:{sheet:ICON_SHEETS[f[3]], index:(fi%3)*6+i, rect:rectFor(f[3], (fi%3)*6+i)} })));
   const all = [...gold,...uniques,...sets];
