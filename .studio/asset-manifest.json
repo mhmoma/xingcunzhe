@@ -1,7 +1,7 @@
 {
   "version": 1,
   "createdAt": "2026-06-13T14:08:29Z",
-  "updatedAt": "2026-06-16T11:32:00Z",
+  "updatedAt": "2026-06-16T11:44:30Z",
   "assets": [
     {
       "name": "player-paladin",
@@ -2271,6 +2271,32 @@
       },
       "traceId": "trace_mqgk942v_n410d09j",
       "createdAt": "2026-06-16T11:32:00Z"
+    },
+    {
+      "name": "scythe-reaper-chain-whip",
+      "status": "success",
+      "path": "publish/assets/generated/scythe-maiden/scythe-reaper-chain-whip.38ac8ff5.webp",
+      "contentHash": "38ac8ff5",
+      "revisedPrompt": "Animated 2x2 sprite sheet for a fantasy action game skill VFX named Reaper Chain Whip. Exactly four equal square cells arranged in a 2x2 grid, one animation frame per cell, no labels or frame numbers. Top-down 3/4 arcade magic effect style matching a Scythe Maiden character: spectral purple, violet, cyan, pale moonlight, dark clean outline, soft glow, high contrast. The skill is NOT a scythe blade and NOT a projectile. It is a long ghostly metal chain with one end fixed at the caster in the exact center of each cell, spinning around the caster like a circular whip. Show only the chain VFX, no character body. The chain should form a sweeping circular arc around the center, like a flail/whip being swung in a circle. One end visually anchored near the center with a small glowing hook/ring, the other end extends outward around the circle with a heavier spectral hook tip. Frame 1: chain curves from center toward upper right, beginning circular sweep. Frame 2: chain sweeps clockwise across right and bottom side. Frame 3: chain forms a broad circle around center with bright motion blur. Frame 4: chain finishes the circular whip sweep with fading afterimages. Keep consistent scale and center anchor across all frames. The usable effect must read clearly when drawn as a square sprite centered on the player. No scythe blade, no crescent moon slash, no character, no ground, no scenery, no text, no logo, no watermark. Strictly placed on a SOLID UNIFORM #00B140 chroma key flat color background. The background is a single uniform shade of #00B140 chroma key green that fills 100% of pixels not occupied by the skill effect. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background, exactly like a green screen used for VFX compositing. No text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1254x1254",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 84.5,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossless_alpha",
+      "originalBytes": 1450086,
+      "finalBytes": 470396,
+      "usage": {
+        "inputTokens": 421,
+        "outputImageTokens": 2058
+      },
+      "traceId": "trace_mqgkp9xv_jvebpo1c",
+      "createdAt": "2026-06-16T11:44:30Z"
     }
   ]
 }
