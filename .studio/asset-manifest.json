@@ -1,7 +1,7 @@
 {
   "version": 1,
   "createdAt": "2026-06-13T14:08:29Z",
-  "updatedAt": "2026-06-16T06:07:19Z",
+  "updatedAt": "2026-06-16T06:28:44Z",
   "assets": [
     {
       "name": "player-paladin",
@@ -2115,6 +2115,32 @@
       },
       "traceId": "trace_mqg8o162_6yy53wf1",
       "createdAt": "2026-06-16T06:07:19Z"
+    },
+    {
+      "name": "scythe-maiden-battle-damaged-pinup",
+      "status": "success",
+      "path": "publish/assets/generated/scythe-maiden/scythe-maiden-battle-damaged-pinup.4808dae9.webp",
+      "contentHash": "4808dae9",
+      "revisedPrompt": "Adult female scythe maiden character illustration for a dark fantasy arcade survivor game, matching ornate gothic anime game character art. Elegant alluring reaper woman, long pale silver hair, confident mature expression, crimson and violet gothic palette, black battle-worn gothic dress and torn cloak with gold filigree, lace edges, chains, crescent moon ornaments, glowing purple moon halo, holding a large crescent scythe. Clothing is damaged from battle with ragged hems and cracked armor plates, but the design remains non-revealing and fantasy-armored; chest, hips, and private areas fully covered by opaque cloth or armor. Full body centered portrait, graceful dynamic pose, high detail, clean dark outline, high contrast, readable silhouette, soft glow, dramatic fantasy lighting, suitable as a game sprite/standee for screenshots. No text, no logo, no watermark. Strictly placed on a SOLID UNIFORM #00B140 chroma key flat color background. The background is a single uniform shade of #00B140 chroma key green that fills 100% of pixels not occupied by the character. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background, exactly like a green screen used for VFX compositing.",
+      "model": "gpt-image-2",
+      "size": "1024x1536",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 46.6,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 2626161,
+      "finalBytes": 306156,
+      "usage": {
+        "inputTokens": 269,
+        "outputImageTokens": 1372
+      },
+      "traceId": "trace_mqg9d02d_gd2q25t4",
+      "createdAt": "2026-06-16T06:28:43Z"
     }
   ]
 }
