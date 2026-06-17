@@ -5,6 +5,7 @@ window.GameModules.redeem = (() => {
     'Tomkk白衣胜雪': { id: 'tomkk-baiyi-20260615', gold: 6666, core: 100 },
     'Tomkk666': { id: 'tomkk-rift-tickets-20260616', riftKeys: 50 },
     '琦琦专属礼包': { id: 'scythe-gift-20260617', scytheGift: true, userId: '4701f6f4-6d69-4cd8-8dbe-0f20f2668162' },
+    '魔核特供': { id: 'core-grant-20260617', coreGift: true, userId: '835bd1b2-f27a-4490-aa59-f3d1dbde0d16' },
   };
   let used = null;
   let redeeming = false;
@@ -68,6 +69,11 @@ window.GameModules.redeem = (() => {
         const user = await window.dzmm?.user?.info?.();
         if (user?.id !== reward.userId) { message('该兑换码仅限指定用户领取'); return; }
         result = await grantScytheGift(reward.id);
+      } else if (reward.coreGift) {
+        const user = await window.dzmm?.user?.info?.();
+        if (user?.id !== reward.userId) { message('该兑换码仅限指定用户领取'); return; }
+        if (!window.Progression?.addGrantCurrency) { message('成长系统未就绪，请稍后再试'); return; }
+        result = await window.Progression.addGrantCurrency(reward.id, 0, 400);
       } else if (reward.riftKeys) {
         if (!window.Rift?.addGrantKeys) { message('秘境系统未就绪，请稍后再试'); return; }
         result = await window.Rift.addGrantKeys(reward.id, reward.riftKeys);
@@ -78,7 +84,7 @@ window.GameModules.redeem = (() => {
       data[reward.id] = true;
       await kvPut(KEY, data);
       if (!result.applied) { message('该兑换码已使用过'); return; }
-      message(reward.scytheGift ? '兑换成功：琦琦冥月套装 4 件、魔核 +400、金币 +20000、门票 +40、赛季等级直升 20' : reward.riftKeys ? `兑换成功：大秘境门票 +${reward.riftKeys}` : `兑换成功：灵魂金币 +${reward.gold}，魔核 +${reward.core}`, true);
+      message(reward.scytheGift ? '兑换成功：琦琦冥月套装 4 件、魔核 +400、金币 +20000、门票 +40、赛季等级直升 20' : reward.coreGift ? '兑换成功：魔核 +400' : reward.riftKeys ? `兑换成功：大秘境门票 +${reward.riftKeys}` : `兑换成功：灵魂金币 +${reward.gold}，魔核 +${reward.core}`, true);
       input.value = '';
       onSuccess?.();
     } finally {
