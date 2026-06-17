@@ -1,7 +1,7 @@
 window.GameModules = window.GameModules || {};
 window.GameModules.equipment = (() => {
   const KEY = 'arcane-equipment-v2';
-  const ICON_SHEETS = { gold:'./assets/generated/equipment-icons-gold-rpg-sheet.8bac9168.webp', unique:'./assets/generated/equipment-icons-unique-rpg-sheet.b1783e31.webp', setPaladin:'./assets/generated/paladin/equipment-set-paladin-redraw-sheet.fc5d587d.webp', setMage:'./assets/generated/mage/equipment-set-mage-redraw-sheet.665e0d14.webp', setRanger:'./assets/generated/ranger/equipment-set-ranger-redraw-sheet.e9a42555.webp', setSaintess:'./assets/generated/saintess/equipment-set-saintess-redraw-sheet.717f3333.webp', setScythe:'./assets/generated/scythe-maiden/equipment-set-scythe-maiden-redraw-sheet.3704bd38.webp' };
+  const ICON_SHEETS = { gold:'./assets/generated/equipment-icons-gold-rpg-sheet.8bac9168.webp', unique:'./assets/generated/equipment-icons-unique-rpg-sheet.b1783e31.webp', setPaladin:'./assets/generated/paladin/equipment-set-paladin-aligned-sheet.6b5b1f04.webp', setMage:'./assets/generated/mage/equipment-set-mage-aligned-sheet.3554b0a7.webp', setRanger:'./assets/generated/ranger/equipment-set-ranger-aligned-sheet.ff9d9fdf.webp', setSaintess:'./assets/generated/saintess/equipment-set-saintess-aligned-sheet.db8d2831.webp', setScythe:'./assets/generated/scythe-maiden/equipment-set-scythe-maiden-aligned-sheet.7a3d74f2.webp' };
   const SLOTS = ['weapon','helm','chest','amulet','ring','boots'];
   const SLOT_CN = { weapon:'武器', helm:'头盔', chest:'胸甲', amulet:'项链', ring:'戒指', boots:'靴子' };
   const CLS_CN = { paladin:'圣骑士', mage:'大魔法师', ranger:'游侠', lewdSaintess:'淫靡圣女', scytheMaiden:'琦琦' };

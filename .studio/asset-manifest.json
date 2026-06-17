@@ -1,7 +1,7 @@
 {
   "version": 1,
   "createdAt": "2026-06-13T14:08:29Z",
-  "updatedAt": "2026-06-17T02:32:46Z",
+  "updatedAt": "2026-06-17T02:56:11Z",
   "assets": [
     {
       "name": "player-paladin",
@@ -1845,134 +1845,134 @@
       "createdAt": "2026-06-16T17:43:13Z"
     },
     {
-      "name": "equipment-set-paladin-redraw-sheet",
+      "name": "equipment-set-paladin-aligned-sheet",
       "status": "success",
-      "path": "publish/assets/generated/paladin/equipment-set-paladin-redraw-sheet.fc5d587d.webp",
-      "contentHash": "fc5d587d",
-      "revisedPrompt": "Create a single fantasy RPG equipment icon sprite sheet on a perfectly square canvas, exactly 6 columns by 6 rows, 36 equal cells. Use a strict grid layout with evenly spaced cell boundaries. The entire canvas background outside all items must be a solid uniform chroma key green #00B140, flat with no gradient, no texture, no shadows, no scenery.\n\nTop 3 rows (18 cells) contain polished classic RPG inventory icon art, each icon large, centered in its cell, fully contained with consistent padding, readable at small inventory size, high contrast, clean dark outline, ornate metal and gem highlights, matching a golden equipment icon sprite scale. Style: premium fantasy RPG equipment icons, detailed but compact, centered.\n\nRow 1 left-to-right by slot: weapon, helm, chest armor, amulet, ring, boots.\nAureate Guardian holy gold shield-paladin set: sun sword, winged gold helm, heavy holy gold plate armor, radiant sun amulet, gold signet ring, armored greaves.\n\nRow 2 left-to-right by slot: weapon, helm, chest armor, amulet, ring, boots.\nThorn Bulwark defensive thorn and ruby paladin set: spiked thorn mace, thorn helm, red-gold thorn armor, thorn ruby charm, ruby ring, heavy thorn sabatons.\n\nRow 3 left-to-right by slot: weapon, helm, chest armor, amulet, ring, boots.\nDawn Judgment white-gold judgment paladin set: holy lance, dawn crown, white-gold judgment armor, dawn pendant, judgment ring, white armored boots.\n\nBottom 3 rows (rows 4, 5, 6) are BLUE PLACEHOLDER ALIGNMENT CELLS, not equipment. In every bottom cell, draw a simple flat bright blue square tile centered in the cell, with a thin darker blue outline, same approximate size across all 18 cells, clearly occupying each cell so the grid alignment is obvious. No item icons in the bottom 3 rows.\n\nImportant: no characters, no text, no numbers, no labels, no logo, no watermark. Keep all top-row item icons sized similarly to gold equipment sheet icons, not tiny, not cropped. Strictly place everything on the solid #00B140 chroma key background. The sprite sheet must be crisp, symmetrical, and clean, with every item isolated inside its cell and consistent spacing.",
+      "path": "publish/assets/generated/paladin/equipment-set-paladin-aligned-sheet.6b5b1f04.webp",
+      "contentHash": "6b5b1f04",
+      "revisedPrompt": "Create a STRICTLY ALIGNED 6x6 RPG equipment sprite sheet on a perfectly square canvas. The canvas must have exactly 6 columns and exactly 6 rows of equal-size cells, with a mathematically regular visible grid implied only by perfect placement. Use a solid uniform chroma-key background color #00B140 filling every pixel outside the icons and placeholders. No gradients, no texture, no scenery, no panel, no frame, no cell borders, no shadows on background.\n\nCRITICAL ALIGNMENT AND SCALE: Every icon must be centered exactly in the center of its own cell. Each icon must be much smaller than the cell, occupying only about 50% to 58% of the cell width and height. Leave large empty green margins inside every cell. Do not let any icon cross cell boundaries. Keep all icons the same visual size category, including weapons and armor. Use simple isolated item silhouettes, compact and centered.\n\nTOP 3 ROWS: 18 class set equipment icons only, 6 icons per row, left-to-right by slot: weapon, helm, chest armor, amulet, ring, boots.\nRow 1, Aureate Guardian set: sun sword, winged gold helm, heavy holy gold plate armor, radiant sun amulet, gold signet ring, armored greaves.\nRow 2, Thorn Bulwark set: spiked thorn mace, thorn helm, red-gold thorn armor, thorn ruby charm, ruby ring, heavy thorn sabatons.\nRow 3, Dawn Judgment set: holy lance, dawn crown, white-gold judgment armor, dawn pendant, judgment ring, white armored boots.\n\nBOTTOM 3 ROWS: alignment placeholders only. In each cell place one flat bright blue square centered exactly in the cell, all the same size as the item icons, with a thin darker blue outline. These blue squares should clearly prove the grid alignment.\n\nSTYLE: polished classic fantasy RPG inventory icons, clean dark outline, gold/gem highlights, readable at small size, but compact and centered. No characters, no text, no numbers, no labels, no logo, no watermark. The blue placeholder squares should be flat and simple, not glossy. The equipment icons should look like isolated item silhouettes with subtle highlights, not splash art. Ensure strict regularity and consistent spacing across all 36 cells.",
       "model": "gpt-image-2",
       "size": "1254x1254",
       "wantsTransparent": true,
       "chromaKey": {
         "color": "#00B140",
-        "alphaZeroPct": 44.1,
+        "alphaZeroPct": 75.1,
         "edgeGreenBiasPct": 0,
         "verdict": "PASS"
       },
       "outputFormat": "webp",
       "compressionProfile": "lossy_q85_alpha",
-      "originalBytes": 1805061,
-      "finalBytes": 243420,
+      "originalBytes": 1427923,
+      "finalBytes": 142552,
       "usage": {
-        "inputTokens": 496,
+        "inputTokens": 477,
         "outputImageTokens": 2058
       },
-      "traceId": "trace_mqhfugf1_jaaj8gxy",
-      "createdAt": "2026-06-17T02:16:13Z"
+      "traceId": "trace_mqhh0xpe_8ot8myk8",
+      "createdAt": "2026-06-17T02:49:07Z"
     },
     {
-      "name": "equipment-set-mage-redraw-sheet",
+      "name": "equipment-set-mage-aligned-sheet",
       "status": "success",
-      "path": "publish/assets/generated/mage/equipment-set-mage-redraw-sheet.665e0d14.webp",
-      "contentHash": "665e0d14",
-      "revisedPrompt": "Create a single fantasy RPG equipment icon sprite sheet on a perfectly square canvas, arranged as EXACTLY 6 columns by 6 rows with 36 equal cells. The style should match a polished golden classic RPG equipment icon sheet: large centered icons, fully contained with consistent padding, readable at small inventory size, clean dark outline, high detail, high contrast, ornate metal and gem highlights.\n\nCanvas/background: pure flat uniform chroma key green #00B140 filling all pixels outside the icons and placeholders. No gradient, no texture, no scenery, no shadow on background, no ground, no decoration, no environmental elements, no text, no numbers, no logos, no watermark.\n\nTop 3 rows only contain class set equipment icons, one icon per cell, left-to-right by slot order in every row: weapon, helm, chest armor, amulet, ring, boots.\nRow 1: Astral Missile arcane wizard set — star crystal wand, astral pointed hat, violet star robe, glowing arcane core amulet, star sigil ring, soft wizard boots.\nRow 2: Ember Meteor fire mage set — ember staff, flame crown hood, red-orange meteor robe, molten heart pendant, fire ruby ring, ember boots.\nRow 3: Storm Sigil thunder mage set — lightning staff, storm circlet, blue storm robe, thunder sigil amulet, lightning ring, stormstep boots.\n\nBottom 3 rows must be BLUE PLACEHOLDER ALIGNMENT CELLS, not equipment. In each of the 18 bottom cells, draw a simple flat bright blue square tile centered in the cell, with a thin darker blue outline, consistent size. Every bottom cell in rows 4, 5, and 6 must be visibly occupied by a blue square placeholder tile; no item icons in the bottom 3 rows.\n\nKeep all top-row item icons sized similarly to gold equipment sheet icons, not tiny, not cropped, centered within their cells, polished and icon-like, with ornate fantasy detail and strong silhouette readability. No extra objects beyond the described icons and the blue placeholders.\n\nEnsure strict 6x6 grid alignment and equal cell spacing. The final image should look like a sprite sheet for an RPG inventory UI.",
+      "path": "publish/assets/generated/mage/equipment-set-mage-aligned-sheet.3554b0a7.webp",
+      "contentHash": "3554b0a7",
+      "revisedPrompt": "Create a strictly aligned 6x6 RPG equipment sprite sheet on a square canvas with a perfectly regular, visually obvious grid layout. Exactly 6 columns and exactly 6 rows, equal-size cells. Each icon must be centered exactly in its own cell and occupy only about 50% to 58% of the cell width and height, leaving large empty chroma-key margins inside every cell. No icon may cross cell boundaries. Keep all icons the same visual size category, compact isolated silhouettes, not splash art.\n\nBackground: solid uniform chroma key green #00B140 filling every pixel outside the icons and placeholders. No gradient, no texture, no scenery, no shadows on background, no inventory panel, no decorative frame, no labels, no text, no numbers, no watermark.\n\nTop 3 rows contain class set equipment icons only, 18 icons total, left-to-right by slot in each row: weapon, helm, chest armor, amulet, ring, boots.\nRow 1 Astral Missile set: star crystal wand, astral pointed hat, violet star robe, glowing arcane core amulet, star sigil ring, soft wizard boots.\nRow 2 Ember Meteor set: ember staff, flame crown hood, red-orange meteor robe, molten heart pendant, fire ruby ring, ember boots.\nRow 3 Storm Sigil set: lightning staff, storm circlet, blue storm robe, thunder sigil amulet, lightning ring, stormstep boots.\n\nBottom 3 rows are alignment placeholders: one flat bright blue square centered in each cell, same size as the item icons, with a thin darker blue outline. These 18 blue squares must be identical and prove alignment.\n\nArt style: polished classic fantasy RPG inventory icons, clean dark outline, gold/gem highlights, readable at small size, centered, isolated, simple silhouettes, consistent scale across all items. No characters. No logo. No extra objects.",
       "model": "gpt-image-2",
       "size": "1254x1254",
       "wantsTransparent": true,
       "chromaKey": {
         "color": "#00B140",
-        "alphaZeroPct": 42.1,
+        "alphaZeroPct": 61.4,
         "edgeGreenBiasPct": 0,
         "verdict": "PASS"
       },
       "outputFormat": "webp",
       "compressionProfile": "lossy_q85_alpha",
-      "originalBytes": 1903895,
-      "finalBytes": 256558,
+      "originalBytes": 1550201,
+      "finalBytes": 167856,
       "usage": {
-        "inputTokens": 455,
+        "inputTokens": 393,
         "outputImageTokens": 2058
       },
-      "traceId": "trace_mqhfw7r1_bzvm8oab",
-      "createdAt": "2026-06-17T02:17:25Z"
+      "traceId": "trace_mqhh2jkr_q2wbtc01",
+      "createdAt": "2026-06-17T02:50:26Z"
     },
     {
-      "name": "equipment-set-ranger-redraw-sheet",
+      "name": "equipment-set-ranger-aligned-sheet",
       "status": "success",
-      "path": "publish/assets/generated/ranger/equipment-set-ranger-redraw-sheet.e9a42555.webp",
-      "contentHash": "e9a42555",
-      "revisedPrompt": "Create a single fantasy RPG equipment icon sprite sheet on a perfectly square canvas, arranged in EXACTLY 6 columns by 6 rows, with 36 equal cells. Use a clean, polished classic RPG inventory icon art style with high detail, high contrast, ornate metal and gem highlights, and a clean dark outline. Each icon should be large, centered, fully contained within its cell, with consistent padding, readable at small inventory size. Match the scale of an existing golden equipment icon sheet.\n\nTop 3 rows are equipment icons only, left-to-right by slot: weapon, helm, chest armor, amulet, ring, boots.\nRow 1: Cyclone Axe agile ranger set: twin throwing axes, green leather hood, cyclone leather armor, wind fang amulet, hunter ring, swift boots.\nRow 2: Moon Hunter frost ranger set: crescent bow, moon hood, silver-blue leather armor, moon pendant, crescent ring, moonlit boots.\nRow 3: Venom Shadow assassin ranger set: poison dagger, shadow mask hood, dark green leather armor, venom vial amulet, toxic ring, silent boots.\n\nBottom 3 rows are BLUE PLACEHOLDER ALIGNMENT CELLS only, not equipment. Draw each of the 18 bottom cells as a simple flat bright blue square tile centered in its cell, consistent size, with a thin darker blue outline. These blue placeholders must clearly occupy every cell in rows 4-6 so alignment is obvious; no item icons in the bottom 3 rows.\n\nStrictly use a SOLID UNIFORM #00B140 chroma key flat color background filling all pixels outside the icons and blue placeholder squares. No gradient, no shadow on background, no texture, no scenery, no ground, no decoration, no environmental elements. No characters, no text, no numbers, no labels, no logo, no watermark. Ensure the top-row item icons are not tiny and not cropped, and the blue placeholder tiles occupy every cell in the bottom 3 rows clearly and evenly.",
+      "path": "publish/assets/generated/ranger/equipment-set-ranger-aligned-sheet.ff9d9fdf.webp",
+      "contentHash": "ff9d9fdf",
+      "revisedPrompt": "Create a STRICTLY ALIGNED 6x6 RPG equipment sprite sheet on a perfectly square canvas. Exact layout: 6 columns and 6 rows of equal-size cells, mathematically regular and visually obvious from icon placement (but NO drawn grid lines, NO frame, NO panel). All icons must be centered exactly in their own cell and occupy only about 50% to 58% of the cell width and height, leaving large empty chroma-key margins inside each cell. Nothing may cross cell boundaries. Keep every icon the same overall visual size category, compact and isolated silhouettes.\n\nBACKGROUND: solid uniform chroma-key flat color #00B140 filling every pixel outside the icons and placeholder squares. Absolutely no gradients, no texture, no scenery, no shadows on the background, no text, no labels, no watermark, no logo.\n\nTOP 3 ROWS: 18 class set equipment icons total, 6 per row, left-to-right by slot: weapon, helm, chest armor, amulet, ring, boots.\nRow 1 Cyclone Axe set: twin throwing axes; green leather hood; cyclone leather armor; wind fang amulet; hunter ring; swift boots.\nRow 2 Moon Hunter set: crescent bow; moon hood; silver-blue leather armor; moon pendant; crescent ring; moonlit boots.\nRow 3 Venom Shadow set: poison dagger; shadow mask hood; dark green leather armor; venom vial amulet; toxic ring; silent boots.\n\nBOTTOM 3 ROWS: alignment placeholders only. In each cell, place one flat bright blue square centered exactly in the cell, same size category as the item icons, with a thin darker blue outline. These blue squares must be identical in size across all 18 cells and prove the grid alignment.\n\nSTYLE: polished classic fantasy RPG inventory icons, clean dark outline, subtle gold/gem highlights, readable at small size, but compact and centered. Simple isolated item silhouettes, not splash art. No characters, no hands, no extra props. Ensure the icons are all aligned to the exact centers of the grid cells and the bottom blue squares are perfectly centered as well.",
       "model": "gpt-image-2",
       "size": "1254x1254",
       "wantsTransparent": true,
       "chromaKey": {
         "color": "#00B140",
-        "alphaZeroPct": 35.2,
+        "alphaZeroPct": 65.5,
         "edgeGreenBiasPct": 0,
         "verdict": "PASS"
       },
       "outputFormat": "webp",
       "compressionProfile": "lossy_q85_alpha",
-      "originalBytes": 1923061,
-      "finalBytes": 255770,
+      "originalBytes": 1467158,
+      "finalBytes": 135474,
       "usage": {
-        "inputTokens": 414,
+        "inputTokens": 438,
         "outputImageTokens": 2058
       },
-      "traceId": "trace_mqhfxrll_0faj4is0",
-      "createdAt": "2026-06-17T02:18:43Z"
+      "traceId": "trace_mqhh47t2_9c0oz4lv",
+      "createdAt": "2026-06-17T02:51:37Z"
     },
     {
-      "name": "equipment-set-saintess-redraw-sheet",
+      "name": "equipment-set-saintess-aligned-sheet",
       "status": "success",
-      "path": "publish/assets/generated/saintess/equipment-set-saintess-redraw-sheet.717f3333.webp",
-      "contentHash": "717f3333",
-      "revisedPrompt": "Single fantasy RPG equipment icon sprite sheet on a perfectly square canvas, exactly 6 columns by 6 rows, 36 equal cells, grid-aligned and evenly spaced. Flat chroma key background color #00B140 filling all empty space. Top 3 rows contain 18 polished classic RPG inventory equipment icons only, each icon large, centered in its cell, fully contained with consistent padding, readable at small inventory size, high detail, high contrast, ornate metal and gem highlights, clean dark outline, golden-equipment-sheet style scale. Row 1 left-to-right: crimson holy scepter weapon, red veil crown helm, ornate crimson sacred dress armor, heart chalice amulet, red rose ring, crimson slippers boots. Row 2 left-to-right: violet hymn staff weapon, violet halo veil helm, purple sacred robe armor, hymn pendant amulet, violet ring, soft violet boots. Row 3 left-to-right: rose mirror wand weapon, rose veil circlet helm, pink-white mirror dress armor, mirror core amulet, rose ring, rose-white boots. Bottom 3 rows are not equipment: each of the 18 cells in rows 4-6 contains a simple flat bright blue square tile centered in the cell, consistent size, with a thin darker blue outline, clearly occupying every cell for alignment. No characters, no text, no numbers, no labels, no logo, no watermark. Pure flat background only outside icons and blue placeholder tiles, no gradient, no shadow on background, no texture, no scenery, no decoration.",
+      "path": "publish/assets/generated/saintess/equipment-set-saintess-aligned-sheet.db8d2831.webp",
+      "contentHash": "db8d2831",
+      "revisedPrompt": "Create a STRICTLY ALIGNED 6x6 RPG equipment sprite sheet on a square canvas. Exact 6 columns and 6 rows of equal-size cells, mathematically regular and visually obvious by placement. Solid uniform chroma-key background color #00B140 everywhere outside the icons and placeholders. No panel, no frame, no cell borders, no texture, no gradient, no scenery, no shadows on background.\n\nImportant composition rules: every icon must be centered exactly in its own cell; each icon should occupy only about 50% to 58% of the cell width and height, leaving large empty margins inside each cell. All icons should be the same visual size category. Keep them compact, isolated, readable at small size, simple silhouettes with clean dark outline and gold/gem highlights, polished classic fantasy RPG inventory icon style. No characters, no text, no numbers, no labels, no logo, no watermark.\n\nTop 3 rows contain 18 class set equipment icons only, 6 per row left-to-right by slot: weapon, helm, chest armor, amulet, ring, boots.\nRow 1: crimson holy scepter, red veil crown, ornate crimson sacred dress armor, heart chalice amulet, red rose ring, crimson slippers.\nRow 2: violet hymn staff, violet halo veil, purple sacred robe armor, hymn pendant, violet ring, soft violet boots.\nRow 3: rose mirror wand, rose veil circlet, pink-white mirror dress armor, mirror core amulet, rose ring, rose-white boots.\n\nBottom 3 rows are alignment placeholders: in every cell place one flat bright blue square centered exactly in the cell, same size as the item icons, with a thin darker blue outline. These 18 blue squares must be identical in size and placement consistency to prove grid alignment.\n\nEnsure all 36 cells are clear and regular. Icons do not cross cell boundaries. The grid should be visually obvious from perfectly centered placement and consistent spacing, but without drawn grid lines or borders. Square canvas, crisp sprite-sheet look, high contrast, clean edges.",
       "model": "gpt-image-2",
       "size": "1254x1254",
       "wantsTransparent": true,
       "chromaKey": {
         "color": "#00B140",
-        "alphaZeroPct": 44.4,
+        "alphaZeroPct": 67.4,
         "edgeGreenBiasPct": 0,
         "verdict": "PASS"
       },
       "outputFormat": "webp",
       "compressionProfile": "lossy_q85_alpha",
-      "originalBytes": 1809251,
-      "finalBytes": 240666,
+      "originalBytes": 1583164,
+      "finalBytes": 175014,
       "usage": {
-        "inputTokens": 318,
+        "inputTokens": 426,
         "outputImageTokens": 2058
       },
-      "traceId": "trace_mqhfzfiq_wtyllili",
-      "createdAt": "2026-06-17T02:20:03Z"
+      "traceId": "trace_mqhh5r4o_2lml3wud",
+      "createdAt": "2026-06-17T02:54:53Z"
     },
     {
-      "name": "equipment-set-scythe-maiden-redraw-sheet",
+      "name": "equipment-set-scythe-maiden-aligned-sheet",
       "status": "success",
-      "path": "publish/assets/generated/scythe-maiden/equipment-set-scythe-maiden-redraw-sheet.3704bd38.webp",
-      "contentHash": "3704bd38",
-      "revisedPrompt": "Single fantasy RPG equipment icon sprite sheet on a perfectly square canvas, EXACTLY 6 columns by 6 rows, 36 equal cells. Clean grid alignment with equal cell size. Use a flat solid chroma key background of #00B140 filling all space outside icons and placeholder tiles, with no gradient, no texture, no scenery, no shadow on background, no text, no logos, no watermark.\n\nTop 3 rows contain 18 ornate classic RPG inventory equipment icons only, each centered in its cell, large and readable at small size, with consistent padding, polished high-detail fantasy item art, clean dark outline, high contrast, metallic and gem highlights, golden equipment-sheet scale.\n\nRow 1 left-to-right slot icons for Reaper Waltz moon scythe maiden set: 1) crescent battle scythe weapon, 2) dark moon hair crown helm, 3) black dancing armor dress chest, 4) moon death pendant amulet, 5) crescent ring, 6) waltz boots.\nRow 2 left-to-right slot icons for Blood Reaping blood scythe set: 1) crimson scythe weapon, 2) blood tiara helm, 3) red-black reaper armor chest, 4) blood oath amulet, 5) crimson ring, 6) blood boots.\nRow 3 left-to-right slot icons for Soul Shadow ghost scythe set: 1) spectral scythe weapon, 2) shadow veil crown helm, 3) dark soul armor dress chest, 4) soul orb amulet, 5) shadow ring, 6) ghoststep boots.\n\nBottom 3 rows are BLUE PLACEHOLDER ALIGNMENT CELLS only, no item icons. Draw each of the 18 bottom cells as a simple flat bright blue square tile centered in its cell, consistent size, with a thin darker blue outline. These blue tiles must clearly occupy every cell in rows 4-6 so alignment is obvious.\n\nNo characters. No text. No numbers. No labels. No logo. No watermark. Keep all top-row item icons sized similarly to a golden fantasy equipment icon sheet, not tiny, not cropped, fully contained within each cell.",
+      "path": "publish/assets/generated/scythe-maiden/equipment-set-scythe-maiden-aligned-sheet.7a3d74f2.webp",
+      "contentHash": "7a3d74f2",
+      "revisedPrompt": "Create a STRICTLY ALIGNED 6x6 RPG equipment sprite sheet on a square canvas. Exactly 6 columns and exactly 6 rows of equal-size cells, mathematically regular and visually obvious by placement only (no drawn grid lines, no borders, no frame). Use a solid uniform chroma-key background color #00B140 filling every pixel outside the icons and placeholders.\n\nCRITICAL ALIGNMENT: Every icon must be centered exactly in the center of its own cell. Each icon must be much smaller than the cell, occupying only about 50% to 58% of the cell width and height, leaving large empty margins around it. Do not let any icon cross cell boundaries. All icons should be the same visual size category, including weapons and armor. Simple isolated item silhouettes, not large splash art.\n\nTop 3 rows are 18 class set equipment icons, left-to-right by slot: weapon, helm, chest armor, amulet, ring, boots.\nRow 1: Reaper Waltz set — crescent battle scythe, dark moon hair crown, black dancing armor dress, moon death pendant, crescent ring, waltz boots.\nRow 2: Blood Reaping set — crimson scythe, blood tiara helm, red-black reaper armor, blood oath amulet, crimson ring, blood boots.\nRow 3: Soul Shadow set — spectral scythe, shadow veil crown, dark soul armor dress, soul orb amulet, shadow ring, ghoststep boots.\n\nBottom 3 rows are alignment placeholders: in every cell place one flat bright blue square centered in the cell, same size as the item icons, with a thin darker blue outline. These blue squares prove grid alignment. Keep all placeholder squares identical.\n\nArt style: polished classic fantasy RPG inventory icons, clean dark outline, gold/gem highlights, readable at small size, compact and centered. No characters, no text, no numbers, no labels, no logo, no watermark. No scenery. No shadows on the background. No inventory panel. No decorative frame.",
       "model": "gpt-image-2",
       "size": "1254x1254",
       "wantsTransparent": true,
       "chromaKey": {
         "color": "#00B140",
-        "alphaZeroPct": 41.1,
+        "alphaZeroPct": 73.1,
         "edgeGreenBiasPct": 0,
         "verdict": "PASS"
       },
       "outputFormat": "webp",
       "compressionProfile": "lossy_q85_alpha",
-      "originalBytes": 1826423,
-      "finalBytes": 251314,
+      "originalBytes": 1435943,
+      "finalBytes": 137212,
       "usage": {
-        "inputTokens": 461,
+        "inputTokens": 423,
         "outputImageTokens": 2058
       },
-      "traceId": "trace_mqhg15v4_193wfm8p",
-      "createdAt": "2026-06-17T02:23:21Z"
+      "traceId": "trace_mqhh9yie_3t61s9yt",
+      "createdAt": "2026-06-17T02:56:11Z"
     }
   ]
 }
