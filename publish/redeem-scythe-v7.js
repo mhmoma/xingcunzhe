@@ -4,7 +4,7 @@ window.GameModules.redeem = (() => {
   const CODES = {
     'Tomkk白衣胜雪': { id: 'tomkk-baiyi-20260615', gold: 6666, core: 100 },
     'Tomkk666': { id: 'tomkk-rift-tickets-20260616', riftKeys: 50 },
-    '琦琦专属礼包': { id: 'scythe-gift-20260617', server: true },
+    '琦琦专属礼包': { id: 'scythe-gift-20260617', scytheGift: true, userId: '4701f6f4-6d69-4cd8-8dbe-0f20f2668162' },
   };
   let used = null;
   let redeeming = false;
@@ -50,13 +50,6 @@ window.GameModules.redeem = (() => {
     }
     return { applied: true, slots };
   }
-  async function claimServerCode(code) {
-    try { return await dzmm.fn.invoke('redeem', { method: 'claim', code }); }
-    catch (e) {
-      if (e.code === 'function_not_published') throw new Error('兑换函数还未发布，请先保存游戏');
-      throw e;
-    }
-  }
   async function submit(onSuccess) {
     if (redeeming) return;
     const input = document.getElementById('redeemInput');
@@ -71,9 +64,9 @@ window.GameModules.redeem = (() => {
       const data = await loadUsed();
       if (data[reward.id]) { message('该兑换码已使用过'); return; }
       let result;
-      if (reward.server) {
-        const gate = await claimServerCode(code);
-        if (!gate.applied) { data[reward.id] = true; await kvPut(KEY, data); message('该兑换码已使用过'); return; }
+      if (reward.scytheGift) {
+        const user = await window.dzmm?.user?.info?.();
+        if (user?.id !== reward.userId) { message('该兑换码仅限指定用户领取'); return; }
         result = await grantScytheGift(reward.id);
       } else if (reward.riftKeys) {
         if (!window.Rift?.addGrantKeys) { message('秘境系统未就绪，请稍后再试'); return; }
@@ -85,7 +78,7 @@ window.GameModules.redeem = (() => {
       data[reward.id] = true;
       await kvPut(KEY, data);
       if (!result.applied) { message('该兑换码已使用过'); return; }
-      message(reward.server ? '兑换成功：琦琦冥月套装 4 件、魔核 +400、金币 +20000、门票 +40、赛季等级直升 20' : reward.riftKeys ? `兑换成功：大秘境门票 +${reward.riftKeys}` : `兑换成功：灵魂金币 +${reward.gold}，魔核 +${reward.core}`, true);
+      message(reward.scytheGift ? '兑换成功：琦琦冥月套装 4 件、魔核 +400、金币 +20000、门票 +40、赛季等级直升 20' : reward.riftKeys ? `兑换成功：大秘境门票 +${reward.riftKeys}` : `兑换成功：灵魂金币 +${reward.gold}，魔核 +${reward.core}`, true);
       input.value = '';
       onSuccess?.();
     } finally {
