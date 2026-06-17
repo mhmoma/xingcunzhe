@@ -1,7 +1,7 @@
 {
   "version": 1,
   "createdAt": "2026-06-13T14:08:29Z",
-  "updatedAt": "2026-06-17T01:57:14Z",
+  "updatedAt": "2026-06-17T02:10:31Z",
   "assets": [
     {
       "name": "player-paladin",
@@ -2453,6 +2453,32 @@
       },
       "traceId": "trace_mqhf0scr_eohlqpi7",
       "createdAt": "2026-06-17T01:57:13Z"
+    },
+    {
+      "name": "equipment-paladin-sacrifice-redraw-sheet",
+      "status": "success",
+      "path": "publish/assets/generated/paladin/equipment-paladin-sacrifice-redraw-sheet.4e1fbd63.webp",
+      "contentHash": "4e1fbd63",
+      "revisedPrompt": "Create a single 1024x1024 fantasy RPG equipment icon sprite sheet with EXACTLY 6 columns and 6 rows, evenly spaced invisible grid, 36 separate isolated item icons, each centered in its cell with consistent padding, fully contained and not cropped. The ENTIRE background must be a perfectly flat, uniform solid chroma key green #00B140 with no variation, no gradients, no texture, no floor, no shadows on the background, no inventory panel, no checkerboard, no grid lines, no cell frames, no scenery, no decoration. Only the item icons may occupy pixels other than #00B140.\n\nStyle: ornate high-detail classic fantasy game icon style, clean dark outline, gold metal, gems, holy glow, readable small silhouettes, polished RPG inventory icon look, matching arcane survivor chibi fantasy game UI.\n\nTop 3 rows are paladin class set equipment icons, left to right by slot: weapon, helm, chest armor, amulet, ring, boots.\nRow 1 Aureate Guardian holy gold shield-paladin set: sun sword, winged gold helm, heavy holy gold plate armor, radiant sun amulet, gold signet ring, armored greaves.\nRow 2 Thorn Bulwark defensive thorn and ruby paladin set: spiked thorn mace, thorn helm, red-gold thorn armor, thorn ruby charm, ruby ring, heavy thorn sabatons.\nRow 3 Dawn Judgment white-gold judgment paladin set: holy lance, dawn crown, white-gold judgment armor, dawn pendant, judgment ring, white armored boots.\n\nBottom 3 rows are 18 sacrifice relic icons filling all cells, left to right, row by row: glowing marrow vial, thorn blood crystal, dawn judgment core, star shell, ember dragon heart, storm bottle, beast bone, eclipse fang, venom egg, crimson chalice, violet incense burner, rose mirror core, moon petal, blood scythe bone, black soul feather, abyss heart core, fate clock disk, greedy offering cup.\n\nNo characters, no text, no logo, no watermark. Ensure all 36 icons are distinct, readable at small inventory size, with crisp silhouette and consistent scale. Strictly placed on a SOLID UNIFORM #00B140 chroma key flat color background. The background is a single uniform shade of #00B140 chroma key green that fills 100% of pixels not occupied by the item icons. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background, exactly like a green screen used for VFX compositing.",
+      "model": "gpt-image-2",
+      "size": "1254x1254",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 58,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 2614420,
+      "finalBytes": 422638,
+      "usage": {
+        "inputTokens": 540,
+        "outputImageTokens": 2058
+      },
+      "traceId": "trace_mqhfn107_e5epx6wr",
+      "createdAt": "2026-06-17T02:10:31Z"
     }
   ]
 }
