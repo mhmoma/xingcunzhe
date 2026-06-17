@@ -13,7 +13,7 @@ window.GameModules.progression = (() => {
   const SPEC = {
     paladin: [
       ['aura', '蒜阵圣化', '大蒜光环每级范围 +5、伤害 +4%，Lv.4 后额外 +1 技能等级', 5, 80, 22, 82, 'damage', ['garlic'], 24],
-      ['lance', '圣枪裁决', '圣光长枪每级冷却 -5%、枪阵宽度 +3，Lv.2/Lv.4 各 +1 发', 5, 90, 50, 86, 'damage', ['holyLance'], 24],
+      ['lance', '圣枪裁决', '圣光长枪每级冷却 -5%、命中溅射范围 +3，Lv.2/Lv.4 各 +1 发', 5, 90, 50, 86, 'damage', ['holyLance'], 24],
       ['nova', '血誓新星', '血色新星每级范围 +7、冷却 -6%、伤害 +4%，Lv.4 后额外 +1 技能等级', 5, 90, 78, 82, 'damage', ['bloodNova'], 24],
       ['guard', '神圣壁垒', '每级生命 +3%、开局护盾 +4% 基础生命、每秒回复 +0.25', 4, 110, 50, 108, 'utility', [], 24, 'lance'],
       ['seal', '圣印破盾', '近战圣光对 Boss 与护盾敌人更强，血色新星命中 Boss 回复生命', 4, 135, 50, 126, 'damage', ['garlic', 'bloodNova', 'flameWheel'], 28, 'aura'],
