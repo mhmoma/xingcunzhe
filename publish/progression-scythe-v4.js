@@ -102,6 +102,7 @@ window.GameModules.progression = (() => {
   function coreUnlocked(c, n) { return !n.core || clsData(c).unlocks[n.id] || level(c, n.id) > 0; }
   function cost(c, id) { const n = node(c, id), lv = level(c, id); return !n || lv >= n.max ? 0 : Math.round(n.base * Math.pow(COST_GROWTH, lv)); }
   function esc(v) { return String(v).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m])); }
+  function tone(n) { const d = n.desc || ''; if (/生命|护盾|回复|淫荡值/.test(d)) return 'life'; if (/金币|拾取|经验/.test(d)) return 'wealth'; if (/冷却|移动速度|飞行速度|速度/.test(d)) return 'speed'; if (/Boss|护盾敌人|破盾|处决/.test(d)) return 'boss'; return n.kind === 'utility' ? 'utility' : 'damage'; }
   async function buy(c, id) {
     const n = node(c, id), data = clsData(c); if (!n || !preOk(c, n)) return false;
     if (!coreUnlocked(c, n)) { if (meta.soulCore < n.core) return false; meta.soulCore -= n.core; data.unlocks[n.id] = true; await save(); return true; }
@@ -121,9 +122,9 @@ window.GameModules.progression = (() => {
       const can = pre && !full && (core ? meta.soulGold >= price : meta.soulCore >= n.core);
       const state = !pre ? '需前置节点' : !core ? `解锁 ${n.core} 魔核` : full ? '已满级' : `消耗 ${price}`;
       const tip = `${n.name} Lv.${lv}/${n.max}\n${n.desc}\n${!pre ? '需要先升级前置节点' : !core ? `需要 ${n.core} 魔核解锁，之后用金币升级` : full ? '已满级' : `下一次升级消耗 ${price} 灵魂金币`}`;
-      return `<button class="treeNode ${!pre || !core ? 'locked' : ''} ${full ? 'full' : ''}" style="left:${n.x}%;top:${posY(n.y)}" data-prog-node="${n.id}" data-tip="${esc(tip)}" ${can ? '' : 'disabled'}><b>${n.name}</b><small>Lv.${lv}/${n.max}</small><span>${state}</span><em>${n.desc}</em></button>`;
+      return `<button class="treeNode ${tone(n)} ${!pre || !core ? 'locked' : ''} ${full ? 'full' : ''}" style="left:${n.x}%;top:${posY(n.y)}" data-prog-node="${n.id}" data-tip="${esc(tip)}" ${can ? '' : 'disabled'}><b>${n.name}</b><small>Lv.${lv}/${n.max}</small><span>${state}</span><em>${n.desc}</em></button>`;
     }).join('');
-    container.innerHTML = `<div class="progressHead"><b>灵魂金币：${meta.soulGold}　魔核：${meta.soulCore}</b><small>当前职业：${CLASSES[active]} / Boss 固定掉落魔核，通关额外 +2</small></div><div class="classTabs">${Object.entries(CLASSES).map(([id, name]) => `<button class="${id === active ? 'selected' : ''}" data-prog-class="${id}">${name}</button>`).join('')}</div><div class="treeCanvas"><svg viewBox="0 0 100 132" preserveAspectRatio="none">${lines}</svg>${cards}<div class="treeTip" id="treeTip"></div></div>`;
+    container.innerHTML = `<div class="progressHead"><b>灵魂金币：${meta.soulGold}　魔核：${meta.soulCore}</b><small>当前职业：${CLASSES[active]} / Boss 固定掉落魔核，通关额外 +2</small></div><div class="classTabs">${Object.entries(CLASSES).map(([id, name]) => `<button class="${id === active ? 'selected' : ''}" data-prog-class="${id}">${name}</button>`).join('')}</div><div class="treeLegend"><span class="life">生存</span><span class="damage">伤害</span><span class="speed">速度/冷却</span><span class="boss">首领</span><span class="wealth">收益</span><span class="utility">机制</span></div><div class="treeCanvas"><svg viewBox="0 0 100 132" preserveAspectRatio="none">${lines}</svg>${cards}<div class="treeTip" id="treeTip"></div></div>`;
     container.querySelectorAll('[data-prog-class]').forEach(b => b.onclick = () => renderTree(container, onChange, b.dataset.progClass));
     const tip = container.querySelector('#treeTip');
     function showTip(btn) { if (!tip) return; tip.textContent = btn.dataset.tip || ''; tip.style.left = btn.style.left; tip.style.top = `calc(${btn.style.top} - 54px)`; tip.classList.add('show'); }
