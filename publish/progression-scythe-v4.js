@@ -180,6 +180,8 @@ window.GameModules.progression = (() => {
   function estimateCoreReward(run) { return Math.max(0, Math.floor(Number(run.bossKills) || 0)) + (run.win ? 2 : 0); }
   async function addRunReward(run) { await init(); const gold = estimateRunReward(run), core = estimateCoreReward(run); meta.soulGold += gold; meta.soulCore += core; await save(); return { gold, core }; }
   async function addCurrency(gold, core) { await init(); meta.soulGold += Math.max(0, Math.floor(Number(gold) || 0)); meta.soulCore += Math.max(0, Math.floor(Number(core) || 0)); await save(); return { gold: meta.soulGold, core: meta.soulCore }; }
+  async function spendGold(amount) { await init(); amount = Math.max(0, Math.floor(Number(amount) || 0)); if (meta.soulGold < amount) return false; meta.soulGold -= amount; await save(); return true; }
+  async function spendCore(amount) { await init(); amount = Math.max(0, Math.floor(Number(amount) || 0)); if (meta.soulCore < amount) return false; meta.soulCore -= amount; await save(); return true; }
   async function addGrantCurrency(id, gold, core) {
     await init();
     meta.grants = meta.grants || {};
@@ -191,6 +193,6 @@ window.GameModules.progression = (() => {
     return { gold: meta.soulGold, core: meta.soulCore, applied: true };
   }
   function data() { return meta; }
-  return { init, render, renderTree, applyClass, estimateRunReward, estimateCoreReward, addRunReward, addCurrency, addGrantCurrency, data, dlcOwned, buyDlc };
+  return { init, render, renderTree, applyClass, estimateRunReward, estimateCoreReward, addRunReward, addCurrency, spendGold, spendCore, addGrantCurrency, data, dlcOwned, buyDlc };
 })();
 window.Progression = window.GameModules.progression;

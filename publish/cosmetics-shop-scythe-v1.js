@@ -1,0 +1,43 @@
+(function(){
+'use strict';
+const KEY='arcane-cosmetics-v1',SHOP_GOLD=2000,COSTUME_CORE=200;
+const CLASS_CN={paladin:'圣骑士',mage:'大魔法师',ranger:'游侠',lewdSaintess:'淫靡圣女',scytheMaiden:'琦琦'};
+const SHOP_COSTUMES=[];
+const SPECIAL={lewdSaintess:[{id:'rift40',name:'秘境圣女',unlock:'通关秘境40层',frames:[]}]};
+let state={owned:{},selected:{}},ready=false,imgs={};
+const $=id=>document.getElementById(id),esc=v=>String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const timeout=(p,ms=1200)=>Promise.race([p,new Promise((_,r)=>setTimeout(()=>r(new Error('timeout')),ms))]);
+function localGet(){try{let r=localStorage.getItem(KEY);return r?JSON.parse(r):null}catch(_){return null}}
+function localPut(v){try{localStorage.setItem(KEY,JSON.stringify(v))}catch(_){}}
+async function kvGet(){let l=localGet();if(l)return l;try{return (await timeout(window.dzmm.kv.get(KEY)))?.value||null}catch(_){return null}}
+async function kvPut(v){localPut(v);try{await timeout(window.dzmm.kv.put(KEY,v))}catch(_){}}
+function norm(v){let out={owned:{},selected:{}};for(const c of Object.keys(CLASS_CN)){out.owned[c]={default:true,...(v?.owned?.[c]||{})};out.selected[c]=out.owned[c][v?.selected?.[c]]?v.selected[c]:'default'}return out}
+async function init(){if(ready)return state;state=norm(await kvGet());ready=true;return state}
+async function save(){await kvPut(state)}
+function allCostumes(cls){return [{id:'default',name:'默认',cls,free:true}].concat(SHOP_COSTUMES.filter(x=>x.cls===cls),SPECIAL[cls]||[])}
+function costume(cls,id){return allCostumes(cls).find(x=>x.id===id)||allCostumes(cls)[0]}
+function owned(cls,id){return !!state.owned?.[cls]?.[id]}
+function selected(cls){return costume(cls,state.selected?.[cls]||'default')}
+function frameSrc(c,i){return c.frames?.[i]||''}
+function imgFor(src){if(!src)return null;if(!imgs[src]){imgs[src]=new Image();imgs[src].src=src}return imgs[src]}
+function drawSelected(p,x,y,size,row,frame,a=1){let c=selected(p.cls);if(!c||c.id==='default')return false;let img=imgFor(frameSrc(c,row*6+frame));if(!img?.complete||!img.naturalWidth)return false;let ratio=img.height/img.width,w=size,h=size*ratio;ctx.save();ctx.globalAlpha=a;ctx.translate(x,y);ctx.drawImage(img,-w/2,-h/2,w,h);ctx.restore();return true}
+function preview(cls,c){if(c.id==='default')return AS?.[CLASSES?.[cls]?.card]||'';return frameSrc(c,0)||AS?.[CLASSES?.[cls]?.card]||''}
+function ensureUi(){if($('shopBtn'))return;document.querySelector('.game')?.insertAdjacentHTML('beforeend',`<button id="shopBtn" class="shopBtn" type="button">商店</button><section id="shopModal" class="overlay hidden"><div class="panel shopPanel"><h1 class="title">奥术商店</h1><p class="sub" id="shopSub"></p><div id="shopBody" class="shopGrid"></div><p class="sub"><button id="shopClose" class="ghostBtn" type="button">关闭</button></p></div></section><section id="costumeModal" class="overlay hidden"><div class="panel shopPanel"><h1 class="title" id="costumeTitle">时装</h1><p class="sub" id="costumeSub"></p><div id="costumeBody" class="costumeGrid"></div><p class="sub"><button id="costumeClose" class="ghostBtn" type="button">关闭</button></p></div></section>`);
+$('shopBtn').onclick=openShop;$('shopClose').onclick=()=>{$('shopModal').classList.add('hidden');if(S)S.paused=false};$('costumeClose').onclick=()=>{$('costumeModal').classList.add('hidden');if(S)S.paused=false};}
+function moneyText(){let m=Progression?.data?.()||{},r=Rift?.data?.()||{};return `灵魂金币：${m.soulGold||0}　魔核：${m.soulCore||0}　秘境门票：${r.keys||0}`}
+async function openShop(){await init();await Progression.init();await Rift.init();renderShop();$('shopModal').classList.remove('hidden');if(S)S.paused=true}
+function renderShop(){let costumes=SHOP_COSTUMES;$('shopSub').textContent=moneyText();$('shopBody').innerHTML=`<button class="shopCard" data-buy-ticket><h2>秘境门票</h2><p>购买 1 张深渊秘境门票。</p><b>${SHOP_GOLD} 灵魂金币</b></button><div class="shopCard muted"><h2>宠物</h2><p>宠物系统预留，后续加入。</p><b>即将开放</b></div>`+(costumes.length?costumes.map(c=>shopCostumeHtml(c)).join(''):'<div class="shopCard muted"><h2>时装</h2><p>时装商店已接入，提供素材路径后会在这里上架。</p><b>待添加</b></div>')}
+function shopCostumeHtml(c){let own=owned(c.cls,c.id);return `<button class="shopCard costume" data-shop-costume="${esc(c.cls)}:${esc(c.id)}"><img src="${esc(preview(c.cls,c))}"><h2>${esc(c.name)}</h2><p>${esc(CLASS_CN[c.cls]||c.cls)}</p><b>${own?'已拥有':COSTUME_CORE+' 魔核'}</b></button>`}
+async function buyTicket(){let ok=await Progression.spendGold(SHOP_GOLD);if(!ok){showNotice?.('灵魂金币不足');renderShop();return}await Rift.addKeys(1);showNotice?.('秘境门票 +1');renderProgression?.();renderShop()}
+async function buyCostume(cls,id){let c=costume(cls,id);if(!c||owned(cls,id))return;if(!await Progression.spendCore(COSTUME_CORE)){showNotice?.('魔核不足');return}state.owned[cls][id]=true;state.selected[cls]=id;await save();showNotice?.('时装已购买并穿戴');renderProgression?.();renderShop();openCostume(cls)}
+async function openCostume(cls){await init();let list=allCostumes(cls);$('costumeTitle').textContent=`${CLASS_CN[cls]||cls} · 时装`;$('costumeSub').textContent=moneyText();$('costumeBody').innerHTML=list.map(c=>{let own=owned(cls,c.id),sel=state.selected[cls]===c.id,has=c.id==='default'||!!frameSrc(c,0);let sale=SHOP_COSTUMES.some(x=>x.cls===cls&&x.id===c.id);return `<button class="costumeCard ${sel?'selected':''} ${own?'owned':'locked'}" data-costume-pick="${esc(cls)}:${esc(c.id)}" ${(!own&&!sale)||(!has&&c.id!=='default')?'disabled':''}><img src="${esc(preview(cls,c))}"><h2>${esc(c.name)}</h2><p>${own?sel?'已穿戴':'点击穿戴':sale?COSTUME_CORE+' 魔核购买':(c.unlock||'未解锁')}</p>${!has&&c.id!=='default'?'<small>素材待接入</small>':''}</button>`}).join('');$('costumeModal').classList.remove('hidden');if(S)S.paused=true}
+async function pickCostume(cls,id){let c=costume(cls,id),sale=SHOP_COSTUMES.some(x=>x.cls===cls&&x.id===id);if(!owned(cls,id)){if(sale)return buyCostume(cls,id);return}state.selected[cls]=id;await save();showNotice?.('已切换时装：'+c.name);openCostume(cls)}
+function addIcons(){document.querySelectorAll('.classCard[data-c]').forEach(card=>{if(card.querySelector('.costumeIcon'))return;card.insertAdjacentHTML('afterbegin',`<span class="costumeIcon" data-costume-class="${card.dataset.c}" title="时装">服</span>`)});}
+function patchCards(){if(!window.renderClassCards||window.renderClassCards._costume)return;let base=window.renderClassCards;window.renderClassCards=function(){let r=base.apply(this,arguments);addIcons();return r};window.renderClassCards._costume=true;addIcons()}
+function unlockRift40(cls){if(cls!=='lewdSaintess'||owned(cls,'rift40'))return;state.owned.lewdSaintess.rift40=true;save();showNotice?.('通关秘境40层：圣女时装已解锁')}
+function patchRift(){if(!window.Rift?.finishRun||window.Rift.finishRun._costume)return;let base=window.Rift.finishRun;window.Rift.finishRun=async function(r){let out=await base.apply(this,arguments);await init();if(r?.win&&Math.floor(r.layer||0)>=40)unlockRift40(r.classId);return out};window.Rift.finishRun._costume=true}
+function bind(){document.addEventListener('click',e=>{let ci=e.target.closest('[data-costume-class]');if(ci){e.preventDefault();e.stopPropagation();openCostume(ci.dataset.costumeClass);return}let bt=e.target.closest('[data-buy-ticket]');if(bt){buyTicket();return}let sc=e.target.closest('[data-shop-costume]');if(sc){let [c,id]=sc.dataset.shopCostume.split(':');buyCostume(c,id);return}let cp=e.target.closest('[data-costume-pick]');if(cp){let [c,id]=cp.dataset.costumePick.split(':');pickCostume(c,id)}} ,true)}
+function boot(){ensureUi();init().then(()=>{patchCards();patchRift()});bind()}
+window.Cosmetics={init,allCostumes,drawSelected,openCostume,registerCostume(c){SHOP_COSTUMES.push(c);return c}};
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+})();
