@@ -1,7 +1,7 @@
 {
   "version": 1,
   "createdAt": "2026-06-13T14:08:29Z",
-  "updatedAt": "2026-06-16T17:46:16Z",
+  "updatedAt": "2026-06-17T01:42:15Z",
   "assets": [
     {
       "name": "player-paladin",
@@ -2375,6 +2375,32 @@
       },
       "traceId": "trace_mqgxj9k7_n6ih2ayb",
       "createdAt": "2026-06-16T17:43:13Z"
+    },
+    {
+      "name": "equipment-paladin-sacrifice-sheet",
+      "status": "success",
+      "path": "publish/assets/generated/paladin/equipment-paladin-sacrifice-sheet.dbb94274.webp",
+      "contentHash": "dbb94274",
+      "revisedPrompt": "Create a single fantasy RPG equipment icon sprite sheet on a 1024x1024 square canvas, exactly 6 columns by 6 rows, with each icon centered inside an equal grid cell and consistent scale. Style reference: ornate golden RPG equipment icons, high detail, clean dark outline, high contrast, readable at small size, polished game-inventory art. Background: dark navy transparent-looking inventory backdrop with subtle square cell separation/guides, no visible text, no labels, no watermark.\n\nLayout: 36 total icons arranged in 6 rows x 6 columns.\nTop 3 rows are paladin class set equipment icons arranged left-to-right by slot per row: weapon, helm, chest armor, amulet, ring, boots.\nRow 1 theme: Aureate Guardian, holy gold shield-paladin set. Icons: sun sword, crown helm, heavy gold plate, radiant amulet, gold ring, armored greaves.\nRow 2 theme: Thorn Bulwark, defensive thorn and ruby paladin set. Icons: spiked mace, thorn helm, red-gold bulwark armor, thorn charm, ruby ring, heavy sabatons.\nRow 3 theme: Dawn Judgment, white-gold judgment paladin set. Icons: holy lance, dawn crown, white-gold armor, dawn pendant, judgment ring, white armored boots.\n\nBottom 3 rows are sacrifice relic icons, still 18 cells total and aligned to the same grid, varied but consistent holy-dark fantasy style. Fill rows 4-6 with these 18 relics in order left-to-right, row by row: glowing marrow vial, thorn blood crystal, dawn judgment core, star shell, ember dragon heart, storm bottle, beast bone, eclipse fang, venom egg, crimson chalice, violet incense, rose mirror core, moon petal, blood scythe bone, black soul feather, abyss heart core, fate clock disk, greedy offering cup.\n\nImportant visual constraints: no characters, only equipment and relic icons; each icon large but not cropped, centered with small padding; ornate gold accents for equipment, darker sacrificial relic tones with holy-dark glow accents; clean readable silhouettes; no text, no numbers, no labels, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1254x1254",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 0,
+        "edgeGreenBiasPct": 0,
+        "verdict": "FAIL"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 2882623,
+      "finalBytes": 371240,
+      "usage": {
+        "inputTokens": 456,
+        "outputImageTokens": 2058
+      },
+      "traceId": "trace_mqhehn24_faw7kkot",
+      "createdAt": "2026-06-17T01:42:15Z"
     }
   ]
 }
