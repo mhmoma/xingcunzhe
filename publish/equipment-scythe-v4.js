@@ -1,7 +1,8 @@
 window.GameModules = window.GameModules || {};
 window.GameModules.equipment = (() => {
   const KEY = 'arcane-equipment-v2';
-  const ICON_SHEETS = { gold:'./assets/generated/equipment-icons-gold-rpg-sheet.8bac9168.webp', unique:'./assets/generated/equipment-icons-unique-rpg-sheet.b1783e31.webp' };
+  const GOLD_ICON_PREFIX = './assets/generated/huangjin/d98add39-dbc9-4803-ad99-c075894fe454_';
+  const UNIQUE_ICON_PREFIX = './assets/generated/anjin/9f0f72b8-ae78-49b3-93d5-0415d37c6b00_';
   const SET_ICON_PREFIX = { setPaladin:'./assets/generated/paladin/cccb496c-393b-4a20-9ed8-245883afa2b3_', setMage:'./assets/generated/mage/7cfaf443-aece-4533-b56a-d6e8c72a9734_', setRanger:'./assets/generated/ranger/695e9072-a6b9-41c7-b65a-423267d0669a_', setSaintess:'./assets/generated/saintess/f9571423-469d-490d-868a-2a33dcaa326c_', setScythe:'./assets/generated/scythe-maiden/afb7751d-ed19-476d-ab4e-c4a492c79c92_' };
   const SLOTS = ['weapon','helm','chest','amulet','ring','boots'];
   const SLOT_CN = { weapon:'武器', helm:'头盔', chest:'胸甲', amulet:'项链', ring:'戒指', boots:'靴子' };
@@ -73,9 +74,10 @@ window.GameModules.equipment = (() => {
     return null;
   }
   const pieceNames = { weapon:'武器', helm:'冠冕', chest:'衣甲', amulet:'坠饰', ring:'戒环', boots:'足具' };
-  const toItem = (r, sheet, i) => ({ baseId:r[0], name:r[1], rarity:sheet, slot:r[2], stats:r[3], resists:r[4], effect:r[5]||'', icon:{sheet:ICON_SHEETS[sheet], index:i, rect:sheet==='unique'?UNIQUE_RECTS[i]:null} });
+  const iconPath = (prefix, i) => `${prefix}${Math.floor(i/6)+1}_${i%6+1}.png`;
+  const toItem = (r, sheet, i) => ({ baseId:r[0], name:r[1], rarity:sheet, slot:r[2], stats:r[3], resists:r[4], effect:r[5]||'', icon:{src:iconPath(sheet==='gold'?GOLD_ICON_PREFIX:UNIQUE_ICON_PREFIX,i), index:i} });
   const gold = GOLD.map((r,i)=>toItem(r,'gold',i)), uniques = UNIQUES.map((r,i)=>toItem(r,'unique',i));
-  const sets = SET_FAMILIES.flatMap((f,fi)=>SLOTS.map((slot,i)=>({ baseId:`set-${f[1]}-${slot}`, name:`${f[2]}·${pieceNames[slot]}`, rarity:'set', class:f[0], setId:f[1], setName:f[2], slot, stats:{...Object.fromEntries(Object.entries(f[4]).filter(([k])=>!RES.includes(k))), [slot==='weapon'?'damage':slot==='boots'?'move':slot==='ring'?'atkSpeed':slot==='amulet'?'range':'hp']:.06}, resists:Object.fromEntries(Object.entries(f[4]).filter(([k])=>RES.includes(k))), icon:{src:`${SET_ICON_PREFIX[f[3]]}${fi%3+1}_${i+1}.png`, sheet:ICON_SHEETS[f[3]], index:(fi%3)*6+i, rect:rectFor(f[3], (fi%3)*6+i)} })));
+  const sets = SET_FAMILIES.flatMap((f,fi)=>SLOTS.map((slot,i)=>({ baseId:`set-${f[1]}-${slot}`, name:`${f[2]}·${pieceNames[slot]}`, rarity:'set', class:f[0], setId:f[1], setName:f[2], slot, stats:{...Object.fromEntries(Object.entries(f[4]).filter(([k])=>!RES.includes(k))), [slot==='weapon'?'damage':slot==='boots'?'move':slot==='ring'?'atkSpeed':slot==='amulet'?'range':'hp']:.06}, resists:Object.fromEntries(Object.entries(f[4]).filter(([k])=>RES.includes(k))), icon:{src:`${SET_ICON_PREFIX[f[3]]}${fi%3+1}_${i+1}.png`, index:(fi%3)*6+i} })));
   const all = [...gold,...uniques,...sets];
   const DEF_KEYS = ['hp','armor','move','pickup','gold','regen'];
   const OFF_KEYS = ['damage','cooldown','atkSpeed','range','crit','skillLv'];

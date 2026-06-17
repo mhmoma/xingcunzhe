@@ -1409,58 +1409,6 @@
       "createdAt": "2026-06-15T03:44:19Z"
     },
     {
-      "name": "equipment-icons-gold-rpg-sheet",
-      "status": "success",
-      "path": "publish/assets/generated/equipment-icons-gold-rpg-sheet.8bac9168.webp",
-      "contentHash": "8bac9168",
-      "revisedPrompt": "Create a high-detail fantasy RPG equipment icon SPRITE SHEET, matching ornate mobile RPG item icon aesthetics. Composition: EXACTLY 6 columns by 6 rows, 36 equal square cells, one centered equipment icon per cell, consistent scale and padding, row-major order from left to right, top to bottom. Each cell should contain a single polished icon with ornate red and gold gemstones, metallic gold trim, dark clean outline, glossy highlights, rich shadows, transparent/icon-like presentation, bright readable silhouette, top-down 3/4 icon rendering, no text, no labels, no numbers, no watermark.\n\nIMPORTANT: The 6th weapon must clearly be a DAGGER, not a staff. The 2nd weapon must clearly be a STAFF, not a dagger.\n\nCell contents in row-major order:\nRow 1 weapons: 1 golden sun sword/blade, 2 meteor fire mage staff, 3 hawk hunting bow, 4 crystal mace/scepter, 5 dragon engraved battle axe, 6 moonlight short dagger.\nRow 2 helmets: 1 golden guardian crown, 2 ember fire visor helmet, 3 frost hood, 4 heavy stone helmet, 5 void gold mask, 6 rose veil.\nRow 3 chest armor: 1 solar gilded plate armor, 2 ember mage robe, 3 golden hunter leather armor, 4 deep gold carapace armor, 5 mist shadow robe, 6 holy vessel ceremonial dress.\nRow 4 amulets: 1 dawn holy amulet, 2 arcane golden core pendant, 3 molten fire heart pendant, 4 icy moon teardrop pendant, 5 bone golden charm, 6 rose heart pendant.\nRow 5 rings: 1 fury red gold ring, 2 focus arcane ring, 3 guardian shield ring, 4 moon shadow ring, 5 greed treasure ring, 6 rose gold ring.\nRow 6 boots: 1 sun forged greaves, 2 wind golden boots, 3 frost boots, 4 void walking boots, 5 stone sabaton boots, 6 rose slippers.\n\nBackground: strictly a SOLID UNIFORM #00B140 chroma key flat color filling 100% of pixels not occupied by icons. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background exactly like green screen compositing. Make the icon grid clean and evenly spaced, with each icon centered in its square cell. Maintain consistent perspective and scale across all 36 icons.",
-      "model": "gpt-image-2",
-      "size": "1024x1024",
-      "wantsTransparent": true,
-      "chromaKey": {
-        "color": "#00B140",
-        "alphaZeroPct": 54.1,
-        "edgeGreenBiasPct": 0,
-        "verdict": "PASS"
-      },
-      "outputFormat": "webp",
-      "compressionProfile": "lossy_q85_alpha",
-      "originalBytes": 1952086,
-      "finalBytes": 299448,
-      "usage": {
-        "inputTokens": 529,
-        "outputImageTokens": 1756
-      },
-      "traceId": "trace_mqf8adm0_2liws545",
-      "createdAt": "2026-06-15T13:09:17Z"
-    },
-    {
-      "name": "equipment-icons-unique-rpg-sheet",
-      "status": "success",
-      "path": "publish/assets/generated/equipment-icons-unique-rpg-sheet.b1783e31.webp",
-      "contentHash": "b1783e31",
-      "revisedPrompt": "High-detail dark-gold unique fantasy RPG equipment icon sprite sheet, ornate mobile RPG item icon style. Create a 6 columns by 6 rows sprite sheet with equal square cells and one centered icon per cell. Only the first 18 cells contain icons in row-major order; remaining cells are empty transparent/chroma background. Each occupied cell must clearly match the item type and name concept below, with polished gem-encrusted fantasy equipment icon rendering, dark gold metal, red/purple gems, black shadows, glossy highlights, clean dark outline, no text, no labels, no numbers, no watermark. Use a SOLID UNIFORM #00B140 chroma key flat color background filling all unused pixels; no gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background exactly like green screen compositing.\n\nRow 1: 1 void lantern pendant, 2 dragon heart chest armor/core, 3 frost moon crown helmet, 4 holy nail war hammer/mace weapon, 5 thunder long bow weapon, 6 blood pact heavy plate armor.\nRow 2: 1 reverse clock ring, 2 greedy traveler boots, 3 rose mirror amulet, 4 abyss mask helmet, 5 golem soul ring/core, 6 starfall tome weapon book.\nRow 3: 1 demon horn helmet, 2 pale wheel ring, 3 pilgrim faith boots, 4 endless quiver amulet, 5 plague bell weapon, 6 sun remnant shield chest armor.\n\nMake weapons clearly weapons, boots clearly boots, rings clearly rings, helmets clearly helmets, armor clearly armor. Icon-centric composition, centered in each cell, consistent scale and style across all icons. No extra cells populated beyond the first 18.",
-      "model": "gpt-image-2",
-      "size": "1024x1024",
-      "wantsTransparent": true,
-      "chromaKey": {
-        "color": "#00B140",
-        "alphaZeroPct": 69.4,
-        "edgeGreenBiasPct": 0,
-        "verdict": "PASS"
-      },
-      "outputFormat": "webp",
-      "compressionProfile": "lossy_q85_alpha",
-      "originalBytes": 1541737,
-      "finalBytes": 178840,
-      "usage": {
-        "inputTokens": 369,
-        "outputImageTokens": 1756
-      },
-      "traceId": "trace_mqf8cv3e_ttpyi1sz",
-      "createdAt": "2026-06-15T13:11:01Z"
-    },
-    {
       "name": "ui-medieval-scrollbar",
       "status": "success",
       "path": "publish/assets/generated/ui-medieval-scrollbar.aa5a7d11.webp",
