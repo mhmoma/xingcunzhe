@@ -50,7 +50,7 @@ window.GameModules.progression = (() => {
   const COST_GROWTH = 1.72;
   const DEFAULT = { soulGold: 0, soulCore: 0, grants: {}, classes: Object.fromEntries(Object.keys(CLASSES).map(k => [k, { upgrades: {}, unlocks: {} }])) };
   const ADMIN_GRANTS = { '03b30ae3-a2da-440b-9333-58dd490507ea': { id: 'admin-core-20260615', soulCore: 200 } };
-  let meta = clone(DEFAULT), ready = false, cloudWarned = false;
+  let meta = clone(DEFAULT), ready = false;
 
   function clone(v) { return JSON.parse(JSON.stringify(v)); }
   function clsData(c) { return meta.classes[c] || (meta.classes[c] = { upgrades: {}, unlocks: {} }); }
@@ -59,20 +59,8 @@ window.GameModules.progression = (() => {
     const spec = SPEC[c].map((v, i) => ({ id: v[0], name: v[1], desc: v[2], max: v[3], base: v[4], x: v[5], y: v[6], kind: v[7], skills: v[8], core: v[9] || 0, pre: v[10] || (i === 3 ? SPEC[c][1][0] : 'damage') }));
     return base.concat(spec);
   }
-  const timeout = (p, ms = 1200) => Promise.race([p, new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), ms))]);
-  function localGet(key) { try { const raw = localStorage.getItem(key); return raw ? JSON.parse(raw) : null; } catch (_) { return null; } }
-  function localPut(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); } catch (_) {} }
-  async function kvGet(key) {
-    const local = localGet(key);
-    if (local) return local;
-    try { return (await timeout(window.dzmm.kv.get(key)))?.value ?? null; }
-    catch (_) { return null; }
-  }
-  async function kvPut(key, value) {
-    localPut(key, value);
-    try { await timeout(window.dzmm.kv.put(key, value)); }
-    catch (e) { if (!cloudWarned) { cloudWarned = true; window.dzmm?.toast?.warning?.('永久强化云端保存失败，已暂存本机'); console.warn('永久强化云端保存失败:', e.code, e.message); } }
-  }
+  async function kvGet(key) { return await StorageSync.get(key); }
+  async function kvPut(key, value) { await StorageSync.put(key, value, '永久强化'); }
   function normalize(data) {
     const base = clone(DEFAULT); if (!data || typeof data !== 'object') return base;
     base.soulGold = Math.max(0, Math.floor(Number(data.soulGold) || 0));
