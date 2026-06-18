@@ -60,8 +60,8 @@ window.GameModules.redeem = (() => {
     if (submitBtn) submitBtn.disabled = true;
     try {
       message('兑换中，请稍候…');
-      let r;
-      if (LOCAL_CODES[code]) r = { applied: true, reward: LOCAL_CODES[code], message: LOCAL_CODES[code].message };
+      let r, localKey = Object.keys(LOCAL_CODES).find(k => k.toLowerCase() === code.toLowerCase());
+      if (localKey) r = { applied: true, reward: LOCAL_CODES[localKey], message: LOCAL_CODES[localKey].message };
       else r = await dzmm.fn.invoke('redeem', { code });
       if (!r.applied) { message(r.message || '该兑换码已使用过'); return; }
       const result = await applyReward(r.reward);
