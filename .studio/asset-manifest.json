@@ -1,7 +1,7 @@
 {
   "version": 1,
   "createdAt": "2026-06-13T14:08:29Z",
-  "updatedAt": "2026-06-18T02:11:05Z",
+  "updatedAt": "2026-06-18T08:45:07Z",
   "assets": [
     {
       "name": "player-paladin",
@@ -2157,6 +2157,72 @@
       },
       "traceId": "trace_mqiv410j_exliqmbe",
       "createdAt": "2026-06-18T02:11:05Z"
+    },
+    {
+      "name": "cover-rift-classes",
+      "status": "success",
+      "path": "publish/assets/generated/cover-rift-classes.3375a741.webp",
+      "contentHash": "3375a741",
+      "revisedPrompt": "Dark ornate fantasy mobile game cover art in the style of a polished 2D dark fantasy dungeon crawler, highly detailed but clean readable silhouettes, vertical portrait phone cover composition. Deep navy and violet dungeon interior with gold trim, gothic chains, and a glowing purple crystal portal to a Greater Rift centered in the composition. Foreground: five small heroic fantasy class silhouettes standing together, clearly distinct: a holy paladin with shield and golden aura, a purple archmage holding an arcane orb, an agile ranger with twin axes and a green cloak, a seductive saintess healer casting rose-violet magic, and a scythe maiden wielding a crescent scythe with moon glow. Background: a huge abyss guardian boss emerging from the rift, with elite monsters and floating loot shards around it, strong endgame dungeon challenge atmosphere. High contrast, dramatic lighting, soft glow, ornate gothic fantasy details, cinematic composition. Keep the bottom-right area relatively open and usable for a menu panel overlay. No text, no logo, no watermark. Wide-feeling composition within a vertical portrait frame, optimized for mobile cover art.",
+      "model": "gpt-image-2",
+      "size": "1024x1536",
+      "wantsTransparent": false,
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q80_opaque",
+      "originalBytes": 2796090,
+      "finalBytes": 220032,
+      "usage": {
+        "inputTokens": 230,
+        "outputImageTokens": 1372
+      },
+      "traceId": "trace_mqj9021g_7v7czipb",
+      "createdAt": "2026-06-18T08:42:11Z"
+    },
+    {
+      "name": "loading-rift-run",
+      "status": "success",
+      "path": "publish/assets/generated/loading-rift-run.ced8ae81.webp",
+      "contentHash": "ced8ae81",
+      "revisedPrompt": "Dark fantasy loading screen background for a mobile arcade survivor game, matching an ornate Arcane Survivors style. Wide composition. A long gothic dungeon corridor leading toward a luminous purple Greater Rift portal at the far end, chains and black stone arches overhead, violet crystals embedded along the walls, faint blue fire braziers, abyss fog, tiny silhouettes of heroes running toward the portal in the distance. Leave enough dark empty space in the lower center for a loading panel overlay. High contrast navy, purple, and gold palette. Polished 2D illustration, dramatic depth, cinematic lighting, atmospheric, no text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1536x1024",
+      "wantsTransparent": false,
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q80_opaque",
+      "originalBytes": 2516170,
+      "finalBytes": 164314,
+      "usage": {
+        "inputTokens": 133,
+        "outputImageTokens": 1372
+      },
+      "traceId": "trace_mqj94w07_vwcl9vjf",
+      "createdAt": "2026-06-18T08:43:38Z"
+    },
+    {
+      "name": "loading-runner",
+      "status": "success",
+      "path": "publish/assets/generated/loading-runner.365d7ea2.webp",
+      "contentHash": "365d7ea2",
+      "revisedPrompt": "Tiny chibi fantasy runner loading mascot sprite for a dark fantasy arcade survivor game, side view, heroic small adventurer sprinting with cloak and glowing weapon, readable silhouette at small UI size, cute but gothic, gold and violet accents, clean dark outline, centered full body. Strictly on a SOLID UNIFORM #00B140 chroma key flat color background filling every pixel not occupied by the character. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background, exactly like a green screen used for VFX compositing. No text, no logo, no watermark.",
+      "model": "gpt-image-2",
+      "size": "1254x1254",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 82.2,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 1253270,
+      "finalBytes": 65596,
+      "usage": {
+        "inputTokens": 136,
+        "outputImageTokens": 2058
+      },
+      "traceId": "trace_mqj96snq_sexerwn6",
+      "createdAt": "2026-06-18T08:45:07Z"
     }
   ]
 }
