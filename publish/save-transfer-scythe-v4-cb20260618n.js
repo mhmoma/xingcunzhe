@@ -4,7 +4,8 @@ window.GameModules.saveTransfer = (() => {
   const BASE_KEYS = ['arcane-meta-v3','arcane-season-state-v2','arcane-rift-v1','arcane-cosmetics-v1','arcane-redeem-v2','arcane-layout-v2'];
 
   function seasonKey(base){return window.Season?.key ? Season.key(base) : base}
-  function keys(){return [...BASE_KEYS, seasonKey('arcane-save-v2'), seasonKey('arcane-equipment-v2')]}
+  function runSaveKey(){return seasonKey('arcane-save-v2')}
+  function keys(){return [...BASE_KEYS, seasonKey('arcane-equipment-v2')]}
   async function kvGet(k){return await StorageSync.get(k)}
   async function kvPut(k,v){await StorageSync.put(k,v,'导入存档')}
   function enc(obj){return btoa(unescape(encodeURIComponent(JSON.stringify(obj))))}
@@ -19,6 +20,7 @@ window.GameModules.saveTransfer = (() => {
     if (k === 'arcane-redeem-v2' || k === 'arcane-layout-v2') return true;
     return true;
   }
+  async function clearRunSave(){await kvPut(runSaveKey(),{ended:true,at:Date.now()})}
   async function refreshRuntimeData(){
     await window.Season?.reload?.();
     await window.Progression?.reload?.();
@@ -44,6 +46,7 @@ window.GameModules.saveTransfer = (() => {
       count++;
     }
     if (!count) throw new Error('存档文本没有可导入的数据');
+    await clearRunSave();
     await refreshRuntimeData();
     return true;
   }
@@ -54,7 +57,7 @@ window.GameModules.saveTransfer = (() => {
   }
   async function doImport(){
     const box=document.getElementById('saveTransferText'),text=box?.value||'';
-    try{await importText(text);msg('导入成功，请关闭窗口后点击“读取存档”。',true)}
+    try{await importText(text);msg('导入成功，局内战斗进度已清空，可从封面重新开始。',true)}
     catch(e){console.error('导入存档失败:',e.code,e.message,e.stack);msg(e.message||'导入失败，存档文本无效')}
   }
   function open(){document.getElementById('saveTransferModal')?.classList.remove('hidden');msg('')}
