@@ -45,6 +45,7 @@ window.GameModules.equipment = (() => {
   function normalize(d){let base={items:[],equipped:{},dust:0}; if(!d||typeof d!=='object')return base; base.items=Array.isArray(d.items)?d.items.filter(x=>x&&x.uid&&x.baseId).slice(0,160).map(normalizeItemValues):[]; base.equipped=d.equipped&&typeof d.equipped==='object'?d.equipped:{}; base.dust=Math.max(0,Math.floor(Number(d.dust)||0)); return base;}
   function storeKey(){return window.Season?.key?Season.key(KEY):KEY}
   async function init(){let k=storeKey();if(ready&&activeKey===k)return meta; activeKey=k; migrated=false; meta=normalize(await kvGet(k)); ready=true; if(migrated)await save(); return meta;}
+  async function reload(){ready=false;activeKey='';migrated=false;meta={items:[],equipped:{},dust:0};return await init()}
   async function save(){await kvPut(storeKey(),meta)}
   function baseById(id){return all.find(x=>x.baseId===id)}
   function requiredLevel(lv=1,rarity='gold'){let cap=window.Season?.cap?Season.cap():20,bonus=rarity==='unique'?2:rarity==='set'?1:0;return Math.min(cap,Math.max(1,Math.ceil((lv||1)+bonus)))}
@@ -86,6 +87,6 @@ window.GameModules.equipment = (() => {
   function iconHtml(it){let r=it.icon?.rect,s=iconScale(it);if(it.icon?.src)return `<span class="eqIcon" style="background-image:url('${it.icon.src}');background-size:contain;background-position:center;background-repeat:no-repeat;transform:scale(${s})"></span>`;if(r){let fit=34/Math.max(r.w,r.h),bw=Math.round((r.sw||1024)*fit),bh=Math.round((r.sh||1024)*fit);return `<span class="eqIcon" style="background-image:url('${it.icon?.sheet||''}');background-size:${bw}px ${bh}px;background-position:${Math.round(-r.x*fit)}px ${Math.round(-r.y*fit)}px;background-repeat:no-repeat;transform:scale(${s})"></span>`}let i=it.icon?.index||0,x=i%6,y=Math.floor(i/6),rows=iconRows(it),step=100/(rows-1),oy=iconYOffset(it);return `<span class="eqIcon" style="background-image:url('${it.icon?.sheet||''}');background-size:600% ${rows*100}%;background-position:${x*20}% ${y*step+oy}%;background-repeat:no-repeat;transform:scale(${s})"></span>`}
   function data(){return meta}
   function setBonus(id){return D.SET_BONUS[id]||null}
-  return { init, save, data, SLOTS, SLOT_CN, CLS_CN, RES_CN, all, rollDrop, addItem, equip, unequip, discard, discardMany, rerollAffix, rerollCost, disenchantValue, equippedItems, stats, hydrate, itemText, iconHtml, setBonus, requiredLevel, canEquip };
+  return { init, reload, save, data, SLOTS, SLOT_CN, CLS_CN, RES_CN, all, rollDrop, addItem, equip, unequip, discard, discardMany, rerollAffix, rerollCost, disenchantValue, equippedItems, stats, hydrate, itemText, iconHtml, setBonus, requiredLevel, canEquip };
 })();
 window.Equipment = window.GameModules.equipment;

@@ -29,6 +29,7 @@ window.GameModules.season = (() => {
   async function kvPut(k,v){await StorageSync.put(k,v,'赛季')}
   function normalize(v){let s=v&&typeof v==='object'?v:{};s.currentSeason=CURRENT;s.started=s.started&&typeof s.started==='object'?s.started:{};s.seasons=s.seasons&&typeof s.seasons==='object'?s.seasons:{};return s}
   async function init(){if(ready)return state;state=normalize(await kvGet(KEY));ready=true;return state}
+  async function reload(){ready=false;state=null;return await init()}
   function cfg(){return CONFIG[CURRENT]}
   function started(){return !!state?.started?.[CURRENT]}
   function season(){return state?.seasons?.[CURRENT]||{level:1,xp:0,totalXp:0}}
@@ -42,6 +43,6 @@ window.GameModules.season = (() => {
   async function addRunXp(run){await init();if(!started())return null;let cur=season(),gain=Math.max(10,Math.floor((run.kills||0)*1+(run.bossKills||0)*85+Math.floor((run.time||0)/10)*8+(run.win?500:0)+(run.endlessLayer||0)*180));cur.level=level();cur.xp=xp()+gain;cur.totalXp=(cur.totalXp||0)+gain;let ups=0;while(cur.level<cap()&&cur.xp>=need(cur.level)){cur.xp-=need(cur.level);cur.level++;ups++}state.seasons[CURRENT]=cur;await save();return {gain,level:cur.level,xp:cur.xp,next:need(cur.level),ups}}
   async function grantLevel(target){await init();if(!started())await start();let cur=season(),old=level(),to=Math.min(cap(),Math.max(old,Math.floor(Number(target)||old)));cur.level=to;cur.xp=0;cur.totalXp=Math.max(cur.totalXp||0,0);state.seasons[CURRENT]=cur;await save();return{level:cur.level,ups:Math.max(0,to-old)}}
   function introHtml(){let c=cfg(),story=(c.story||[]).map((x,i)=>`<p class="seasonStoryLine" style="--i:${i}">${x}</p>`).join(''),rules=(c.intro||[]).map(x=>`<p>${x}</p>`).join(''),bg=c.promo?` style="--season-bg:url('${c.promo}')"`:'';return `<div class="seasonBg"${bg}></div><div class="seasonIntroHead"><h1 class="title">${c.introTitle}</h1><p class="sub">主题：${c.theme}</p></div><div class="seasonStoryBox"><b>赛季背景播放中</b>${story}</div><div class="seasonRules">${rules}</div><div class="seasonStartBar"><button id="seasonStartBtn" class="startBtn" type="button">开启${c.name}</button></div>`}
-  return { CURRENT, CONFIG, init, started, start, cfg, season, level, xp, cap, need, key, addRunXp, grantLevel, introHtml };
+  return { CURRENT, CONFIG, init, reload, started, start, cfg, season, level, xp, cap, need, key, addRunXp, grantLevel, introHtml };
 })();
 window.Season = window.GameModules.season;

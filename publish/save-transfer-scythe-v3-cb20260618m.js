@@ -5,8 +5,6 @@ window.GameModules.saveTransfer = (() => {
 
   function seasonKey(base){return window.Season?.key ? Season.key(base) : base}
   function keys(){return [...BASE_KEYS, seasonKey('arcane-save-v2'), seasonKey('arcane-equipment-v2')]}
-  function localGet(k){return StorageSync.localGet(k)}
-  function localPut(k,v){StorageSync.localPut(k,StorageSync.stamp(v))}
   async function kvGet(k){return await StorageSync.get(k)}
   async function kvPut(k,v){await StorageSync.put(k,v,'导入存档')}
   function enc(obj){return btoa(unescape(encodeURIComponent(JSON.stringify(obj))))}
@@ -20,6 +18,13 @@ window.GameModules.saveTransfer = (() => {
     if (k === 'arcane-cosmetics-v1') return plainObject(v.owned) || plainObject(v.selected);
     if (k === 'arcane-redeem-v2' || k === 'arcane-layout-v2') return true;
     return true;
+  }
+  async function refreshRuntimeData(){
+    await window.Season?.reload?.();
+    await window.Progression?.reload?.();
+    await window.Equipment?.reload?.();
+    await window.Rift?.reload?.();
+    if (typeof initBootData === 'function') await initBootData();
   }
 
   async function exportText(){
@@ -39,6 +44,7 @@ window.GameModules.saveTransfer = (() => {
       count++;
     }
     if (!count) throw new Error('存档文本没有可导入的数据');
+    await refreshRuntimeData();
     return true;
   }
   async function doExport(){

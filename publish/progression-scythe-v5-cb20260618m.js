@@ -87,6 +87,7 @@ window.GameModules.progression = (() => {
     } catch (_) {}
   }
   async function init() { if (ready) return meta; meta = normalize(await kvGet(KEY) || await kvGet('arcane-meta-v1')); ready = true; await applyAdminGrant(); return meta; }
+  async function reload() { ready = false; meta = clone(DEFAULT); return await init(); }
   async function save() { await kvPut(KEY, meta); }
   function dlcOwned(c) { return c !== 'lewdSaintess' || !!clsData(c).unlocks.dlc; }
   async function buyDlc(c) { if (c !== 'lewdSaintess' || dlcOwned(c)) return dlcOwned(c); if (meta.soulCore < 200) return false; meta.soulCore -= 200; clsData(c).unlocks.dlc = true; await save(); return true; }
@@ -181,6 +182,6 @@ window.GameModules.progression = (() => {
     return { gold: meta.soulGold, core: meta.soulCore, applied: true };
   }
   function data() { return meta; }
-  return { init, render, renderTree, applyClass, estimateRunReward, estimateCoreReward, addRunReward, addCurrency, spendGold, spendCore, addGrantCurrency, data, dlcOwned, buyDlc };
+  return { init, reload, render, renderTree, applyClass, estimateRunReward, estimateCoreReward, addRunReward, addCurrency, spendGold, spendCore, addGrantCurrency, data, dlcOwned, buyDlc };
 })();
 window.Progression = window.GameModules.progression;
