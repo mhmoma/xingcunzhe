@@ -34,6 +34,7 @@ function sfx(k){if(!audio)return;let c=audio.ctx,now=c.currentTime;if(audio.last
 function bgmVol(){let v=Number($('bgmVolume')?.value??42);return Math.max(0,Math.min(1,v/100))}
 function fxScale(){return fxQuality==='off'?0:fxQuality==='low'?.25:fxQuality==='medium'?.55:1}
 function fxOff(){return fxScale()<=0}
+function fxSpriteOnly(){return fxQuality==='low'}
 function shouldDrawFx(i=0){let q=fxScale();return q>0&&(q>=1||i%Math.max(1,Math.round(1/q))===0)}
 function viewSetting(id,def,fromInput=false){let raw=fromInput?$(id)?.value:null;if(raw==null)try{raw=localStorage.getItem(id)}catch(_){}if(raw==null)raw=viewPrefs?.[id];let v=Number(raw??$(id)?.value??def);return Math.max(60,Math.min(120,v))}
 function applyBgmVol(){let v=Math.round(bgmVol()*100);if(audio?.bgm)audio.bgm.volume=v/100;if($('bgmVolumeTxt'))$('bgmVolumeTxt').textContent=v+'%'}
