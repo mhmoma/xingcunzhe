@@ -34,7 +34,7 @@ window.GameModules.equipment = (() => {
   const all = [...gold,...uniques,...sets,...sacrifices];
   const DEF_KEYS = ['hp','armor','move','pickup','gold','regen'];
   const OFF_KEYS = ['damage','cooldown','atkSpeed','range','crit','skillLv'];
-  const SKILL_BY_CLASS = {paladin:['garlic','bloodNova','holyLance'],mage:['missile','meteorShard','thunderChain'],ranger:['axe','moonSlash','poisonCloud'],lewdSaintess:['lustSplash','lustPrayer','lustKiss'],scytheMaiden:['scytheArc','bloodReap','wraithBlade']};
+  const SKILL_BY_CLASS = {paladin:['garlic','bloodNova','holyLance'],mage:['missile','meteorShard','thunderChain'],ranger:['axe','moonSlash','poisonCloud','shadowBlade'],lewdSaintess:['lustSplash','lustPrayer','lustKiss'],scytheMaiden:['scytheArc','bloodReap','wraithBlade']};
   const REROLL_STATS = new Set(['hp','armor','regen','move','damage','cooldown','atkSpeed','skillFreq','range','crit','projectileSpeed','extraProjectile','splitChance','bossDmg','eliteDmg','riftBossDmg','riftEliteDmg','shieldBreak','executeDmg','dotTickRate','progressBonus','critDmg','dotDmg','rangeDmg','healthyDmg','dodge','eliteDmgReduce','bossDmgReduce','slowResist','healBonus']);
   const NORM_VERSION = 2;
   let meta = { items:[], equipped:{}, dust:0 }, ready = false, activeKey = '', migrated = false;
