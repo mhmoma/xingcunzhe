@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tr ';' '\\\\n')",
+      "Bash(echo \"ANTHROPIC_BASE_URL=$ANTHROPIC_BASE_URL\")",
+      "Bash(echo \"ANTHROPIC_AUTH_TOKEN=$ANTHROPIC_AUTH_TOKEN\")",
+      "Bash(env)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"$ANTHROPIC_BASE_URL/v1/images/generations\" -H \"Authorization: Bearer $ANTHROPIC_AUTH_TOKEN\")",
+      "Bash(echo \"BASE_URL: $ANTHROPIC_BASE_URL\")"
+    ]
+  }
+}
