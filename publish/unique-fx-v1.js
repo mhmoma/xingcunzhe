@@ -13,6 +13,7 @@ window.GameModules.uniqueFx = (() => {
   }
   function hasSet(id, n) { return window.hasSet?.(id, n) || (S?.equipStats?.setPowers?.[id] || 0) >= (n || 6); }
   function eqStat(k) { return S?.equipStats?.[k] || 0; }
+  function dotFx(f) { return !!(f?.burn || f?.poison || f?.rift); }
   function riftProgress() {
     if (!S?.endless) return 0;
     let layer = S.endlessLayer || 0, gap = window.endlessBossGap?.(layer) || 320;
@@ -50,7 +51,7 @@ window.GameModules.uniqueFx = (() => {
     if (hasUnique('unique-demon-horn') && e.boss) d *= 1.60;
 
     // unique-plague-bell: 疫病加速 — 幽魂刃舞对DoT目标暴击伤害[x]75%
-    if (hasUnique('unique-plague-bell') && id === 'wraithBlade' && (e.slow > 0 || e._dotMarked)) d *= 1.75;
+    if (hasUnique('unique-plague-bell') && id === 'wraithBlade' && e._nextCrit && (e.slow > 0 || e._dotMarked > 0)) d *= 1.75;
 
     // unique-golem-soul: 岩盾守护 — 荆棘150%加算到弹幕
     if (hasUnique('unique-golem-soul') && eqStat('thorns') > 0) {
@@ -185,6 +186,12 @@ window.GameModules.uniqueFx = (() => {
     let p = S?.player;
     if (!p) return;
 
+    // unique-plague-bell: 疫病加速 — 击杀精英加速全屏DoT跳字150%
+    if (hasUnique('unique-plague-bell') && (e.elite || e.boss)) {
+      S._plagueDotRush = 3;
+      S.parts.push({x:e.x,y:e.y,vx:0,vy:0,life:.55,max:.55,a:1,c:'#86efac',aspectRing:115});
+    }
+
     // unique-dragon-heart: 龙心殉爆 — 击杀精英全屏殉爆 + 杂兵额外进度
     if (hasUnique('unique-dragon-heart')) {
       if (e.elite || e.boss) {
@@ -229,6 +236,28 @@ window.GameModules.uniqueFx = (() => {
   function aspectUpdate(dt) {
     let p = S?.player;
     if (!p) return;
+
+    S._plagueDotRush = Math.max(0, (S._plagueDotRush || 0) - dt);
+    for (const e of S.enemies || []) {
+      e._dotMarked = Math.max(0, (e._dotMarked || 0) - dt);
+      e._blazeBurn = Math.max(0, (e._blazeBurn || 0) - dt * .35);
+      e._emberBurn = Math.max(0, (e._emberBurn || 0) - dt * .35);
+    }
+    S._faithTrailBonus = 0;
+
+    // unique-faith-boots: 黎明道路 — 踩圣痕获得移速+40%与施法频率[x]30%
+    if (hasUnique('unique-faith-boots')) {
+      for (const f of S.artFx || []) {
+        if (f.faithTrail && Math.hypot(p.x - f.x, p.y - f.y) < (f.rad || 40) + p.r) {
+          S._faithTrailBonus = .30;
+          if (S.time > (S._faithTrailNoticeAt || 0)) {
+            S._faithTrailNoticeAt = S.time + .45;
+            S.parts.push({x:p.x,y:p.y,vx:0,vy:0,life:.28,max:.28,a:1,c:'#fde68a',aspectRing:58});
+          }
+          break;
+        }
+      }
+    }
 
     // unique-pale-ring: 苍白相位倒计时
     if (S._paleTimer > 0) {
@@ -306,23 +335,29 @@ window.GameModules.uniqueFx = (() => {
 
   // --- HOOK 7: artFx 持续效果修饰 ---
   function aspectArtFxTick(f, dt) {
-    // set ember-meteor 6件: 火海Boss DoT叠加
-    if (hasSet('ember-meteor') && f.burn && f.kind === 'meteor') {
+    if (hasUnique('unique-plague-bell') && dotFx(f)) {
+      for (const e of S.enemies) if (Math.hypot(e.x - f.x, e.y - f.y) < f.rad + e.r) e._dotMarked = .35;
+    }
+
+    if (hasUnique('unique-blaze-core') && f.burn) {
       for (const e of S.enemies) {
         if (e.boss && Math.hypot(e.x - f.x, e.y - f.y) < f.rad + e.r) {
-          e._emberBurn = (e._emberBurn || 0) + dt;
-          f._emberMul = 1 + Math.min(1.5, e._emberBurn * .2);
+          e._blazeBurn = (e._blazeBurn || 0) + dt;
+          f.blazeMul = 1 + Math.min(2, e._blazeBurn * .20);
         }
-      }
-      if (f._emberMul && f.dmg) {
-        f.dmg *= f._emberMul;
       }
     }
 
-    // set reaper-waltz 6件: DoT加速250%
-    if (hasSet('reaper-waltz') && S._deathShieldFull && (f.burn || f.poison || f.rift)) {
-      f.dmg *= S._dotSpeed || 1;
+    if (hasSet('ember-meteor') && f.burn) {
+      for (const e of S.enemies) {
+        if (e.boss && Math.hypot(e.x - f.x, e.y - f.y) < f.rad + e.r) {
+          e._emberBurn = (e._emberBurn || 0) + dt;
+          f.emberMul = 1 + Math.min(1.5, e._emberBurn * .20);
+        }
+      }
     }
+
+    if (dotFx(f)) f.tickMul = (S._plagueDotRush > 0 ? 2.5 : 1) * (hasSet('reaper-waltz') && S._deathShieldFull ? (S._dotSpeed || 1) : 1) * (f.emberMul || 1) * (f.blazeMul || 1);
 
     // set violet-hymn 6件: 祈祷溢出转化脉冲
     if (hasSet('violet-hymn') && f.prayer) {
@@ -383,10 +418,10 @@ window.GameModules.uniqueFx = (() => {
 
   // --- HOOK 10: 移速/攻速修正 ---
   function getMoveBonus() {
-    return S?._voidBonus || 0;
+    return (S?._voidBonus || 0) + (S?._faithTrailBonus ? .40 : 0);
   }
   function getAtkBonus() {
-    return S?._voidBonus || 0;
+    return (S?._voidBonus || 0) + (S?._faithTrailBonus || 0);
   }
   function getPaleDamageMul() {
     // 苍白相位期间技能伤害[x]120%
@@ -431,7 +466,7 @@ window.GameModules.uniqueFx = (() => {
     if (!hasUnique('unique-faith-boots')) return;
     S.artFx.push({
       x, y, type: 'holy', kind: 'holy', color: '#fde68a',
-      life: 4, max: 4, size: 32, rad: 40, trail: true, dmg: 0
+      life: 4, max: 4, size: 32, rad: 40, trail: true, faithTrail: true, dmg: 0
     });
   }
 
@@ -445,6 +480,8 @@ window.GameModules.uniqueFx = (() => {
     S._dotSpeed = 1;
     S._soulShadowCd = 0;
     S._soulShadowCrit = 0;
+    S._plagueDotRush = 0;
+    S._faithTrailBonus = 0;
   }
 
   // --- 飞斧重置 (cyclone-axe 6件) ---
