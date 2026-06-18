@@ -22,7 +22,7 @@ window.GameModules.progression = (() => {
       ['missile', '星界飞弹', '魔法飞弹每级冷却 -4.5%、爆炸范围 +4，Lv.2/Lv.4 各 +1 发，契合星界飞弹套', 5, 80, 22, 82, 'damage', ['missile'], 24],
       ['fire', '余烬陨星', '陨星碎片每级爆炸范围 +6、冷却 -5%、伤害 +5%，Lv.4 后 +1 颗陨星，强化余烬陨星套', 5, 90, 50, 86, 'damage', ['meteorShard'], 24],
       ['thunder', '风暴符印', '连锁雷弧每级 +1 跳、范围 +3、冷却 -5%，强化风暴符印套', 5, 90, 78, 82, 'damage', ['thunderChain'], 24],
-      ['beam', '奥术回响', '魔法飞弹与奥术射线每级射程/范围提升并缩短冷却，补强雷弧奥术流', 4, 110, 50, 108, 'damage', ['missile', 'arcaneBeam'], 24, 'fire'],
+      ['beam', '奥术棱镜', '奥术射线每级射程/范围提升并缩短冷却，强化棱镜终幕路线', 4, 110, 50, 108, 'damage', ['arcaneBeam'], 24, 'fire'],
       ['overload', '秘境超载', '飞弹、陨星、雷链对 Boss、精英与护盾敌人更强，并略微缩短冷却', 4, 135, 50, 126, 'damage', ['missile', 'meteorShard', 'thunderChain'], 28, 'thunder'],
     ],
     ranger: [
