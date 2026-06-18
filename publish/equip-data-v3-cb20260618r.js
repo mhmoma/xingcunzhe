@@ -55,7 +55,7 @@ window.GameModules.equipData = (() => {
     'rose-mirror':{n:'蔷薇镜像',s:'3件 精英免伤+12% 暴击伤害+25%；6件 [x]镜像100%复制承伤，以[x]500%独立反弹经媚心飞吻化为反冲光束。',b3:{eliteDmgReduce:.12,critDmg:.25},b6:{skill:'lustKiss',skillDmg:5.0,special:'mirrorReflect'}},
     'reaper-waltz':{n:'冥月圆舞',s:'3件 暴击+10% 护甲+14%；6件 [x]残月镰舞每发1%护盾，叠满100%死神状态，DoT跳字加速250%溢出吸血。',b3:{crit:.10,armor:.14},b6:{skill:'scytheArc',skillDmg:4.5,special:'deathShield'}},
     'blood-reaping':{n:'血镰誓约',s:'3件 暴击伤害+26% Boss免伤+10%；6件 [x]血镰回旋飞行分裂飞镰，碰撞精英暗影内爆[x]45%。',b3:{critDmg:.26,bossDmgReduce:.10},b6:{skill:'bloodReap',skillDmg:4.0,special:'splitImplode'}},
-    'soul-shadow':{n:'断魂影镰',s:'3件 精英伤害+20% 攻速+12% 暗影抗性+18%；6件 [x]幽魂刃舞击杀提供1秒全技能无CD，命中强敌生成影盾，连续斩杀叠加魂甲减伤，低血时魂甲化盾保命。',b3:{eliteDmg:.20,atkSpeed:.12,shadow:.18},b6:{skill:'wraithBlade',skillDmg:4.5,special:'shadowGuard'}},
+    'soul-shadow':{n:'断魂影镰',s:'3件 精英伤害+20% 攻速+12% 暗影抗性+18%；6件 [x]幽魂刃舞伤害+450%，击杀提供1秒全技能无CD并叠+15%最终伤害(最高+75%)；命中精英/Boss生成2.5%/3.5%最大生命影盾(上限45%)；魂甲每层4%减伤(最高8层32%)，低血时魂甲化盾并减免本次伤害45%；有护盾时最终伤害额外+12%。',b3:{eliteDmg:.20,atkSpeed:.12,shadow:.18},b6:{skill:'wraithBlade',skillDmg:4.5,special:'shadowGuard'}},
   };
   const STAT_CN = {hp:'生命',damage:'伤害',armor:'护甲',move:'移速',cooldown:'冷却',atkSpeed:'攻速',range:'范围',pickup:'拾取',gold:'金币',regen:'回复',crit:'暴击',critDmg:'暴击伤害',eliteDmg:'对精英伤害',bossDmg:'对Boss伤害',dotDmg:'持续伤害',dodge:'闪避',eliteDmgReduce:'精英减伤',bossDmgReduce:'Boss减伤',skillFreq:'施法频率',projectileSpeed:'技能飞行速度',extraProjectile:'额外弹幕',splitChance:'弹幕分裂率',riftBossDmg:'大秘境Boss伤害',riftEliteDmg:'大秘境精英伤害',shieldBreak:'破盾系数',executeDmg:'处决伤害',dotTickRate:'DoT跳字频率',progressBonus:'秘境进度',slowResist:'减速抗性',healBonus:'治疗效果',thorns:'荆棘',allRes:'全抗性',attrCapBonus:'抗性上限',rangeDmg:'远距伤害',healthyDmg:'对健康伤害'};
   return { UNIQUES, SET_FAMILIES, SET_BONUS, STAT_CN };
