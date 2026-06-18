@@ -112,17 +112,18 @@ window.GameModules.uniqueFx = (() => {
 
     // set dawn-judgment 6件: 圣光裁决专属精灵图
     if (hasSet('dawn-judgment') && id === 'holyLance') {
-      S.artFx.push({x:e.x,y:e.y,type:'setDawnJudgment',kind:'setDawnJudgment',color:'#fde68a',life:.42,max:.42,size:150,rot:Math.random()*Math.PI});
+      S.artFx.push({x:e.x,y:e.y,fromX:p.x,fromY:p.y,type:'setDawnJudgment',kind:'setDawnJudgment',color:'#fde68a',life:.42,max:.42,size:150,rot:Math.atan2(e.y-p.y,e.x-p.x)});
     }
 
     // set storm-sigil 6件: 雷弧爆链专属精灵图
     if (hasSet('storm-sigil') && id === 'thunderChain' && crit) {
-      S.artFx.push({x:e.x,y:e.y,type:'setStormChain',kind:'setStormChain',color:'#fde047',life:.45,max:.45,size:145,rot:Math.random()*Math.PI});
+      S.artFx.push({x:e.x,y:e.y,fromX:p.x,fromY:p.y,type:'setStormChain',kind:'setStormChain',color:'#fde047',life:.45,max:.45,size:120,rot:Math.atan2(e.y-p.y,e.x-p.x)});
     }
 
     // set venom-shadow 6件: 毒影破抗专属精灵图
-    if (hasSet('venom-shadow') && (id === 'poisonCloud' || id === 'shadowBlade')) {
-      S.artFx.push({x:e.x,y:e.y,type:'setVenomBreak',kind:'setVenomBreak',color:'#86efac',life:.46,max:.46,size:132});
+    if (hasSet('venom-shadow') && (id === 'poisonCloud' || id === 'shadowBlade') && S.time > (e._venomFxAt || 0)) {
+      e._venomFxAt = S.time + .28;
+      S.artFx.push({x:e.x,y:e.y,type:'setVenomBreak',kind:'setVenomBreak',color:'#86efac',life:.46,max:.46,size:132,target:e});
     }
 
     // set cyclone-axe 6件: 回旋飞斧飞回重置位移CD + 切割风暴
@@ -280,7 +281,7 @@ window.GameModules.uniqueFx = (() => {
       let rad = 50 + lv * 10 + 34;
       if (S.time > (S._aureateFxAt || 0)) {
         S._aureateFxAt = S.time + .7;
-        S.artFx.push({x:p.x,y:p.y,type:'setAureateBlackhole',kind:'setAureateBlackhole',color:'#fde68a',life:.62,max:.62,size:rad*3.1,rot:S.time});
+        S.artFx.push({x:p.x,y:p.y,type:'setAureateBlackhole',kind:'setAureateBlackhole',color:'#fde68a',life:.62,max:.62,size:rad*3.1,rot:S.time,setPlayer:true});
       }
       for (const e of S.enemies) {
         let d = Math.hypot(e.x - p.x, e.y - p.y);
