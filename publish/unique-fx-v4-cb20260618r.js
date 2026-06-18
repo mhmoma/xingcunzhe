@@ -66,6 +66,8 @@ window.GameModules.uniqueFx = (() => {
     S._soulShieldAt = 0;
     S._soulArmorHitAt = 0;
     S._soulLastStandAt = 0;
+    S._fear = 0;
+    S._fearGuardFxAt = 0;
     S._plagueDotRush = 0;
     S._faithTrailBonus = 0;
   }

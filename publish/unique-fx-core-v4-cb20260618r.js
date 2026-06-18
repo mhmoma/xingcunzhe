@@ -19,6 +19,10 @@ window.GameModules.uniqueFxShared = (() => {
     let kills = (S.kills || 0) - (S.endlessBossStartKills || 0);
     return Math.min(1, kills / gap);
   }
+  function fearCap() { return hasSet('blood-reaping', 3) ? 300 + eqStat('fearMax') : 0; }
+  function fearNearbyCount(p, rad=260) { return (S?.enemies || []).filter(e => !e.dead && (e._fear || 0) > 0 && Math.hypot(e.x - p.x, e.y - p.y) < rad + e.r).length; }
+  function gainFear(v) { if (v <= 0) return; S._fear = Math.min(fearCap(), (S._fear || 0) + v); }
+  function markFear(e, t=4) { if (e) e._fear = Math.max(e._fear || 0, t); }
   function aspectDamageChain(d, id, e) {
     let p = S?.player;
     if (!p || !id) return d;
@@ -45,6 +49,11 @@ window.GameModules.uniqueFxShared = (() => {
       let shieldRate = Math.min(1, (p.shield || 0) / Math.max(1, p.max));
       d *= 1 + Math.min(.30, Math.floor(shieldRate * 10) * .03);
       if ((S._deathWaltzTimer || 0) > 0) d *= 1.25;
+    }
+    if (hasSet('blood-reaping', 6) && id === 'bloodReap') {
+      let fearCount = fearNearbyCount(p);
+      d *= 1 + Math.min(.40, fearCount * .05);
+      if ((S._fear || 0) >= fearCap() * .5) d *= 1.15;
     }
     return d;
   }
@@ -104,6 +113,15 @@ window.GameModules.uniqueFxShared = (() => {
         }
       }
     }
+    if (hasSet('blood-reaping', 6) && id === 'bloodReap') {
+      markFear(e, e.boss ? 7 : e.elite ? 5 : 4);
+      let low = (S._fear || 0) < fearCap() * .35, gain = e.boss ? 10 : e.elite ? 6 : 2;
+      gainFear(gain * (low ? 1.75 : 1));
+      if (S.time > (e._fearFxAt || 0)) {
+        e._fearFxAt = S.time + .35;
+        S.parts.push({x:e.x,y:e.y,vx:0,vy:-12,life:.42,max:.42,a:1,c:'#a78bfa',txt:'恐惧'});
+      }
+    }
   }
   function aspectDefend(rawDmg, source) {
     let p = S?.player;
@@ -116,6 +134,17 @@ window.GameModules.uniqueFxShared = (() => {
       return { dmg: 0, prevent: true };
     }
     if (hasUnique('unique-golem-soul') && !p.moving && (p.cast || 0) > 0) rawDmg *= Math.max(.40, 1 - Math.min(5, Math.floor(S.time * 2)) * .12);
+    if ((S._fear || 0) > 0) {
+      let fearCut = 1 - Math.min(.70, fearNearbyCount(p) * .08), capped = Math.min(rawDmg, p.max), fearLoss = capped * fearCut;
+      let paid = Math.min(S._fear || 0, fearLoss);
+      S._fear = Math.max(0, (S._fear || 0) - paid);
+      if (paid > 0 && S.time > (S._fearGuardFxAt || 0)) {
+        S._fearGuardFxAt = S.time + .28;
+        S.parts.push({x:p.x,y:p.y,vx:0,vy:0,life:.42,max:.42,a:1,c:'#a78bfa',txt:`恐惧-${Math.round(paid)}`});
+      }
+      if (paid >= fearLoss) return { dmg: 0, prevent: false };
+      rawDmg = Math.max(0, fearLoss - paid);
+    }
     if (hasSet('reaper-waltz', 6) && (S._deathWaltzTimer || 0) > 0) rawDmg *= .80;
     if (hasSet('soul-shadow', 6)) {
       let stacks = S._soulArmor || 0;
@@ -158,10 +187,14 @@ window.GameModules.uniqueFxShared = (() => {
       S._soulArmorTimer = 4;
       S.artFx.push({x:e.x,y:e.y,type:'setSoulShadowBurst',kind:'setSoulShadowBurst',color:'#a78bfa',life:.58,max:.58,size:170,rot:Math.random()*Math.PI});
     }
+    if (hasSet('blood-reaping', 6) && (e._fear || 0) > 0) {
+      gainFear(e.boss ? 60 : e.elite ? 25 : 8);
+      S.parts.push({x:e.x,y:e.y,vx:0,vy:0,life:.48,max:.48,a:1,c:'#fb7185',txt:'恐惧吸收'});
+    }
     if (hasSet('crimson-vessel') && (e._lastHitBy === 'lustSplash' || e._lastHitBy === 'lustKiss')) {
       let elite = window.nearest?.(S.enemies.filter(m => !m.dead && (m.elite || m.boss)), e);
       if (elite) for (const m of S.enemies.filter(m => !m.dead && !m.boss && !m.elite && Math.hypot(m.x - e.x, m.y - e.y) < 200).slice(0, 3)) m._kamikaze = { target: elite, timer: 1.8, dmg: m.max * .35 };
     }
   }
-  return { hasUnique, hasSet, eqStat, dotFx, isEvolvedDamageSkill, riftProgress, aspectDamageChain, aspectAfterDamage, aspectDefend, aspectSkillMods, aspectOnKill };
+  return { hasUnique, hasSet, eqStat, dotFx, isEvolvedDamageSkill, riftProgress, fearCap, aspectDamageChain, aspectAfterDamage, aspectDefend, aspectSkillMods, aspectOnKill };
 })();

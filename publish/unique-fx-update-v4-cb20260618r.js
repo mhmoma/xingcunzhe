@@ -8,9 +8,11 @@ window.GameModules.uniqueFxUpdate = (() => {
     S._plagueDotRush = Math.max(0, (S._plagueDotRush || 0) - dt);
     for (const e of S.enemies || []) {
       e._dotMarked = Math.max(0, (e._dotMarked || 0) - dt);
+      e._fear = Math.max(0, (e._fear || 0) - dt);
       e._blazeBurn = Math.max(0, (e._blazeBurn || 0) - dt * .35);
       e._emberBurn = Math.max(0, (e._emberBurn || 0) - dt * .35);
     }
+    S._fear = Math.min(H.fearCap?.() || 0, S._fear || 0);
     S._faithTrailBonus = 0;
     S._soulShadowCrit = Math.max(0, (S._soulShadowCrit || 0) - dt * .08);
     if (H.hasUnique('unique-faith-boots')) {
