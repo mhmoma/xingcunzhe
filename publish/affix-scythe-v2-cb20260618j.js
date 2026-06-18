@@ -56,8 +56,8 @@ window.GameModules.affix = (() => {
   function affixKey(a) { return a.id || a.stat; }
   function available(pool, used) { return pool.filter(a => !used.has(affixKey(a)) && !used.has(a.stat)); }
   function powerScale(itemPower=1) {
-    let ip = Math.max(1, Math.min(120, Number(itemPower)||1)), x = ip / 120;
-    return .6 + Math.pow(x, 2.15) * 24;
+    let ip = Math.max(1, Math.min(120, Number(itemPower)||1));
+    return 1 + Math.max(0, ip - 1) * .024;
   }
   function powerTier(itemPower=1) {
     let ip = Math.max(1, Math.min(120, Number(itemPower)||1));
