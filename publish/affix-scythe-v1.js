@@ -39,6 +39,18 @@ window.GameModules.affix = (() => {
     tag:'SUB_BUCKET_TYPE'
   }));
   const RESIST_AFFIXES = RES.map(r => ({id:'res_'+r,stat:'resist_'+r,attr:r,name:RES_CN[r]+'抗性',range:[.06,.14],tag:'ADDITIVE_POOL'}));
+  const TEMPLATE_AFFIXES = [
+    {id:'critDmg',stat:'critDmg',name:'暴击伤害',range:[.10,.28],tag:'ADDITIVE_POOL'},
+    {id:'dotDmg',stat:'dotDmg',name:'持续伤害',range:[.10,.28],tag:'ADDITIVE_POOL'},
+    {id:'rangeDmg',stat:'rangeDmg',name:'远距伤害',range:[.08,.22],tag:'ADDITIVE_POOL'},
+    {id:'healthyDmg',stat:'healthyDmg',name:'对健康伤害',range:[.08,.22],tag:'ADDITIVE_POOL'},
+    {id:'dodge',stat:'dodge',name:'闪避',range:[.04,.12],tag:'ADDITIVE_POOL'},
+    {id:'eliteDmgReduce',stat:'eliteDmgReduce',name:'精英减伤',range:[.06,.16],tag:'ADDITIVE_POOL'},
+    {id:'bossDmgReduce',stat:'bossDmgReduce',name:'Boss减伤',range:[.06,.16],tag:'ADDITIVE_POOL'},
+    {id:'slowResist',stat:'slowResist',name:'减速抗性',range:[.06,.18],tag:'ADDITIVE_POOL'},
+    {id:'healBonus',stat:'healBonus',name:'治疗效果',range:[.06,.18],tag:'ADDITIVE_POOL'},
+  ];
+  const AFFIX_BY_STAT = [...SURVIVAL_AFFIXES, ...ADDITIVE_AFFIXES, ...MULTIPLICATIVE_AFFIXES, ...RESIST_AFFIXES, ...TEMPLATE_AFFIXES].reduce((o,a)=>(o[a.stat]=a,o),{});
 
   function pickRandom(pool) { return pool[Math.floor(Math.random()*pool.length)]; }
   function affixKey(a) { return a.id || a.stat; }
@@ -55,9 +67,12 @@ window.GameModules.affix = (() => {
     let base = range[0] + Math.random()*(range[1]-range[0]);
     return Math.round(base * powerScale(itemPower) * mul * 1000) / 1000;
   }
-  function addFlat(stats, resists, tags, used, a, level, mul) {
+  function addFlat(stats, resists, tags, used, a, level, mul, rf=null) {
     if (!a) return false;
-    let key = affixKey(a), val = scaleValue(a.range, level, mul, level);
+    let old = Math.random, key = affixKey(a);
+    if (rf !== null) Math.random = () => rf;
+    let val = scaleValue(a.range, level, mul, level);
+    if (rf !== null) Math.random = old;
     used.add(key); used.add(a.stat);
     if (a.attr && a.stat.startsWith('resist_')) resists[a.attr] = Math.round(((resists[a.attr]||0)+val)*1000)/1000;
     else stats[a.stat] = Math.round(((stats[a.stat]||0)+val)*1000)/1000;
@@ -68,6 +83,17 @@ window.GameModules.affix = (() => {
     let p = available(pool, used);
     if (!p.length) return false;
     return addFlat(stats, resists, tags, used, pickRandom(p), level, mul);
+  }
+
+  function rollFixedAffixes(keys, itemPower, mul=1, high=false) {
+    let stats = {}, resists = {}, tags = {}, used = new Set(), lucky = false;
+    for (const key of keys || []) {
+      let a = AFFIX_BY_STAT[key];
+      if (!a) continue;
+      let rf = high ? .85 + Math.random() * .15 : null;
+      lucky = addFlat(stats, resists, tags, used, a, itemPower, mul, rf) || lucky;
+    }
+    return { stats, resists, tags, isLucky:lucky };
   }
 
   function rollGoldAffixes(level, mul, slot, cls) {
@@ -119,6 +145,6 @@ window.GameModules.affix = (() => {
   return {
     SURVIVAL_AFFIXES, ADDITIVE_AFFIXES, MULTIPLICATIVE_AFFIXES, RESIST_AFFIXES,
     UNIQUE_ASPECTS, RES, RES_CN,
-    rollGoldAffixes, tagLabel, uniqueAspectDesc, scaleValue, powerScale, powerTier, pickRandom
+    rollGoldAffixes, rollFixedAffixes, tagLabel, uniqueAspectDesc, scaleValue, powerScale, powerTier, pickRandom
   };
 })();
