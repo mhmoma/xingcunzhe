@@ -8,6 +8,7 @@ const baseFallingAttack=window.fallingAttack;
 const baseBurstAt=window.burstAt;
 if(window.imgs?.wind&&!imgs.windFlipped)imgs.windFlipped=imgs.wind;
 if(window.INFO?.daggerRain)INFO.daggerRain[1]='指定区域落下匕首雨造成范围伤害。升级：匕首雨帧数、范围和伤害提升。';
+if(window.INFO?.meteorShard)INFO.meteorShard[1]='指定区域落下陨星雨造成范围爆炸。升级：陨星帧数、范围和伤害提升。';
 function isBlade(k){return k==='wind'||k==='moonSlash'}
 function ensureWindFlip(){
   let src=window.imgs?.wind;if(!src?.complete||imgs._windFlipReady||imgs._windFlipPending)return;
@@ -22,15 +23,24 @@ function drawMirroredSheet(img,x,y,size,frame,rot=0,sx=1,sy=1,a=1){
   ctx.save();ctx.globalAlpha=a;ctx.translate(x,y);ctx.rotate(rot);ctx.scale(-sx,sy);
   ctx.drawImage(img,frame%2*fw,Math.floor(frame/2)*fh,fw,fh,-size/2,-size/2,size,size);ctx.restore();
 }
-function ensureDaggerFrames(){
-  let src=imgs?.dagger;if(!src?.src)return;
-  for(let i=1;i<=4;i++){let k='daggerRainFx'+i;if(imgs[k])continue;let im=new Image();im._daggerFrame=i;im.src=src.currentSrc||src.src;imgs[k]=im}
+function ensureFrameAliases(srcKey,prefix,prop){
+  let src=imgs?.[srcKey];if(!src?.src)return;
+  for(let i=1;i<=4;i++){let k=prefix+i;if(imgs[k])continue;let im=new Image();im[prop]=i;im.src=src.currentSrc||src.src;imgs[k]=im}
 }
+function ensureDaggerFrames(){ensureFrameAliases('dagger','daggerRainFx','_daggerFrame')}
+function ensureMeteorFrames(){ensureFrameAliases('meteor','meteorRainFx','_meteorFrame')}
 function daggerKind(frames){ensureDaggerFrames();let k='daggerRainFx'+frames;return imgs[k]?k:'dagger'}
+function meteorKind(frames){ensureMeteorFrames();let k='meteorRainFx'+frames;return imgs[k]?k:'meteor'}
 function isDaggerKind(k){return k==='dagger'||/^daggerRainFx[1-4]$/.test(k)}
+function isMeteorKind(k){return k==='meteor'||/^meteorRainFx[1-4]$/.test(k)}
+function drawFrameAlias(img,srcKey,frame,size,x,y,a=1){
+  let src=img.complete?img:imgs[srcKey],fw=src.width/2,fh=src.height/2,ratio=fh/fw,w=size,h=size*ratio;
+  if(!src?.complete)return;ctx.save();ctx.globalAlpha=a;ctx.translate(x,y);ctx.drawImage(src,frame%2*fw,Math.floor(frame/2)*fh,fw,fh,-w/2,-h/2,w,h);ctx.restore();
+}
 window.drawSheet=function(img,x,y,size,frame,rot=0,sx=1,sy=1,a=1){
   if(img===imgs?.windFlipped)return drawMirroredSheet(imgs.wind,x,y,size,frame,rot,Math.abs(sx),sy,a);
-  if(img?._daggerFrame){let src=img.complete?img:imgs.dagger,forced=img._daggerFrame-1;return baseDrawSheet?baseDrawSheet(src,x,y,size,forced,rot,sx,sy,a):undefined}
+  if(img?._daggerFrame)return drawFrameAlias(img,'dagger',img._daggerFrame-1,size,x,y,a);
+  if(img?._meteorFrame)return drawFrameAlias(img,'meteor',img._meteorFrame-1,size,x,y,a);
   return baseDrawSheet?baseDrawSheet(img,x,y,size,frame,rot,sx,sy,a):undefined;
 };
 function daggerRainAttack(target,dmg,rad,size,delay=.46,extra=null){
@@ -43,16 +53,28 @@ function daggerRainAttack(target,dmg,rad,size,delay=.46,extra=null){
   S.falls.push({kind:daggerKind(frames),daggerRain:true,x:tx,y:ty,sx:tx,sy:ty,tx,ty,dmg,rad,slow:0,color:'#dbeafe',size,life:delay,max:delay,rot:0,frames,hit:false,...(extra||{})});
   sfx('throw');
 }
+function meteorRainAttack(target,dmg,rad,slow,color,size,delay=.5,extra=null){
+  if(!target)return;
+  let evo=!!extra?.burn&&delay<.4,key=evo?'_meteorRainEvoTime':'_meteorRainCastTime';
+  if(S[key]===S.time)return;S[key]=S.time;
+  let lv=skillLv('meteorShard'),cp=comboPower('meteorShard'),frames=clamp(Math.ceil(lv),1,4),tx=target.x,ty=target.y;
+  rad=Math.max(rad||0,78+lv*8+cp*5+skillMod('meteorShard','radius'));
+  size=Math.max(size||0,rad*2.05);
+  S.falls.push({kind:meteorKind(frames),meteorRain:true,x:tx,y:ty,sx:tx,sy:ty,tx,ty,dmg,rad,slow,color:color||'#fb923c',size,life:delay,max:delay,rot:0,frames,hit:false,...(extra||{})});
+  sfx('fall');
+}
 window.fallingAttack=function(kind,target,dmg,rad,slow,color,size,delay=.42,extra=null){
   if(kind==='dagger')return daggerRainAttack(target,dmg,rad,size,delay,extra);
+  if(kind==='meteor')return meteorRainAttack(target,dmg,rad,slow,color,size,delay,extra);
   return baseFallingAttack?baseFallingAttack(kind,target,dmg,rad,slow,color,size,delay,extra):undefined;
 };
 window.burstAt=function(kind,x,y,dmg,rad,slow=0,color='#facc15',size=100,life=.55){
-  if(isDaggerKind(kind)){
-    let hits=rangeDamage('daggerRain',x,y,dmg,rad,slow),fxKind=kind==='dagger'?daggerKind(4):kind;
-    S.artFx.push({x,y,type:'daggerRain',kind:fxKind,color,life,max:life,size,rad});
+  if(isDaggerKind(kind)||isMeteorKind(kind)){
+    let meteor=isMeteorKind(kind),skill=meteor?'meteorShard':'daggerRain',fxKind=meteor?(kind==='meteor'?meteorKind(4):kind):(kind==='dagger'?daggerKind(4):kind);
+    let hits=rangeDamage(skill,x,y,dmg,rad,slow);
+    S.artFx.push({x,y,type:meteor?'meteorRain':'daggerRain',kind:fxKind,color,life,max:life,size,rad});
     for(let n=0;n<8;n++)S.parts.push({x,y,vx:rand(-70,70),vy:rand(-70,70),life:rand(.18,.45),max:.45,a:1,c:color});
-    sfx('throw');return hits;
+    sfx(meteor?'boom':'throw');return hits;
   }
   return baseBurstAt?baseBurstAt(kind,x,y,dmg,rad,slow,color,size,life):0;
 };
@@ -75,7 +97,7 @@ window.volley=function(kind,target,n,speed,dmg,life,aoe=0,slow=0,pierce=false){
   for(let i=0;i<n;i++)window.castProjectile(kind,target,speed,dmg,life,aoe,slow,(i-(n-1)/2)*spread,true);
 };
 const baseSkills=window.skills;
-window.skills=function(dt){ensureDaggerFrames();return baseSkills?baseSkills(dt):undefined};
+window.skills=function(dt){ensureDaggerFrames();ensureMeteorFrames();return baseSkills?baseSkills(dt):undefined};
 window.drawBladeWave=function(m,kind){
   if(kind==='wind')ensureWindFlip();
   let img=kind==='wind'?(imgs?.windFlipped||imgs?.wind):imgs?.[kind];
