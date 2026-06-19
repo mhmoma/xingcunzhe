@@ -61,6 +61,9 @@ button,.ghostBtn,.startBtn,.modeBtn,.equipTabs button,.choiceActions button,.lev
 #equipmentPanel .panel{height:min(96dvh,760px)!important;min-height:0!important;overflow:hidden!important}
 #equipDetailModal{z-index:80!important}
 #equipDetailModal .equipDetailPanel{position:relative!important;z-index:81!important}
+#statModal,#shopDetailModal,#costumeModal,#dlcModal,#saveTransferModal,#redeemModal,#riftEditorModal{z-index:70!important}
+#leaderboard,#progressionModal,#evoGuide{z-index:65!important}
+#skillTip,#modeTip{z-index:90!important}
 #equipmentPanel #equipGrid{overflow-y:scroll!important;overflow-x:hidden!important;-webkit-overflow-scrolling:touch!important;touch-action:pan-y!important;overscroll-behavior:contain!important;align-content:start!important;scrollbar-width:auto!important}
 #equipmentPanel #equipGrid .eqCard,#equipmentPanel #equipGrid .eqIcon{touch-action:pan-y!important}
 #equipmentPanel #equipGrid::-webkit-scrollbar,.equipDetailBody::-webkit-scrollbar{width:8px;height:8px}
