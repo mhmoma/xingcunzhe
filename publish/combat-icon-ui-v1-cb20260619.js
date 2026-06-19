@@ -34,10 +34,11 @@ function iconizeMode(){
   const raw=(mode.textContent||'').trim();
   if(raw&&!mode.querySelector('.swordsIcon'))mode.dataset.modeLabel=raw;
   mode.dataset.iconUi='1';
+  mode.classList.toggle('hidden',!window.S?.run);
   mode.classList.add('combatIconButton');
   mode.setAttribute('aria-label','自动战斗模式');
   mode.title='自动战斗';
-  mode.innerHTML=`<img class="combatIcon" src="${iconBase}ui-icon-auto.9419fb98-sm.webp" alt=""><span class="srOnly">自动战斗</span>`;
+  mode.innerHTML=`<img class="combatIcon" src="${iconBase}ui-icon-auto.9419fb98-sm.webp" alt=""><span class="combatIconText">自动</span>`;
   if(!mode.dataset.modeTipBound){
     mode.dataset.modeTipBound='1';
     mode.addEventListener('click',()=>setTimeout(showModeTip,40),true);
@@ -129,12 +130,21 @@ function patchHudUpdate(){
   if(window.updateHud?.__iconPatched)return;
   const base=window.updateHud;
   if(typeof base==='function'){
-    window.updateHud=function(){base();ensureResourceBar();updateResourceBar();document.getElementById('equipBtn')?.classList.add('hidden');};
+    window.updateHud=function(){base();iconizeMode();ensureResourceBar();updateResourceBar();document.getElementById('equipBtn')?.classList.add('hidden');};
     window.updateHud.__iconPatched=true;
   }
 }
-document.addEventListener('DOMContentLoaded',()=>{iconize();patchModeLabel();patchHudUpdate();});
+function patchRestart(){
+  if(window.restart?.__iconPatched)return;
+  const base=window.restart;
+  if(typeof base==='function'){
+    window.restart=function(){base();document.getElementById('modeBtn')?.classList.add('hidden');};
+    window.restart.__iconPatched=true;
+  }
+}
+document.addEventListener('DOMContentLoaded',()=>{iconize();patchModeLabel();patchHudUpdate();patchRestart();});
 iconize();
 patchModeLabel();
 patchHudUpdate();
+patchRestart();
 })();
