@@ -13,9 +13,9 @@ window.GameModules.affix = (() => {
   ];
   const ADDITIVE_AFFIXES = [
     {id:'damage',stat:'damage',name:'伤害',range:[.06,.18],tag:'ADDITIVE_POOL'},
-    {id:'cooldown',stat:'cooldown',name:'冷却',range:[.04,.12],tag:'ADDITIVE_POOL'},
-    {id:'atkSpeed',stat:'atkSpeed',name:'攻速',range:[.04,.14],tag:'ADDITIVE_POOL'},
-    {id:'skillFreq',stat:'skillFreq',name:'施法频率',range:[.04,.12],tag:'ADDITIVE_POOL'},
+    {id:'cooldown',stat:'cooldown',name:'冷却',range:[.025,.055],tag:'ADDITIVE_POOL'},
+    {id:'atkSpeed',stat:'atkSpeed',name:'攻速',range:[.035,.09],tag:'ADDITIVE_POOL'},
+    {id:'skillFreq',stat:'skillFreq',name:'施法频率',range:[.03,.075],tag:'ADDITIVE_POOL'},
     {id:'range',stat:'range',name:'范围',range:[.04,.14],tag:'ADDITIVE_POOL'},
     {id:'crit',stat:'crit',name:'暴击',range:[.04,.14],tag:'ADDITIVE_POOL'},
     {id:'projectileSpeed',stat:'projectileSpeed',name:'技能飞行速度',range:[.06,.18],tag:'ADDITIVE_POOL'},
