@@ -56,6 +56,16 @@ button,.ghostBtn,.startBtn,.modeBtn,.equipTabs button,.choiceActions button,.lev
 #classSelect .classPanel:before{content:"";position:absolute;inset:12px;border:1px solid rgba(250,204,21,.28);border-radius:inherit;pointer-events:none;box-shadow:inset 0 0 24px rgba(0,0,0,.5)}
 #classSelect .card,#classSelect .classCard{background:linear-gradient(180deg,rgba(15,23,42,.84),rgba(12,8,24,.94));border-color:rgba(250,204,21,.42);box-shadow:0 12px 34px rgba(0,0,0,.45),inset 0 0 18px rgba(124,58,237,.12)}
 #classSelect .title{text-shadow:0 0 18px rgba(250,204,21,.52),0 3px 8px #000}
+#classSelect .classPanel{width:min(96vw,1040px)!important;max-height:96dvh!important;overflow-y:auto!important;padding:18px 18px 14px!important}
+#classSelect .classPanel .sub{margin:4px auto 8px!important;line-height:1.25!important}
+#classSelect .cards{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;align-items:stretch!important;gap:8px!important;max-width:none!important;margin:0 auto!important}
+#classSelect .classCard{height:100%!important;min-height:324px!important;padding:8px!important;display:grid!important;grid-template-rows:76px auto auto auto 1fr auto!important;align-content:start!important;gap:4px!important;text-align:left!important}
+#classSelect .classCard .portrait{height:76px!important;margin:0!important}
+#classSelect .classCard h2{text-align:center!important;font-size:13px!important;line-height:1.1!important;margin:0!important;min-height:16px!important;display:flex!important;align-items:center!important;justify-content:center!important}
+#classSelect .classCard p{font-size:10px!important;line-height:1.18!important;margin:0!important;padding:3px 5px!important;min-height:0!important}
+#classSelect .classCard .rewardHint{font-size:9px!important;line-height:1.18!important}
+#classSelect #progressionPanel{margin-top:8px!important}
+@media (orientation:portrait){#classSelect .classPanel{width:min(96vw,440px)!important;padding:14px 10px 12px!important}#classSelect .cards{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important}#classSelect .classCard{min-height:260px!important;padding:6px!important;grid-template-rows:58px auto auto auto 1fr auto!important}#classSelect .classCard .portrait{height:58px!important}#classSelect .classCard p{font-size:9px!important;line-height:1.12!important;padding:2px 4px!important}}
 
 /* v15: restore reliable touch/production scrolling and keep equipment tabs out of the item grid row */
 #equipmentPanel .panel{height:min(96dvh,760px)!important;min-height:0!important;overflow:hidden!important}
