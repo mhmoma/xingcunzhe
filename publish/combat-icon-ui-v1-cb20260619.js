@@ -24,11 +24,16 @@ function iconButton(btn,file,label){
 function iconize(){
   for(const [id,[file,label]] of Object.entries(labels))iconButton(document.getElementById(id),file,label);
   document.getElementById('equipBtn')?.classList.add('hidden');
+  placeModeButton();
   iconizeMode();
   ensureResourceBar();
   ensureToggle();
   applyHudState();
   syncCombatChrome();
+}
+function placeModeButton(){
+  const mode=document.getElementById('modeBtn'),game=document.querySelector('.game');
+  if(mode&&game&&mode.parentElement!==game)game.appendChild(mode);
 }
 function overlayOpen(){
   return Array.from(document.querySelectorAll('.overlay,.layoutEditor')).some(x=>!x.classList.contains('hidden'));
@@ -44,6 +49,7 @@ function modeLabel(){
   return control.auto?`自动${styles[control.style%3]||'均衡'}`:'手动';
 }
 function iconizeMode(){
+  placeModeButton();
   const mode=document.getElementById('modeBtn');
   if(!mode)return;
   mode.dataset.iconUi='1';
