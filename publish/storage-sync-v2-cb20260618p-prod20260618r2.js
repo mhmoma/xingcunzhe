@@ -25,10 +25,21 @@ window.GameModules.storageSync = (() => {
     }
     if (e) console.warn(text + ':', e.code, e.message);
   }
+  function withTimeout(task, ms = 2800) {
+    if (!task || typeof task.then !== 'function') return Promise.resolve(task);
+    return Promise.race([
+      task,
+      new Promise((_, reject) => setTimeout(() => {
+        const e = new Error('云端请求超时，已使用本地数据');
+        e.code = 'CLOUD_TIMEOUT';
+        reject(e);
+      }, ms))
+    ]);
+  }
   async function get(key) {
     const local = localGet(key);
     let cloud = null;
-    try { cloud = (await window.dzmm?.kv?.get?.(key))?.value ?? null; }
+    try { cloud = (await withTimeout(window.dzmm?.kv?.get?.(key)))?.value ?? null; }
     catch (e) { if (!local) console.warn('云端读取失败:', e.code, e.message); }
     const best = newer(local, cloud);
     if (best && best !== local) localPut(key, best);
@@ -37,13 +48,13 @@ window.GameModules.storageSync = (() => {
   async function put(key, value, label = '数据') {
     const data = stamp(value);
     localPut(key, data);
-    try { await window.dzmm?.kv?.put?.(key, data); }
+    try { await withTimeout(window.dzmm?.kv?.put?.(key, data)); }
     catch (e) { warn(key, `${label}云端保存失败，已暂存本机`, e); }
     return data;
   }
   async function remove(key, label = '数据') {
     localRemove(key);
-    try { await window.dzmm?.kv?.delete?.(key); }
+    try { await withTimeout(window.dzmm?.kv?.delete?.(key)); }
     catch (e) { warn(key + ':delete', `${label}云端删除失败`, e); }
   }
   return { get, put, remove, localGet, localPut, newer, stamp };
