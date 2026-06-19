@@ -8,7 +8,8 @@ const labels={
   skillBtn:['ui-icon-skill.e2db75b9-sm.webp','技能'],
   invBtn:['ui-icon-bag.03c04b3e-sm.webp','背包']
 };
-let collapsed=false,tipTimer=0;
+const combatIds=['modeBtn','skillBtn','relicBtn','invBtn','saveBtn','settingsBtn','controls'];
+let collapsed=false,tipTimer=0,overlayWatcher=null;
 function iconButton(btn,file,label){
   if(!btn)return;
   btn.dataset.iconUi='1';
@@ -27,22 +28,36 @@ function iconize(){
   ensureResourceBar();
   ensureToggle();
   applyHudState();
+  syncCombatChrome();
+}
+function overlayOpen(){
+  return Array.from(document.querySelectorAll('.overlay,.layoutEditor')).some(x=>!x.classList.contains('hidden'));
+}
+function syncCombatChrome(){
+  const open=overlayOpen(),active=!!window.S?.run&&!open;
+  combatIds.forEach(id=>document.getElementById(id)?.classList.toggle('combatUiSuppressed',!active));
+  document.getElementById('hudFoldBtn')?.classList.toggle('hidden',!window.S?.run||open);
+}
+function modeLabel(){
+  if(!window.control)return '手动';
+  const styles=['均衡','保守','激进'];
+  return control.auto?`自动${styles[control.style%3]||'均衡'}`:'手动';
 }
 function iconizeMode(){
   const mode=document.getElementById('modeBtn');
   if(!mode)return;
-  const raw=(mode.textContent||'').trim();
-  if(raw&&!mode.querySelector('.swordsIcon'))mode.dataset.modeLabel=raw;
   mode.dataset.iconUi='1';
   mode.classList.toggle('hidden',!window.S?.run);
+  mode.classList.toggle('active',!!window.control?.auto);
   mode.classList.add('combatIconButton');
   mode.setAttribute('aria-label','自动战斗模式');
   mode.title='自动战斗';
-  mode.innerHTML=`<img class="combatIcon" src="${iconBase}ui-icon-auto.9419fb98-sm.webp" alt=""><span class="combatIconText">自动</span>`;
+  mode.innerHTML=`<img class="combatIcon" src="${iconBase}ui-icon-auto.9419fb98-sm.webp" alt=""><span class="combatIconText">${modeLabel()}</span>`;
   if(!mode.dataset.modeTipBound){
     mode.dataset.modeTipBound='1';
-    mode.addEventListener('click',()=>setTimeout(showModeTip,40),true);
+    mode.addEventListener('click',()=>setTimeout(()=>{iconizeMode();showModeTip();},40),true);
   }
+  syncCombatChrome();
 }
 function ensureResourceBar(){
   const hud=document.querySelector('.hud'),hp=document.getElementById('hudHp');
@@ -59,7 +74,7 @@ function ensureToggle(){
   if(!game||document.getElementById('hudFoldBtn'))return;
   const btn=document.createElement('button');
   btn.id='hudFoldBtn';
-  btn.className='hudFoldBtn';
+  btn.className='hudFoldBtn hidden';
   btn.type='button';
   btn.textContent='▾';
   btn.setAttribute('aria-label','折叠状态栏');
@@ -80,6 +95,7 @@ function applyHudState(){
   setHudLabel('hudHp','血量','生命');
   setHudLabel('hudBoss','Boss','下个魔王');
   updateResourceBar();
+  syncCombatChrome();
 }
 function resourceInfo(){
   if(!window.S?.player)return null;
@@ -104,8 +120,7 @@ function updateResourceBar(){
 }
 function showModeTip(){
   const mode=document.getElementById('modeBtn');
-  if(!mode)return;
-  const label=(mode.dataset.modeLabel||'自动·均衡').replace(/自动[·・]?/,'')||'均衡';
+  if(!mode||overlayOpen())return;
   let box=document.getElementById('modeTip');
   if(!box){
     box=document.createElement('div');
@@ -113,7 +128,7 @@ function showModeTip(){
     box.className='modeTip';
     document.querySelector('.game')?.appendChild(box);
   }
-  box.textContent=`自动战斗：${label}`;
+  box.textContent=`自动战斗：${modeLabel()}`;
   box.classList.add('show');
   clearTimeout(tipTimer);
   tipTimer=setTimeout(()=>box.classList.remove('show'),1400);
@@ -130,7 +145,7 @@ function patchHudUpdate(){
   if(window.updateHud?.__iconPatched)return;
   const base=window.updateHud;
   if(typeof base==='function'){
-    window.updateHud=function(){base();iconizeMode();ensureResourceBar();updateResourceBar();document.getElementById('equipBtn')?.classList.add('hidden');};
+    window.updateHud=function(){base();iconizeMode();ensureResourceBar();updateResourceBar();document.getElementById('equipBtn')?.classList.add('hidden');syncCombatChrome();};
     window.updateHud.__iconPatched=true;
   }
 }
@@ -138,13 +153,19 @@ function patchRestart(){
   if(window.restart?.__iconPatched)return;
   const base=window.restart;
   if(typeof base==='function'){
-    window.restart=function(){base();document.getElementById('modeBtn')?.classList.add('hidden');};
+    window.restart=function(){base();document.getElementById('modeBtn')?.classList.add('hidden');syncCombatChrome();};
     window.restart.__iconPatched=true;
   }
 }
-document.addEventListener('DOMContentLoaded',()=>{iconize();patchModeLabel();patchHudUpdate();patchRestart();});
+function watchOverlays(){
+  if(overlayWatcher)return;
+  overlayWatcher=new MutationObserver(syncCombatChrome);
+  document.querySelectorAll('.overlay,.layoutEditor').forEach(x=>overlayWatcher.observe(x,{attributes:true,attributeFilter:['class']}));
+}
+document.addEventListener('DOMContentLoaded',()=>{iconize();patchModeLabel();patchHudUpdate();patchRestart();watchOverlays();});
 iconize();
 patchModeLabel();
 patchHudUpdate();
 patchRestart();
+watchOverlays();
 })();
