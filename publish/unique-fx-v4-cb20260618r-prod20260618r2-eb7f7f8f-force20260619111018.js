@@ -38,7 +38,7 @@ window.GameModules.uniqueFx = (() => {
   }
   function bloodReapSplit(x, y, dmg) {
     if (!H.hasSet('blood-reaping')) return;
-    let elites = S.enemies.filter(e => !e.dead && (e.elite || e.boss) && Math.hypot(e.x - x, e.y - y) < 220);
+    let pool = window.nearbyEnemies ? window.nearbyEnemies(x, y, 240) : S.enemies, elites = pool.filter(e => !e.dead && (e.elite || e.boss) && Math.hypot(e.x - x, e.y - y) < 220);
     for (let i = 0; i < Math.min(3, elites.length); i++) {
       let target = elites[i];
       window.burstAt?.('blood', target.x, target.y, dmg * .45, 42, 0, '#a78bfa', 80, .28);

@@ -110,7 +110,7 @@ window.GameModules.uniqueFxUpdate = (() => {
     let p = S?.player;
     if (!p) return dmg;
     if (H.hasUnique('unique-thunder-bow') && m.kind === 'axe' && Math.random() < .20) {
-      let elite = window.nearest?.(S.enemies.filter(x => x !== e && (x.elite || x.boss) && Math.hypot(x.x - e.x, x.y - e.y) < 280), e);
+      let pool = window.nearbyEnemies ? window.nearbyEnemies(e.x, e.y, 300) : S.enemies, elite = window.nearest?.(pool.filter(x => x !== e && (x.elite || x.boss) && Math.hypot(x.x - e.x, x.y - e.y) < 280), e);
       if (elite) {
         window.dealDamage?.(elite, dmg * .50, true, 'thunderChain');
         e._thunderVuln = 3;

@@ -178,7 +178,7 @@ window.GameModules.uniqueFxShared = (() => {
       if (e.elite || e.boss) {
         let martyrDmg = (48 + p.max * .12) * (window.dmgBase?.('bloodNova') || 1);
         (window.lightBurstAt || window.burstAt)?.('blood', e.x, e.y, martyrDmg, 240, 0, '#fde68a', 220, .42);
-        if (S.endless) for (const m of S.enemies) if (m !== e && !m.boss && !m.dead && Math.hypot(m.x - e.x, m.y - e.y) < 260) m.hp -= m.max * .18;
+        if (S.endless) for (const m of (window.nearbyEnemies ? window.nearbyEnemies(e.x, e.y, 280) : S.enemies)) if (m !== e && !m.boss && !m.dead && Math.hypot(m.x - e.x, m.y - e.y) < 260) m.hp -= m.max * .18;
       }
       if (!e.boss && !e.elite && S.endless) S.kills += Math.max(1, Math.floor(window.endlessBossGap?.(S.endlessLayer || 1) * .01));
     }
@@ -193,7 +193,7 @@ window.GameModules.uniqueFxShared = (() => {
       S.parts.push({x:e.x,y:e.y,vx:0,vy:0,life:.48,max:.48,a:1,c:'#fb7185',txt:'恐惧吸收'});
     }
     if (hasSet('crimson-vessel') && (e._lastHitBy === 'lustSplash' || e._lastHitBy === 'lustKiss')) {
-      let elite = window.nearest?.(S.enemies.filter(m => !m.dead && (m.elite || m.boss)), e); if (elite) for (const m of S.enemies.filter(m => !m.dead && !m.boss && !m.elite && Math.hypot(m.x - e.x, m.y - e.y) < 220).slice(0, 4)) m._kamikaze = { target: elite, timer: 2.1, dmg: m.max * .42 };
+      let near = window.nearbyEnemies ? window.nearbyEnemies(e.x, e.y, 300) : S.enemies, elite = window.nearest?.(near.filter(m => !m.dead && (m.elite || m.boss)), e); if (elite) for (const m of near.filter(m => !m.dead && !m.boss && !m.elite && Math.hypot(m.x - e.x, m.y - e.y) < 220).slice(0, 4)) m._kamikaze = { target: elite, timer: 2.1, dmg: m.max * .42 };
       if (S.player?.cls === 'lewdSaintess') window.gainLust?.(e.boss ? 18 : e.elite ? 10 : 4);
     }
   } return { hasUnique, hasSet, eqStat, dotFx, isEvolvedDamageSkill, riftProgress, fearCap, aspectDamageChain, aspectAfterDamage, aspectDefend, aspectSkillMods, aspectOnKill };
