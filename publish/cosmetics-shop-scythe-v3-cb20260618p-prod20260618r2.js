@@ -2,10 +2,10 @@
 'use strict';
 const KEY='arcane-cosmetics-v1',SHOP_GOLD=2000,COSTUME_CORE=200,SACRIFICE_CORE=150,TICKET_ICON='./assets/generated/shop/rift-ticket-cb20260618a.png?v=20260618-full-cache-refresh-r1',LAOYANG_ICON='./assets/generated/laoyang-5090.e37e4947.webp',HARD_DRIVE_ICON='./assets/generated/hard-drive-sacrifice.77268ef6.webp';
 const CLASS_CN={paladin:'圣骑士',mage:'大魔法师',ranger:'游侠',lewdSaintess:'淫靡圣女',scytheMaiden:'琦琦'};
-function frames(d,p){return Array.from({length:24},(_,i)=>`./assets/shizhuang/${d}/${p}_${i+1}-cb20260618a.png?v=20260618-full-cache-refresh-r1`)}
+function frames(d,p,ext='png'){return Array.from({length:24},(_,i)=>`./assets/shizhuang/${d}/${p}_${i+1}-cb20260618a.${ext}?v=20260619-webp-costume-r1`)}
 const SHOP_COSTUMES=[
 {cls:'ranger',id:'vengeanceDemon',name:'复仇炎魔',frames:frames('youxia','c76e30af-a36f-494d-aad8-b51dbf4fd6b4')},
-{cls:'paladin',id:'lichKing',name:'巫妖王',frames:frames('shengqishi','d02b49a3-1e09-48e9-93c2-9d31d6e1f78d')},
+{cls:'paladin',id:'lichKing',name:'巫妖王',frames:frames('shengqishi','d02b49a3-1e09-48e9-93c2-9d31d6e1f78d','webp')},
 {cls:'mage',id:'royalMage',name:'皇家法师',frames:frames('fashi','a140b02b-e7db-481c-937e-b0a1f1bc7aee')},
 {cls:'scytheMaiden',id:'soulScythe',name:'夺魂之镰',frames:frames('qiqi','c826b322-3d3b-496e-bca5-3613aaa27394')}
 ];
