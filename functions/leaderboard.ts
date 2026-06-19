@@ -10,7 +10,7 @@ export default async function (request: any, ctx: any) {
 async function listScores(ctx: any) {
   const board = readBoard((await ctx.kv.global.get(KEY))?.value);
   sortBoard(board);
-  return { board: publicRows(board.slice(0, 10)) };
+  return { board: publicRows(board.slice(0, 20)) };
 }
 
 async function submitScore(ctx: any, args: any) {
@@ -23,7 +23,7 @@ async function submitScore(ctx: any, args: any) {
   const filtered = row.userKey ? board.filter((r) => r.userKey !== row.userKey) : board;
   filtered.push(next);
   sortBoard(filtered);
-  const top = filtered.slice(0, 10);
+  const top = filtered.slice(0, 20);
   await ctx.kv.global.put(KEY, top);
   return { board: publicRows(top), rank: top.findIndex((r) => r.at === next.at && r.name === next.name) + 1 };
 }
