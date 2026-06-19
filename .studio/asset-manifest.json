@@ -2295,32 +2295,6 @@
       },
       "traceId": "trace_mqjlw9wm_fuuvwp6y",
       "createdAt": "2026-06-18T14:40:52Z"
-    },
-    {
-      "name": "equipment-panel-frame",
-      "status": "success",
-      "path": "publish/assets/generated/equipment-panel-frame.ea04341f.webp",
-      "contentHash": "ea04341f",
-      "revisedPrompt": "Create a vertical mobile fantasy RPG equipment inventory UI background frame, portrait 9:16, centered, full panel fills image, no text, no logos, no icons, no characters. Match a dark fantasy survivor game UI reference style closely: dark brown and black leather/wood panel, ornate golden borders, rounded outer frame, crisp game UI asset look, high contrast, beveled borders, inset shadows, gold trim, subtly worn but polished. Top title plaque area empty. Below it a narrow info bar with left pill button placeholder and right pill button placeholder. A large upper equipment area with a central rectangular character/equipment display window and circular magic-ring decoration around/behind it. Three fixed empty equipment slot wells on the left side and three fixed empty equipment slot wells on the right side. Two small round gem sockets above the central window. Below the equipment area, two rows of rounded category button bases, empty. Then a large lower inventory grid/backpack tray in warm bronze gradient with subtle scroll track on the right. Bottom rounded return button base empty. All slots and button bases are pre-painted fixed UI components. Clean empty UI background ready for overlaying dynamic Chinese labels, icons, and buttons. Strictly no readable text, no letters, no numbers, no symbols, no watermark. The design should be a clean empty UI background. Transparent outside the panel only, and the background outside the UI panel must be a single uniform flat chroma key color #00B140 filling all non-panel pixels, with no gradient, no shadow, no texture, no scenery outside the panel.",
-      "model": "gpt-image-2",
-      "size": "941x1672",
-      "wantsTransparent": true,
-      "chromaKey": {
-        "color": "#00B140",
-        "alphaZeroPct": 8.4,
-        "edgeGreenBiasPct": 0,
-        "verdict": "FAIL"
-      },
-      "outputFormat": "webp",
-      "compressionProfile": "lossy_q85_alpha",
-      "originalBytes": 2677904,
-      "finalBytes": 278064,
-      "usage": {
-        "inputTokens": 323,
-        "outputImageTokens": 1158
-      },
-      "traceId": "trace_mqkkme6c_gthu9js4",
-      "createdAt": "2026-06-19T06:52:48Z"
     }
   ]
 }
