@@ -43,8 +43,9 @@ window.GameModules.uniqueFxUpdate = (() => {
     S._deathShieldFull = H.hasSet('reaper-waltz') && (S._deathWaltzTimer || 0) > 0;
     S._dotSpeed = S._deathShieldFull ? 2.5 : 1;
     if (S._soulShadowCd > 0) {
-      S._soulShadowCd -= dt;
-      if (S._soulShadowCd > 0) for (const k of Object.keys(S.cd || {})) S.cd[k] = 0;
+      S._soulShadowCd = 0;
+      for (const k of Object.keys(S.cd || {})) if (k !== 'wraithBlade') S.cd[k] = 0;
+      S.cd.wraithBlade = Math.min(S.cd.wraithBlade || .28, .28);
     }
     if (S._soulArmorTimer > 0) {
       S._soulArmorTimer -= dt;

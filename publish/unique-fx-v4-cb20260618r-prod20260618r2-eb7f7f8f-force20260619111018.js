@@ -60,6 +60,7 @@ window.GameModules.uniqueFx = (() => {
     S._deathWaltzTimer = 0;
     S._dotSpeed = 1;
     S._soulShadowCd = 0;
+    S._soulShadowResetAt = 0;
     S._soulShadowCrit = 0;
     S._soulArmor = 0;
     S._soulArmorTimer = 0;

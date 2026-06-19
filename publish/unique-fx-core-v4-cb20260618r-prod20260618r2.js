@@ -182,7 +182,8 @@ window.GameModules.uniqueFxShared = (() => {
       }
       if (!e.boss && !e.elite && S.endless) S.kills += Math.max(1, Math.floor(window.endlessBossGap?.(S.endlessLayer || 1) * .01));
     }
-    if (hasSet('soul-shadow', 6) && e._lastHitBy === 'wraithBlade') {
+    if (hasSet('soul-shadow', 6) && e._lastHitBy === 'wraithBlade' && (S.time || 0) >= (S._soulShadowResetAt || 0)) {
+      S._soulShadowResetAt = (S.time || 0) + .45;
       S._soulShadowCd = 1; S._soulShadowCrit = Math.min(.75, (S._soulShadowCrit || 0) + .15);
       S._soulArmor = Math.min(8, (S._soulArmor || 0) + (e.elite || e.boss ? 2 : 1));
       S._soulArmorTimer = 4;
