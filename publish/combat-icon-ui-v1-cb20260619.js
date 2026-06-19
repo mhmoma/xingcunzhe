@@ -1,15 +1,15 @@
 (function(){
 'use strict';
+const iconBase='./assets/generated/ui/';
 const labels={
-  saveBtn:['💾','存档'],
-  settingsBtn:['⚙','设置'],
-  relicBtn:['✦','职业神器'],
-  skillBtn:['✧','技能'],
-  invBtn:['🎒','神器栏'],
-  equipBtn:['🛡','装备']
+  saveBtn:['ui-icon-save.f5e79e61.webp','存档'],
+  settingsBtn:['ui-icon-settings.1fc5ebcc.webp','设置'],
+  relicBtn:['ui-icon-relic.efa3b5f9.webp','职业神器'],
+  skillBtn:['ui-icon-skill.e2db75b9.webp','技能'],
+  invBtn:['ui-icon-bag.03c04b3e.webp','背包']
 };
 let collapsed=false,tipTimer=0;
-function iconButton(btn,icon,label){
+function iconButton(btn,file,label){
   if(!btn)return;
   btn.dataset.iconUi='1';
   btn.dataset.label=label;
@@ -17,12 +17,14 @@ function iconButton(btn,icon,label){
   btn.setAttribute('aria-label',label);
   btn.title=label;
   if(!btn.querySelector('.combatIcon')){
-    btn.innerHTML=`<span class="combatIcon" aria-hidden="true">${icon}</span><span class="srOnly">${label}</span>`;
+    btn.innerHTML=`<img class="combatIcon" src="${iconBase}${file}" alt=""><span class="srOnly">${label}</span>`;
   }
 }
 function iconize(){
-  for(const [id,[icon,label]] of Object.entries(labels))iconButton(document.getElementById(id),icon,label);
+  for(const [id,[file,label]] of Object.entries(labels))iconButton(document.getElementById(id),file,label);
+  document.getElementById('equipBtn')?.classList.add('hidden');
   iconizeMode();
+  ensureResourceBar();
   ensureToggle();
   applyHudState();
 }
@@ -35,11 +37,21 @@ function iconizeMode(){
   mode.classList.add('combatIconButton');
   mode.setAttribute('aria-label','自动战斗模式');
   mode.title='自动战斗';
-  mode.innerHTML='<span class="swordsIcon" aria-hidden="true"></span><span class="srOnly">自动战斗</span>';
+  mode.innerHTML=`<img class="combatIcon" src="${iconBase}ui-icon-auto.9419fb98.webp" alt=""><span class="srOnly">自动战斗</span>`;
   if(!mode.dataset.modeTipBound){
     mode.dataset.modeTipBound='1';
     mode.addEventListener('click',()=>setTimeout(showModeTip,40),true);
   }
+}
+function ensureResourceBar(){
+  const hud=document.querySelector('.hud'),hp=document.getElementById('hudHp');
+  if(!hud||document.getElementById('hudResource'))return;
+  const bar=document.createElement('div');
+  bar.id='hudResource';
+  bar.className='bar resourceBar';
+  bar.innerHTML='<label><span id="resLabel">职业资源</span><span id="resTxt">0/100</span></label><div class="track"><div id="resFill" class="fill resfill"></div></div>';
+  hp?.after(bar);
+  updateResourceBar();
 }
 function ensureToggle(){
   const game=document.querySelector('.game');
@@ -65,7 +77,29 @@ function applyHudState(){
   btn.textContent=collapsed?'▸':'▾';
   btn.setAttribute('aria-label',collapsed?'展开状态栏':'折叠状态栏');
   setHudLabel('hudHp','血量','生命');
-  setHudLabel('hudBoss','Boss进度','下个魔王');
+  setHudLabel('hudBoss','Boss','下个魔王');
+  updateResourceBar();
+}
+function resourceInfo(){
+  if(!window.S?.player)return null;
+  const p=S.player,cls=p.cls;
+  if(cls==='lewdSaintess')return ['淫荡值',S.lust||0,S.lustMax||100];
+  if(cls==='scytheMaiden')return ['冥契',S.reaperCharge||0,100];
+  if(cls==='mage')return ['奥术回响',S.arcaneEcho||0,100];
+  if(cls==='paladin')return ['圣怒',S.holyRage||0,100];
+  if(cls==='ranger')return ['猎杀动能',S.huntCharge||0,100];
+  return null;
+}
+function updateResourceBar(){
+  const bar=document.getElementById('hudResource'),label=document.getElementById('resLabel'),txt=document.getElementById('resTxt'),fill=document.getElementById('resFill');
+  if(!bar||!label||!txt||!fill)return;
+  const info=resourceInfo();
+  bar.classList.toggle('hidden',!info);
+  if(!info)return;
+  const [name,cur,max]=info,now=Math.max(0,Math.floor(cur)),cap=Math.max(1,Math.floor(max));
+  label.textContent=name;
+  txt.textContent=`${now}/${cap}`;
+  fill.style.width=`${Math.max(0,Math.min(100,now/cap*100))}%`;
 }
 function showModeTip(){
   const mode=document.getElementById('modeBtn');
@@ -91,7 +125,16 @@ function patchModeLabel(){
     window.updateModeLabel.__iconPatched=true;
   }
 }
-document.addEventListener('DOMContentLoaded',()=>{iconize();patchModeLabel();});
+function patchHudUpdate(){
+  if(window.updateHud?.__iconPatched)return;
+  const base=window.updateHud;
+  if(typeof base==='function'){
+    window.updateHud=function(){base();ensureResourceBar();updateResourceBar();document.getElementById('equipBtn')?.classList.add('hidden');};
+    window.updateHud.__iconPatched=true;
+  }
+}
+document.addEventListener('DOMContentLoaded',()=>{iconize();patchModeLabel();patchHudUpdate();});
 iconize();
 patchModeLabel();
+patchHudUpdate();
 })();

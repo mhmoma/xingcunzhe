@@ -1,7 +1,7 @@
 {
   "version": 1,
   "createdAt": "2026-06-13T14:08:29Z",
-  "updatedAt": "2026-06-19T06:52:48Z",
+  "updatedAt": "2026-06-19T08:25:34Z",
   "assets": [
     {
       "name": "player-paladin",
@@ -2295,6 +2295,183 @@
       },
       "traceId": "trace_mqjlw9wm_fuuvwp6y",
       "createdAt": "2026-06-18T14:40:52Z"
+    },
+    {
+      "name": "ui-icon-save",
+      "status": "success",
+      "path": "publish/assets/generated/ui/ui-icon-save.f5e79e61.webp",
+      "contentHash": "f5e79e61",
+      "revisedPrompt": "Glowing golden crystal save sigil shaped like a small magical disk and bookmark, Arcane survivor chibi fantasy game UI icon, dark dungeon fantasy, clean dark outline, gold and violet glow, high contrast, centered single symbol, no letters, no numbers, no text, no logo, no watermark. Strictly placed on a SOLID UNIFORM #00B140 chroma key flat color background. The background is a single uniform shade of #00B140 chroma key green that fills 100% of pixels not occupied by the icon. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background, exactly like a green screen used for VFX compositing.",
+      "model": "gpt-image-2",
+      "size": "1254x1254",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 76.5,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 1465068,
+      "finalBytes": 87132,
+      "usage": {
+        "inputTokens": 155,
+        "outputImageTokens": 515
+      },
+      "traceId": "trace_mqknrxj4_t0prstjn",
+      "createdAt": "2026-06-19T08:20:40Z"
+    },
+    {
+      "name": "ui-icon-settings",
+      "status": "success",
+      "path": "publish/assets/generated/ui/ui-icon-settings.1fc5ebcc.webp",
+      "contentHash": "1fc5ebcc",
+      "revisedPrompt": "A single centered fantasy game UI icon: an arcane gear cog with a small blue rune spark glowing in the center, styled as an Arcane survivor chibi fantasy game asset. Dark dungeon fantasy aesthetic, clean dark outline, gold and violet glow accents, high contrast, crisp readable silhouette, isolated single symbol. No letters, no numbers, no text, no logo, no watermark. Place strictly on a SOLID UNIFORM #00B140 chroma key flat background filling 100% of pixels not occupied by the icon. Background must be pure flat chroma green with no gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements.",
+      "model": "gpt-image-2",
+      "size": "1254x1254",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 58.7,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 1822730,
+      "finalBytes": 134408,
+      "usage": {
+        "inputTokens": 143,
+        "outputImageTokens": 515
+      },
+      "traceId": "trace_mqknsmh4_bvd9uzvg",
+      "createdAt": "2026-06-19T08:21:16Z"
+    },
+    {
+      "name": "ui-icon-auto",
+      "status": "success",
+      "path": "publish/assets/generated/ui/ui-icon-auto.9419fb98.webp",
+      "contentHash": "9419fb98",
+      "revisedPrompt": "Centered single UI icon for an auto-battle fantasy game: crossed enchanted swords with a tiny circular motion ring motif, chibi Arcane survivor aesthetic, dark dungeon fantasy feel, clean dark outline, gold and violet glow accents, high contrast, crisp edges, no letters, no numbers, no text, no logo, no watermark. The icon should be isolated and occupy the center of the frame. Background must be a perfectly flat, solid uniform chroma key green #00B140 filling every pixel not occupied by the icon, with absolutely no gradient, shadow, texture, scenery, ground, decoration, or environmental elements. Pure green screen compositing style.",
+      "model": "gpt-image-2",
+      "size": "1254x1254",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 74.3,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 1524468,
+      "finalBytes": 117914,
+      "usage": {
+        "inputTokens": 137,
+        "outputImageTokens": 515
+      },
+      "traceId": "trace_mqknte61_n3gk11ie",
+      "createdAt": "2026-06-19T08:21:58Z"
+    },
+    {
+      "name": "ui-icon-bag",
+      "status": "success",
+      "path": "publish/assets/generated/ui/ui-icon-bag.03c04b3e.webp",
+      "contentHash": "03c04b3e",
+      "revisedPrompt": "Centered single-symbol game UI icon: a treasure backpack satchel with a glowing artifact gem tucked into it, symbolizing bag and artifacts, in an arcane survivor chibi fantasy style. Dark dungeon fantasy aesthetic, clean dark outline, high contrast, gold and violet glow accents, crisp readable silhouette, polished icon design, no letters, no numbers, no text, no logo, no watermark. Strictly isolated on a solid uniform chroma key background color #00B140 filling the entire canvas outside the icon, perfectly flat with no gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements.",
+      "model": "gpt-image-2",
+      "size": "1254x1254",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 56.3,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 1731969,
+      "finalBytes": 129468,
+      "usage": {
+        "inputTokens": 133,
+        "outputImageTokens": 515
+      },
+      "traceId": "trace_mqknuaon_bo43ek60",
+      "createdAt": "2026-06-19T08:22:36Z"
+    },
+    {
+      "name": "ui-icon-relic",
+      "status": "success",
+      "path": "publish/assets/generated/ui/ui-icon-relic.efa3b5f9.webp",
+      "contentHash": "efa3b5f9",
+      "revisedPrompt": "Ancient class relic star crest, a single centered fantasy game UI icon resembling a holy artifact. Gold and violet color palette with glowing arcane energy, dark dungeon fantasy aesthetic, clean dark outline, high contrast, chibi-friendly stylization but still a relic symbol, ornate star crest motif, mysterious survivor relic vibe. One isolated symbol only, no letters, no numbers, no text, no logo, no watermark. Strictly on a SOLID UNIFORM #00B140 chroma key flat color background filling the entire canvas wherever not occupied by the icon. No gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat green screen background, exactly uniform #00B140.",
+      "model": "gpt-image-2",
+      "size": "1254x1254",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 63.2,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 2035414,
+      "finalBytes": 193672,
+      "usage": {
+        "inputTokens": 153,
+        "outputImageTokens": 2058
+      },
+      "traceId": "trace_mqknv3m2_lwrju1bj",
+      "createdAt": "2026-06-19T08:23:36Z"
+    },
+    {
+      "name": "ui-icon-skill",
+      "status": "success",
+      "path": "publish/assets/generated/ui/ui-icon-skill.e2db75b9.webp",
+      "contentHash": "e2db75b9",
+      "revisedPrompt": "Magic spell rune burst, cyan and violet arcane skill symbol for a fantasy game UI icon, chibi arcane survivor style, dark dungeon fantasy aesthetic, clean dark outline, gold and violet glow, high contrast, centered single symbol, no letters, no numbers, no text, no logo, no watermark. Place the icon strictly on a SOLID UNIFORM #00B140 chroma key flat color background that fills 100% of pixels not occupied by the icon. Background must be a single uniform shade of #00B140 with no gradient, no shadow, no texture, no scenery, no ground, no decoration, no environmental elements. Pure flat color background like a green screen for VFX compositing.",
+      "model": "gpt-image-2",
+      "size": "1254x1254",
+      "wantsTransparent": true,
+      "chromaKey": {
+        "color": "#00B140",
+        "alphaZeroPct": 65.6,
+        "edgeGreenBiasPct": 0,
+        "verdict": "PASS"
+      },
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q85_alpha",
+      "originalBytes": 1720009,
+      "finalBytes": 166534,
+      "usage": {
+        "inputTokens": 150,
+        "outputImageTokens": 2058
+      },
+      "traceId": "trace_mqknwdyg_moi6ygp9",
+      "createdAt": "2026-06-19T08:24:57Z"
+    },
+    {
+      "name": "ui-hud-panel",
+      "status": "success",
+      "path": "publish/assets/generated/ui/ui-hud-panel.2d7f384b.webp",
+      "contentHash": "2d7f384b",
+      "revisedPrompt": "Wide horizontal dark fantasy translucent HUD status bar frame for an arcade survivor game, ornate but clean design, obsidian glass material, faint violet edge glow, subtle gold corner accents, empty transparent center area reserved for health and resource bars, elegant symmetrical UI frame, high readability, polished game interface asset, no text, no logo, no watermark, wide composition",
+      "model": "gpt-image-2",
+      "size": "1983x793",
+      "wantsTransparent": false,
+      "chromaKey": null,
+      "outputFormat": "webp",
+      "compressionProfile": "lossy_q80_opaque",
+      "originalBytes": 1251174,
+      "finalBytes": 71110,
+      "usage": {
+        "inputTokens": 76,
+        "outputImageTokens": 815
+      },
+      "traceId": "trace_mqkny4l4_i32g4tlw",
+      "createdAt": "2026-06-19T08:25:34Z"
     }
   ]
 }
