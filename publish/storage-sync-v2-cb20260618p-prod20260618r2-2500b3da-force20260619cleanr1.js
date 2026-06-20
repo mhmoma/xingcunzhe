@@ -47,9 +47,13 @@ window.GameModules.storageSync = (() => {
   }
   async function put(key, value, label = '数据') {
     const data = stamp(value);
-    localPut(key, data);
-    try { await withTimeout(window.dzmm?.kv?.put?.(key, data)); }
-    catch (e) { warn(key, `${label}云端保存失败，已暂存本机`, e); }
+    try {
+      await withTimeout(window.dzmm?.kv?.put?.(key, data));
+      localPut(key, data);
+    } catch (e) {
+      localPut(key, data);
+      warn(key, `${label}云端保存失败，已暂存本机`, e);
+    }
     return data;
   }
   async function remove(key, label = '数据') {
