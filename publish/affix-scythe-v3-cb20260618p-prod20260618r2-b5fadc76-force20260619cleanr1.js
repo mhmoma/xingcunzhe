@@ -6,49 +6,49 @@ window.GameModules.affix = (() => {
   const RES_CN = { physical:'物理', fire:'火焰', frost:'霜寒', arcane:'奥术', holy:'神圣', shadow:'暗影', poison:'毒素', lust:'欲望' };
 
   const SURVIVAL_AFFIXES = [
-    {id:'hp',stat:'hp',name:'生命',range:[.12,.18],tag:'ADDITIVE_POOL'},
-    {id:'armor',stat:'armor',name:'护甲',range:[.08,.12],tag:'ADDITIVE_POOL'},
-    {id:'regen',stat:'regen',name:'回复',range:[.08,.12],tag:'ADDITIVE_POOL'},
-    {id:'move',stat:'move',name:'移速',range:[.10,.14],tag:'ADDITIVE_POOL'},
+    {id:'hp',stat:'hp',name:'最大生命提高',range:[.12,.18],tag:'ADDITIVE_POOL'},
+    {id:'armor',stat:'armor',name:'总护甲提高',range:[.08,.12],tag:'ADDITIVE_POOL'},
+    {id:'regen',stat:'regen',name:'生命回复提高',range:[.08,.12],tag:'ADDITIVE_POOL'},
+    {id:'move',stat:'move',name:'移动速度提高',range:[.10,.14],tag:'ADDITIVE_POOL'},
   ];
   const ADDITIVE_AFFIXES = [
-    {id:'damage',stat:'damage',name:'伤害',range:[.12,.18],tag:'ADDITIVE_POOL'},
-    {id:'cooldown',stat:'cooldown',name:'冷却',range:[.04,.055],tag:'ADDITIVE_POOL'},
-    {id:'atkSpeed',stat:'atkSpeed',name:'攻速',range:[.06,.09],tag:'ADDITIVE_POOL'},
-    {id:'skillFreq',stat:'skillFreq',name:'施法频率',range:[.06,.09],tag:'ADDITIVE_POOL'},
-    {id:'range',stat:'range',name:'范围',range:[.09,.14],tag:'ADDITIVE_POOL'},
-    {id:'crit',stat:'crit',name:'暴击',range:[.09,.14],tag:'ADDITIVE_POOL'},
-    {id:'projectileSpeed',stat:'projectileSpeed',name:'技能飞行速度',range:[.09,.14],tag:'ADDITIVE_POOL'},
-    {id:'extraProjectile',stat:'extraProjectile',name:'额外弹幕',range:[.07,.10],tag:'ADDITIVE_POOL'},
-    {id:'splitChance',stat:'splitChance',name:'弹幕分裂率',range:[.07,.10],tag:'ADDITIVE_POOL'},
-    {id:'bossDmg',stat:'bossDmg',name:'Boss伤害',range:[.14,.22],tag:'ADDITIVE_POOL'},
-    {id:'eliteDmg',stat:'eliteDmg',name:'精英伤害',range:[.14,.22],tag:'ADDITIVE_POOL'},
-    {id:'riftBossDmg',stat:'riftBossDmg',name:'大秘境Boss伤害',range:[.16,.24],tag:'ADDITIVE_POOL'},
-    {id:'riftEliteDmg',stat:'riftEliteDmg',name:'大秘境精英伤害',range:[.14,.22],tag:'ADDITIVE_POOL'},
-    {id:'shieldBreak',stat:'shieldBreak',name:'破盾系数',range:[.09,.14],tag:'ADDITIVE_POOL'},
-    {id:'executeDmg',stat:'executeDmg',name:'处决伤害',range:[.14,.22],tag:'ADDITIVE_POOL'},
-    {id:'dotTickRate',stat:'dotTickRate',name:'DoT跳字频率',range:[.06,.09],tag:'ADDITIVE_POOL'},
-    {id:'progressBonus',stat:'progressBonus',name:'秘境进度',range:[.03,.05],tag:'ADDITIVE_POOL'},
+    {id:'damage',stat:'damage',name:'全伤害提高',range:[.12,.18],tag:'ADDITIVE_POOL'},
+    {id:'cooldown',stat:'cooldown',name:'冷却缩减',range:[.04,.055],tag:'ADDITIVE_POOL'},
+    {id:'atkSpeed',stat:'atkSpeed',name:'攻击速度提高',range:[.06,.09],tag:'ADDITIVE_POOL'},
+    {id:'skillFreq',stat:'skillFreq',name:'技能释放频率提高',range:[.06,.09],tag:'ADDITIVE_POOL'},
+    {id:'range',stat:'range',name:'技能范围提高',range:[.09,.14],tag:'ADDITIVE_POOL'},
+    {id:'crit',stat:'crit',name:'暴击率',range:[.09,.14],tag:'ADDITIVE_POOL'},
+    {id:'projectileSpeed',stat:'projectileSpeed',name:'技能飞行速度提高',range:[.09,.14],tag:'ADDITIVE_POOL'},
+    {id:'extraProjectile',stat:'extraProjectile',name:'弹幕数量提高',range:[.07,.10],tag:'ADDITIVE_POOL'},
+    {id:'splitChance',stat:'splitChance',name:'弹幕分裂概率',range:[.07,.10],tag:'ADDITIVE_POOL'},
+    {id:'bossDmg',stat:'bossDmg',name:'对Boss伤害提高',range:[.14,.22],tag:'ADDITIVE_POOL'},
+    {id:'eliteDmg',stat:'eliteDmg',name:'对精英伤害提高',range:[.14,.22],tag:'ADDITIVE_POOL'},
+    {id:'riftBossDmg',stat:'riftBossDmg',name:'秘境Boss伤害提高',range:[.16,.24],tag:'ADDITIVE_POOL'},
+    {id:'riftEliteDmg',stat:'riftEliteDmg',name:'秘境精英伤害提高',range:[.14,.22],tag:'ADDITIVE_POOL'},
+    {id:'shieldBreak',stat:'shieldBreak',name:'对护盾伤害提高',range:[.09,.14],tag:'ADDITIVE_POOL'},
+    {id:'executeDmg',stat:'executeDmg',name:'对低血敌人伤害提高',range:[.14,.22],tag:'ADDITIVE_POOL'},
+    {id:'dotTickRate',stat:'dotTickRate',name:'持续伤害生效频率提高',range:[.06,.09],tag:'ADDITIVE_POOL'},
+    {id:'progressBonus',stat:'progressBonus',name:'秘境进度获取提高',range:[.03,.05],tag:'ADDITIVE_POOL'},
   ];
   const MULTIPLICATIVE_AFFIXES = RES.map(r => ({
     id:'attrDmg_'+r,
     stat:'attrDmg_'+r,
     attr:r,
-    name:RES_CN[r]+'属性伤害',
+    name:RES_CN[r]+'属性伤害提高',
     range:[.16,.24],
     tag:'SUB_BUCKET_TYPE'
   }));
-  const RESIST_AFFIXES = RES.map(r => ({id:'res_'+r,stat:'resist_'+r,attr:r,name:RES_CN[r]+'抗性',range:[.15,.20],tag:'ADDITIVE_POOL'}));
+  const RESIST_AFFIXES = RES.map(r => ({id:'res_'+r,stat:'resist_'+r,attr:r,name:RES_CN[r]+'抗性提高',range:[.15,.20],tag:'ADDITIVE_POOL'}));
   const TEMPLATE_AFFIXES = [
-    {id:'critDmg',stat:'critDmg',name:'暴击伤害',range:[.18,.28],tag:'ADDITIVE_POOL'},
-    {id:'dotDmg',stat:'dotDmg',name:'持续伤害',range:[.18,.28],tag:'ADDITIVE_POOL'},
-    {id:'rangeDmg',stat:'rangeDmg',name:'远距伤害',range:[.14,.22],tag:'ADDITIVE_POOL'},
-    {id:'healthyDmg',stat:'healthyDmg',name:'对健康伤害',range:[.14,.22],tag:'ADDITIVE_POOL'},
-    {id:'dodge',stat:'dodge',name:'闪避',range:[.08,.12],tag:'ADDITIVE_POOL'},
-    {id:'eliteDmgReduce',stat:'eliteDmgReduce',name:'精英减伤',range:[.11,.16],tag:'ADDITIVE_POOL'},
-    {id:'bossDmgReduce',stat:'bossDmgReduce',name:'Boss减伤',range:[.11,.16],tag:'ADDITIVE_POOL'},
-    {id:'slowResist',stat:'slowResist',name:'减速抗性',range:[.10,.14],tag:'ADDITIVE_POOL'},
-    {id:'healBonus',stat:'healBonus',name:'治疗效果',range:[.08,.12],tag:'ADDITIVE_POOL'},
+    {id:'critDmg',stat:'critDmg',name:'暴击伤害提高',range:[.18,.28],tag:'ADDITIVE_POOL'},
+    {id:'dotDmg',stat:'dotDmg',name:'持续伤害提高',range:[.18,.28],tag:'ADDITIVE_POOL'},
+    {id:'rangeDmg',stat:'rangeDmg',name:'远距离伤害提高',range:[.14,.22],tag:'ADDITIVE_POOL'},
+    {id:'healthyDmg',stat:'healthyDmg',name:'对高血量敌人伤害提高',range:[.14,.22],tag:'ADDITIVE_POOL'},
+    {id:'dodge',stat:'dodge',name:'闪避率',range:[.08,.12],tag:'ADDITIVE_POOL'},
+    {id:'eliteDmgReduce',stat:'eliteDmgReduce',name:'受到精英伤害降低',range:[.11,.16],tag:'ADDITIVE_POOL'},
+    {id:'bossDmgReduce',stat:'bossDmgReduce',name:'受到Boss伤害降低',range:[.11,.16],tag:'ADDITIVE_POOL'},
+    {id:'slowResist',stat:'slowResist',name:'受到减速效果降低',range:[.10,.14],tag:'ADDITIVE_POOL'},
+    {id:'healBonus',stat:'healBonus',name:'治疗效果提高',range:[.08,.12],tag:'ADDITIVE_POOL'},
   ];
   const AFFIX_BY_STAT = [...SURVIVAL_AFFIXES, ...ADDITIVE_AFFIXES, ...MULTIPLICATIVE_AFFIXES, ...RESIST_AFFIXES, ...TEMPLATE_AFFIXES].reduce((o,a)=>(o[a.stat]=a,o),{});
 
