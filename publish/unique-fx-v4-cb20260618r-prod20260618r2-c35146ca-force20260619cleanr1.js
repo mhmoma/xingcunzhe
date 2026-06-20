@@ -23,7 +23,7 @@ window.GameModules.uniqueFx = (() => {
   function bloodPlateStealMul(id) {
     let p = S?.player;
     if (!p || !H.hasUnique('unique-blood-plate') || p.hp / p.max >= .35) return 0;
-    return H.isEvolvedDamageSkill(id) ? 1 : 0;
+    return H.isEvolvedDamageSkill(id) ? .45 : 0;
   }
   function getThunderVuln(e) {
     if (e._thunderVuln > 0) {
@@ -80,7 +80,7 @@ window.GameModules.uniqueFx = (() => {
   }
   function huntQuiverCount(baseCount, skillId) {
     if (!H.hasUnique('unique-hunt-quiver') || (skillId !== 'daggerRain' && skillId !== 'windCutter')) return baseCount;
-    let extraAtk = H.eqStat('atkSpeed') + (S._voidBonus || 0), extraCount = Math.floor(extraAtk * 10) * .20;
+    let extraAtk = H.eqStat('atkSpeed') + (S._voidBonus || 0), extraCount = Math.min(.80, Math.floor(extraAtk * 10) * .20);
     return baseCount + Math.floor(extraCount * baseCount);
   }
   return {

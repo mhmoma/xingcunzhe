@@ -27,23 +27,23 @@ window.GameModules.uniqueFxShared = (() => {
     let p = S?.player;
     if (!p || !id) return d;
     if (hasUnique('unique-abyss-mask') && e.hp > 0) {
-      let hpR = e.hp / e.max, thresh = e.boss ? .15 : e.elite ? .20 : .30;
+      let hpR = e.hp / e.max, thresh = e.boss ? .10 : e.elite ? .15 : .25;
       if (hpR <= thresh) { d = e.hp + 1; e._abyssExecute = true; S.parts.push({x:e.x,y:e.y,vx:0,vy:0,life:.6,max:.6,a:1,c:'#a78bfa',aspectRing:80}); }
     }
     if (hasUnique('unique-elite-boots')) {
-      let prog = riftProgress(), mul = prog >= 1 ? 1.20 : 1 + prog;
+      let prog = riftProgress(), mul = 1 + Math.min(.80, prog * .80);
       d *= mul;
     }
     if (hasUnique('unique-blood-plate') && isEvolvedDamageSkill(id)) {
-      let loss = Math.floor((1 - p.hp / p.max) * 10);
-      if (loss > 0) d *= 1 + loss * .15;
+      let loss = Math.min(6, Math.floor((1 - p.hp / p.max) * 10));
+      if (loss > 0) d *= 1 + loss * .10;
     }
     if (hasUnique('unique-demon-horn') && e.boss) d *= 1.60;
-    if (hasUnique('unique-plague-bell') && id === 'wraithBlade' && e._nextCrit && (e.slow > 0 || e._dotMarked > 0)) d *= 1.75;
+    if (hasUnique('unique-plague-bell') && id === 'wraithBlade' && e._nextCrit && (e.slow > 0 || e._dotMarked > 0)) d *= 1.55;
     if (hasUnique('unique-golem-soul') && eqStat('thorns') > 0 && ['missile','holy','ice','fire','wind','moonSlash','lustKiss','soulOrb'].includes(id)) d += eqStat('thorns') * 1.5 * .01;
     if (hasUnique('unique-saint-nail') && id === 'garlic') {
       let stacks = Math.floor(riftProgress() * 10);
-      if (stacks > 0) d *= Math.pow(1.12, stacks);
+      if (stacks > 0) d *= Math.pow(1.09, stacks);
     }
     if (hasSet('reaper-waltz', 6) && id === 'scytheArc') {
       let shieldRate = Math.min(1, (p.shield || 0) / Math.max(1, p.max));
@@ -69,7 +69,7 @@ window.GameModules.uniqueFxShared = (() => {
       S.parts.push({x:p.x,y:p.y,vx:0,vy:0,life:.55,max:.55,a:1,c:'#93c5fd',aspectRing:50});
     }
     if (hasUnique('unique-rose-mirror') && (S._roseStored || 0) > 0) {
-      let linked = hasSet('rose-mirror', 6), stored = S._roseStored, dmg = stored * (linked ? 4.6 : 3.5), rad = linked ? 240 : 180, pool = window.nearbyEnemies ? window.nearbyEnemies(p.x, p.y, rad + 80) : S.enemies; S._roseStored = 0;
+      let linked = hasSet('rose-mirror', 6), stored = S._roseStored, dmg = stored * (linked ? 3.0 : 2.2), rad = linked ? 220 : 170, pool = window.nearbyEnemies ? window.nearbyEnemies(p.x, p.y, rad + 80) : S.enemies; S._roseStored = 0;
       for (const m of pool) if (!m.dead && dist(p, m) < rad + m.r) dealDamage(m, dmg, true, 'lustSplash'); S.artFx.push({x:p.x,y:p.y,type:'lustOverflow',kind:'lustOverflow',color:'#f472b6',life:.52,max:.52,size:linked?280:220});
     }
     if (hasSet('astral-missile') && id === 'missile' && crit && Math.random() < .25) {
@@ -125,8 +125,8 @@ window.GameModules.uniqueFxShared = (() => {
     let p = S?.player;
     if (!p) return { dmg: rawDmg, prevent: false };
     if (hasUnique('unique-rose-mirror')) {
-      let linked=hasSet('rose-mirror',6),absorb=linked ? .92 : .85,stored=rawDmg*absorb;
-      S._roseStored = Math.min(p.max*(linked?7:5), (S._roseStored || 0) + stored); if (linked) S._mirrorPool = Math.min(p.max * 3, (S._mirrorPool || 0) + stored * .4); return { dmg: rawDmg * (1 - absorb), prevent: false };
+      let linked=hasSet('rose-mirror',6),absorb=linked ? .72 : .60,stored=rawDmg*absorb;
+      S._roseStored = Math.min(p.max*(linked?4.5:3), (S._roseStored || 0) + stored); if (linked) S._mirrorPool = Math.min(p.max * 2, (S._mirrorPool || 0) + stored * .3); return { dmg: rawDmg * (1 - absorb), prevent: false };
     }
     if (hasUnique('unique-pale-ring') && p.hp - rawDmg <= 0 && !S._paleUsed) {
       S._paleUsed = true; S._paleTimer = 2.5; p.hp = 1; p.shield = Math.round(p.max * .25);

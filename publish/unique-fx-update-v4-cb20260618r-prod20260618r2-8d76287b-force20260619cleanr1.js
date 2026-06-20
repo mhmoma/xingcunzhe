@@ -92,12 +92,12 @@ window.GameModules.uniqueFxUpdate = (() => {
     let rad = f.rad || f.size || 80, pool = window.nearbyEnemies ? window.nearbyEnemies(f.x, f.y, rad + 80) : S.enemies;
     if (H.hasUnique('unique-plague-bell') && H.dotFx(f)) for (const e of pool) if (Math.hypot(e.x - f.x, e.y - f.y) < rad + e.r) e._dotMarked = .35;
     if (H.hasUnique('unique-blaze-core') && f.burn) {
-      for (const e of pool) if (e.boss && Math.hypot(e.x - f.x, e.y - f.y) < rad + e.r) { e._blazeBurn = (e._blazeBurn || 0) + dt; f.blazeMul = 1 + Math.min(2, e._blazeBurn * .20); }
+      for (const e of pool) if (e.boss && Math.hypot(e.x - f.x, e.y - f.y) < rad + e.r) { e._blazeBurn = (e._blazeBurn || 0) + dt; f.blazeMul = 1 + Math.min(1.2, e._blazeBurn * .12); }
     }
     if (H.hasSet('ember-meteor') && f.burn) {
       for (const e of pool) if (e.boss && Math.hypot(e.x - f.x, e.y - f.y) < rad + e.r) { e._emberBurn = (e._emberBurn || 0) + dt; f.emberMul = 1 + Math.min(1.5, e._emberBurn * .20); }
     }
-    if (H.dotFx(f)) f.tickMul = (S._plagueDotRush > 0 ? 2.5 : 1) * (H.hasSet('reaper-waltz') && S._deathShieldFull ? (S._dotSpeed || 1) : 1) * (f.emberMul || 1) * (f.blazeMul || 1);
+    if (H.dotFx(f)) f.tickMul = (S._plagueDotRush > 0 ? 2.0 : 1) * (H.hasSet('reaper-waltz') && S._deathShieldFull ? (S._dotSpeed || 1) : 1) * (f.emberMul || 1) * (f.blazeMul || 1);
     if (H.hasSet('violet-hymn') && f.prayer) {
       let p = S?.player;
       if (p && p.hp >= p.max) {
