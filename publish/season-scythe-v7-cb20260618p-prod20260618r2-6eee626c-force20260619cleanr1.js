@@ -38,7 +38,7 @@ window.GameModules.season = (() => {
   function cap(){return cfg().levelCap}
   function need(lv=level()){return lv>=cap()?0:Math.round(80+lv*lv*22+lv*38)}
   function key(base){return `${base}-season-${CURRENT}`}
-  async function start(){await init();state.started[CURRENT]=true;state.seasons[CURRENT]={level:1,xp:0,totalXp:0,startedAt:Date.now()};await kvPut(KEY,state);return state.seasons[CURRENT]}
+  async function start(){await init();state.started[CURRENT]=true;let cur=state.seasons[CURRENT];if(cur&&typeof cur==='object'){cur.level=Math.min(cfg().levelCap,Math.max(1,Math.floor(Number(cur.level)||1)));cur.xp=Math.max(0,Math.floor(Number(cur.xp)||0));cur.totalXp=Math.max(0,Math.floor(Number(cur.totalXp)||0));cur.startedAt=cur.startedAt||Date.now()}else cur={level:1,xp:0,totalXp:0,startedAt:Date.now()};state.seasons[CURRENT]=cur;await kvPut(KEY,state);return cur}
   async function save(){await kvPut(KEY,state)}
   async function addRunXp(run){await init();if(!started())return null;let cur=season(),gain=Math.max(10,Math.floor((run.kills||0)*1+(run.bossKills||0)*85+Math.floor((run.time||0)/10)*8+(run.win?500:0)+(run.endlessLayer||0)*180));cur.level=level();cur.xp=xp()+gain;cur.totalXp=(cur.totalXp||0)+gain;let ups=0;while(cur.level<cap()&&cur.xp>=need(cur.level)){cur.xp-=need(cur.level);cur.level++;ups++}state.seasons[CURRENT]=cur;await save();return {gain,level:cur.level,xp:cur.xp,next:need(cur.level),ups}}
   async function grantLevel(target){await init();if(!started())await start();let cur=season(),old=level(),to=Math.min(cap(),Math.max(old,Math.floor(Number(target)||old)));cur.level=to;cur.xp=0;cur.totalXp=Math.max(cur.totalXp||0,0);state.seasons[CURRENT]=cur;await save();return{level:cur.level,ups:Math.max(0,to-old)}}
