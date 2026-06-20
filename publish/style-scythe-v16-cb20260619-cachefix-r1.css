@@ -71,6 +71,8 @@ button,.ghostBtn,.startBtn,.modeBtn,.equipTabs button,.choiceActions button,.lev
 #equipmentPanel .panel{height:min(96dvh,760px)!important;min-height:0!important;overflow:hidden!important}
 #equipDetailModal{z-index:80!important}
 #equipDetailModal .equipDetailPanel{position:relative!important;z-index:81!important}
+#equipDetailModal.leaderboardDetailModal .equipDetailPanel{height:min(92dvh,720px)!important;max-height:92dvh!important;display:flex!important;flex-direction:column!important;overflow:hidden!important;min-height:0!important}
+#equipDetailModal.leaderboardDetailModal .equipDetailBody{flex:1 1 auto!important;min-height:0!important;max-height:none!important;overflow-y:auto!important;overscroll-behavior:contain!important;padding-bottom:calc(22px + env(safe-area-inset-bottom))!important}
 #statModal,#shopDetailModal,#costumeModal,#dlcModal,#saveTransferModal,#redeemModal,#riftEditorModal{z-index:70!important}
 #leaderboard,#progressionModal,#evoGuide{z-index:65!important}
 #skillTip,#modeTip{z-index:90!important}
