@@ -3,6 +3,7 @@ window.GameModules.redeem = (() => {
   let redeeming = false;
   const LOCAL_CODES = {
     '版本奖励': { id: 'version-reward-20260618', core: 100, message: '兑换成功：魔核 +100' },
+    '更新补偿': { id: 'update-compensation-20260620', core: 150, message: '兑换成功：魔核 +150' },
     'Tomkk': { id: 'tomkk-local-20260618', core: 300, seasonLevel: 20, message: '兑换成功：赛季等级升至 20，魔核 +300' },
     'Tomkk666': { id: 'tomkk-rift-tickets-20260616', riftKeys: 50, message: '兑换成功：大秘境门票 +50' },
     'Tomkk白衣胜雪': { id: 'tomkk-baiyi-20260615', gold: 6666, core: 100, message: '兑换成功：灵魂金币 +6666，魔核 +100' }
