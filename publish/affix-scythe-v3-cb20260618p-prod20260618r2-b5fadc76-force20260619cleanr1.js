@@ -73,10 +73,10 @@ window.GameModules.affix = (() => {
     let ip = Math.max(1, Math.min(120, Number(itemPower)||1));
     return ip>=105?'满级':ip>=80?'高阶':ip>=50?'进阶':ip>=25?'成长':'新手';
   }
-  function rollQuality(itemPower=1) {
+  function rollQuality(itemPower=1, canPrimal=false) {
     let ip = Math.max(1, Math.min(120, Number(itemPower)||1)), r = Math.random() * 100;
-    if (ip >= 105 && r > 99) return 'primal';
-    if (r > 85) return 'ancient';
+    if (canPrimal && ip >= 105 && r >= 99) return 'primal';
+    if (r >= 85 && r < 99) return 'ancient';
     return 'normal';
   }
   function isSurvivalStat(stat) { return stat === 'hp' || stat === 'armor'; }
