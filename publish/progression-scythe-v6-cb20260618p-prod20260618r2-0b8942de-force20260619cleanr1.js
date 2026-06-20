@@ -106,7 +106,7 @@ window.GameModules.progression = (() => {
   }
   function render(container) {
     if (!container) return;
-    container.innerHTML = `<div class="progressEntry"><span>灵魂金币：<b>${meta.soulGold}</b>　魔核：<b>${meta.soulCore}</b></span><button class="progressBtn skillBoostBtn" data-open-progress>技能强化</button></div>`;
+    container.innerHTML = '';
   }
   function renderTree(container, onChange, active = 'paladin') {
     if (!container) return; const list = nodes(active), up = clsData(active).upgrades;
