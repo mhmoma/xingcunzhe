@@ -30,7 +30,7 @@
 window.__ARCANE_BUILD='prod-nightly-r21-cb20260620';
 window.RIFT_REMOVED_SKILLS=['dawnBanner','aegisCharge'];
 window.__ARCANE_BUILD_CLEANUP='prod-nightly-r21-cb20260620';
-window.addEventListener('error',e=>{try{console.error('[ArcaneError]',e.message||'Script error',e.filename||'',e.lineno||0,e.colno||0,e.error?.message||'',e.error?.stack||'')}catch(_){}},true);
+window.addEventListener('error',e=>{try{console.error('[ArcaneError]',window.__ARCANE_BUILD,e.message||'Script error',e.filename||'',e.lineno||0,e.colno||0,e.error?.message||'',e.error?.stack||'')}catch(_){}},true);
 window.addEventListener('unhandledrejection',e=>{try{let r=e.reason||{};console.error('[ArcaneRejection]',r.code||'',r.message||String(r),r.stack||'')}catch(_){}},true);
 (async()=>{
   try {
