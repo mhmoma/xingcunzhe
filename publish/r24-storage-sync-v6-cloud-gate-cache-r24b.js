@@ -1,7 +1,7 @@
 window.GameModules = window.GameModules || {};
 window.GameModules.storageSync = (() => {
   const warned = {}, pendingCloud = new Set(), cloudReadFailures = new Map();
-  const LOCAL_ONLY_TEST_MODE = window.__LOCAL_SAVE_TEST_MODE === true;
+  function localOnlyTestMode() { return window.__LOCAL_SAVE_TEST_MODE === true; }
   let localFallbackAllowed = false;
   const bootAt = Date.now(), BOOT_GRACE_MS = 9000;
   const wait = ms => new Promise(r => setTimeout(r, ms));
@@ -58,14 +58,14 @@ window.GameModules.storageSync = (() => {
   function clearPending(key) { pendingCloud.delete(key); cloudReadFailures.delete(key); }
   function cloudFailure(key) { return cloudReadFailures.get(key) || null; }
   async function ready(ms = 7600) {
-    if (LOCAL_ONLY_TEST_MODE) return true;
+    if (localOnlyTestMode()) return true;
     await cloudApi(ms);
     return true;
   }
   async function getLocalFallback(key) { return localGet(key); }
   async function get(key) {
     const local = localGet(key);
-    if (LOCAL_ONLY_TEST_MODE) return local;
+    if (localOnlyTestMode()) return local;
     if (localFallbackAllowed && local != null) return local;
     let cloud = null, last = null;
     const tries = local ? 2 : 3;
@@ -86,7 +86,7 @@ window.GameModules.storageSync = (() => {
   }
   async function put(key, value, label = '数据') {
     const data = stamp(value);
-    if (LOCAL_ONLY_TEST_MODE) {
+    if (localOnlyTestMode()) {
       localPut(key, data);
       return data;
     }
@@ -119,7 +119,7 @@ window.GameModules.storageSync = (() => {
   }
   async function remove(key, label = '数据') {
     localRemove(key);
-    if (LOCAL_ONLY_TEST_MODE) return;
+    if (localOnlyTestMode()) return;
     try {
       const ms = writeTimeout();
       const kv = await cloudApi(ms);
