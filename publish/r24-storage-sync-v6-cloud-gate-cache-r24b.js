@@ -1,7 +1,7 @@
 window.GameModules = window.GameModules || {};
 window.GameModules.storageSync = (() => {
   const warned = {}, pendingCloud = new Set(), cloudReadFailures = new Map();
-  const LOCAL_ONLY_TEST_MODE = true;
+  const LOCAL_ONLY_TEST_MODE = window.__LOCAL_SAVE_TEST_MODE === true;
   let localFallbackAllowed = false;
   const bootAt = Date.now(), BOOT_GRACE_MS = 9000;
   const wait = ms => new Promise(r => setTimeout(r, ms));

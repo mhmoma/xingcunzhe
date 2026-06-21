@@ -11,7 +11,8 @@
       "Bash(ssh-add:*)",
       "Bash(gh auth:*)",
       "Bash(ssh-keygen:*)",
-      "Bash(GIT_SSH_COMMAND='ssh -i /root/.ssh/id_ed25519_github -o IdentitiesOnly=yes' git push -u github main)"
+      "Bash(GIT_SSH_COMMAND='ssh -i /root/.ssh/id_ed25519_github -o IdentitiesOnly=yes' git push -u github main)",
+      "Bash(GIT_SSH_COMMAND='ssh -i /root/.ssh/id_ed25519_github -o IdentitiesOnly=yes' git push github main)"
     ]
   }
 }
